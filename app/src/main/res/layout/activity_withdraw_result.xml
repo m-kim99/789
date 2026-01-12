@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="activity"
+            type="com.kyad.traystorage.app.setting.WithdrawResultActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/withdrawal"
+                android:textColor="@color/C151515"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{()->activity.onBackPressed()}"
+                android:padding="15dp"
+                android:src="@drawable/ic_back"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="18dp"
+            android:paddingTop="60dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/img_withdrawalrequest_150" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineHeight="34dp"
+                android:text="@string/withdrawal2"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/text_date"
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:includeFontPadding="false"
+                android:text="@string/withdrawal3"
+                android:textColor="@color/focus_color"
+                android:textSize="15dp" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/bg_label_round"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineHeight="20dp"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="24dp"
+                android:text="@string/withdrawal4"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <com.kyad.traystorage.app.common.font.FontButton
+                android:id="@+id/next_btn"
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_btn_approve_both"
+                android:enabled="true"
+                android:gravity="center"
+                android:onClick="@{()->activity.onConfirm()}"
+                android:text="@string/confirm"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

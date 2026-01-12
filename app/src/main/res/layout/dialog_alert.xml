@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="dialog"
+            type="com.kyad.traystorage.app.common.dialog.AlertDialog" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.6"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="40dp"
+            android:background="@drawable/shape_dialog_round"
+            android:orientation="vertical">
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/title"
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:layout_marginHorizontal="30dp"
+                android:gravity="left"
+                android:includeFontPadding="false"
+                android:text="title"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/message"
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginHorizontal="30dp"
+                android:gravity="left"
+                android:includeFontPadding="false"
+                android:text="message"
+                android:textColor="@color/C777777"
+                android:textSize="15dp" />
+
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    android:id="@+id/btn_cancel"
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_toLeftOf="@id/btn_confirm"
+                    android:background="@drawable/bg_btn_cancel"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:onClick="@{()->dialog.onClickCancel()}"
+                    android:paddingHorizontal="15dp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/focus_color"
+                    android:textSize="12dp" />
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    android:id="@+id/btn_confirm"
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/bg_btn_confirm_bottom"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:onClick="@{()->dialog.onClickConfirm()}"
+                    android:paddingHorizontal="15dp"
+                    android:text="@string/confirm"
+                    android:textColor="@color/white"
+                    android:textSize="12dp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

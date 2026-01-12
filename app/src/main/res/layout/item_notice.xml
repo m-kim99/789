@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="holder"
+            type="com.kyad.traystorage.app.setting.NoticeActivity.ListAdapter.ListItemViewHolder" />
+        <variable
+            name="data"
+            type="com.kyad.traystorage.data.model.ModelNotice" />
+
+    </data>
+
+    <LinearLayout
+        android:paddingHorizontal="20dp"
+        android:background="@{data.view_count>0?@color/transparent:@color/Ce8eaf5}"
+        android:onClick="@{()->holder.onClick()}"
+        android:id="@+id/notice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:paddingTop="28dp"
+            android:paddingBottom="22dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:visibility="@{data.view_count>0?View.GONE:View.VISIBLE}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/icon_c_megaphone_black_24" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:includeFontPadding="false"
+                        android:text="@{data.title}"
+                        android:textColor="@color/C151515"
+                        android:textSize="15dp" />
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="@{data.reg_time}"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/C777777"
+                        android:textSize="13dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/ic_go_forward" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/light_gray" />
+
+    </LinearLayout>
+
+</layout>

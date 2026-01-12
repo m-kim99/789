@@ -1,0 +1,262 @@
+<resources>
+    <string name="app_name">Traystorage</string>
+
+    <string name="notice">Notice</string>
+    <string name="error_network">No network connection</string>
+    <string name="error_network_content">Please check network connection status and try again.</string>
+    <string name="error_ssl_cert_invalid">can you go to unsafed website?</string>
+    <string name="error_permission">you have to allow required permission to run app.</string>
+    <string name="require_permission">App require this permission to take gallery.</string>
+
+    <string name="ok">확인</string>
+    <string name="yes">확인</string>
+    <string name="no">취소</string>
+    <string name="continu">Continue</string>
+    <string name="apply">Apply</string>
+    <string name="close">닫기 </string>
+    <string name="search">검색</string>
+    <string name="photo">Photo</string>
+    <string name="video">Video</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="delete">Delete</string>
+    <string name="photo_max_size">Minimum memory size 5MB.</string>
+
+
+    <string name="to_use">to use</string>
+    <string name="permission_str">허용해주세요.</string>
+    <string name="photo_str">Profile picture service provided</string>
+    <string name="location">Location</string>
+    <string name="location_str">Provide search service for nearby stadiums</string>
+    <string name="permission_not_allow">You will not use some features because you have not allowed some permissions.</string>
+
+    <string name="add">추가</string>
+    <string name="phone_number">휴대폰 번호</string>
+    <string name="male">남자</string>
+    <string name="female">여자</string>
+    <string name="save">저장</string>
+    <string name="password">비밀번호</string>
+    <string name="view">보기</string>
+
+    <!--new added-->
+    <string name="cancel">취소</string>
+    <string name="confirm">확인</string>
+    <string name="update">업데이트</string>
+    <string name="later">다음에</string>
+    <string name="never_look">다시보지 않기</string>
+    <string name="namep">성명<font color="red">*</font></string>
+    <string name="birthdayp">생년월일<font color="red">*</font></string>
+    <string name="sexp">성별<font color="red">*</font></string>
+    <string name="enter_name">성명 입력</string>
+    <string name="select_birthday">생년월일 선택</string>
+    <string name="enter_email">이메일주소 입력</string>
+    <string name="use_service">서비스 이용하기</string>
+    <string name="input_id">아이디를 입력해 주세요.</string>
+    <string name="input_id4">아이디를 4자이상 입력해 주세요.</string>
+    <string name="dbl_check_id">아이디 중복확인 해주세요.</string>
+    <string name="input_phone">휴대폰번호를 입력해 주세요</string>
+    <string name="input_password">비밀번호를 입력홰 주세요.</string>
+    <string name="input_password6">Please input your password over 6-20 characters and english, numeric characters</string>
+    <string name="input_cert_number">인증번호를 입력해주세요.</string>
+    <string name="input_name">성명을 입력해 주세요.</string>
+    <string name="input_name2">성명을 2자이상 입력해 주세요.</string>
+    <string name="input_birth">생년월일을 입력해 주세요.</string>
+    <string name="input_email">이메일을 입력해 주세요.</string>
+    <string name="incorrect_email">이메일이 정확하지 않습니다.</string>
+    <string name="login_suspended">관리자에 의해 계정이 영구정지 되었습니다.</string>
+    <string name="login_waiting">탈퇴대기 상태입니다.\n탈퇴를 취소하시겠습니까?</string>
+    <string name="login_not_registered">가입되지 않은 회원입니다.\n로그인하신 SNS로\n가입 하시겠습니까?</string>
+    <string name="login_not_exist">아이디가 존재하지 않거나\n비밀번호가 일치하지 않습니다.</string>
+    <string name="findid_not_registered">가입된 휴대폰번호가 아닙니다.\n휴대폰번호를 확인해 주세요.</string>
+    <string name="verify_phone">휴대폰번호를 인증해주세요.</string>
+    <string name="change_pwd_success">비밀번호가 변경되었습니다.\n변경하신 비밀번호로 로그인을 해주세요.</string>
+    <string name="pwd_no_match">비밀번호가 일치하지 않습니다.</string>
+    <string name="wrong_pwd">비밀번호를 5회 이상 틀렸습니다.\n비밀번호 찾기를 하시겠습니까?</string>
+    <string name="signup_comp">입력하신 정보로\n회원가입 하시겠습니까?</string>
+    <string name="cert_wrong">인증코드가 정확하지 않습니다.</string>
+    <string name="verify_comp">휴대폰인증이 완료되었습니다.</string>
+    <string name="authreq_dup"><font color="blue">이미 가입된 휴대폰번호 입니다.</font>\n아이디찾기 화면으로 이동하시겠습니까?</string>
+    <string name="id_not_exit">The ID does not exist.</string>
+
+    <string name="update_version">새로운 업데이트가 있습니다.\n지금 업데이트해 보세요.</string>
+    <string name="network_error">네트워크에 연결되어 있지 않습니다.</string>
+    <string name="network_error_msg">네트워크 연결 상태 확인 후 다시 시도해주세요.</string>
+    <string name="to_use1">을 이용하시려면 아래의 권한을</string>
+    <string name="to_use2">permissions to use</string>
+    <string name="permission_approval_guid">권한 승인 안내</string>
+    <string name="to_approve">승인하기</string>
+    <string name="contact">연락처</string>
+    <string name="option">연락처 기반 친구초대 서비스 제공</string>
+    <string name="permission_desc1">∙필수 권한을 설정하지 않으시면, 앱 사용이 제한됩니다.</string>
+    <string name="permission_desc2">(안드로이드 마시멜로6.0이상 사용자 대상)</string>
+    <string name="intro_1_1">매일 산더미처럼</string>
+    <string name="intro_1_2">쌓이는 문서들을</string>
+    <string name="intro_1_3">어떻게 정리할까요?</string>
+    <string name="intro_2_1">복잡한 문서의</string>
+    <string name="intro_2_2">보관·관리를 더 쉽게!</string>
+    <string name="skip">건너뛰기</string>
+    <string name="login_home1">복잡한 문서의</string>
+    <string name="login_home2">보관 · 관리를 더 쉽게</string>
+    <string name="signin_home1">복잡한 문서의</string>
+    <string name="signin_home2">보관·관리를 더 쉽게</string>
+    <string name="login">로그인</string>
+    <string name="signup">회원가입</string>
+    <string name="id">아이디</string>
+    <string name="auto_login">자동로그인</string>
+    <string name="find_id">아이디 찾기</string>
+    <string name="password_reset">비밀번호 재설정</string>
+    <string name="findauth_home1">회원가입 하신 아이디 및\n휴대폰번호를 인증해 주세요.</string>
+    <string name="enter_id">아이디 입력</string>
+    <string name="enter_phone_number">휴대폰 번호 입력</string>
+    <string name="enter_cert_number">인증번호 입력</string>
+    <string name="cert_number">인증번호</string>
+    <string name="resent_code">인증번호 재전송</string>
+    <string name="auth_request">인증요청</string>
+    <string name="findauth_home2">회원가입 시 사용하신\n휴대폰번호를 인증해 주세요</string>
+
+    <string name="inquiries">문의내역</string>
+    <string name="contactus">문의하기</string>
+    <string name="nodocuments">문의 내역이 존재하지 않습니다</string>
+    <string name="inquiry_subject">문의제목</string>
+    <string name="contactus_label1">Traystorage와 관련된 문의사항을 입력하여\n보내주시면 운영팀에서 확인 후 신속하게 답변드리도록 하겠습니다.</string>
+    <string name="inquiry_subject_hint">문의제목을 입력해주세요</string>
+    <string name="inquiry_content">문의내용</string>
+    <string name="inquiry_content_hint">문의내용을 입력해주세요</string>
+    <string name="send">보내기</string>
+    <string name="noticeTitle">공지사항</string>
+    <string name="setting">설정</string>
+    <string name="account_info">계정정보</string>
+    <string name="version_info">버전정보</string>
+    <string name="edit">수정</string>
+    <string name="FAQ">FAQ</string>
+    <string name="license">오픈소스 라이선스</string>
+    <string name="terms_of_use">이용약관</string>
+    <string name="privacy">개인정보 취급방침</string>
+    <string name="marketing">마케팅 수신동의</string>
+    <string name="logout">로그아웃</string>
+    <string name="withdrawal">회원탈퇴</string>
+    <string name="phone_cert">휴대폰 인증</string>
+    <string name="phone_cert1">회원가입 하신 이메일 및\n휴대폰번호를 인증해 주세요</string>
+    <string name="change_password">비밀번호 변경</string>
+    <string name="change_password1">새로운 비밀번호를\n입력해주세요</string>
+    <string name="enter_password">비밀번호 입력</string>
+    <string name="reenter_password">비밀번호 재입력</string>
+    <string name="change_password_btn">비밀번호 변경완료</string>
+    <string name="version_information">버전정보</string>
+    <string name="version_information1">최신 버전으로\n업데이트 해주세요</string>
+    <string name="version_information2">현재 최신버전을\n사용하고 계십니다</string>
+    <string name="current_version">현재버전</string>
+    <string name="newest_version">최신 버전</string>
+    <string name="update_version_button">버전 업데이트하기</string>
+    <string name="terms_of_use1">Traystorage Terms of Use</string>
+    <string name="withdrawal1">계정 비활성화 및 삭제 시 주의사항</string>
+    <string name="withdrawal_btn">회원 탈퇴신청</string>
+    <string name="enter_id_email">아이디 또는 이메일</string>
+    <string name="double_chceck">중복확인</string>
+    <string name="password_hint">영문, 숫자 포함 6~20자 조합</string>
+    <string name="password_confirm">비밀번호 확인</string>
+    <string name="next">다음</string>
+    <string name="all_agree">전체 동의</string>
+    <string name="terms_of_use_req">이용약관 (필수)</string>
+    <string name="privacy_req">개인정보 취급방침 (필수)</string>
+    <string name="signup_title1">회원가입을 위해\n계정정보를 입력해주세요</string>
+    <string name="findid_result1">아이디를 확인해 주세요</string>
+    <string name="find_password">비밀번호 찾기</string>
+    <string name="signup_complete1">Traystorage\n회원가입이 완료되었습니다</string>
+    <string name="signup_complete2">프로필정보를 입력 후 서비스를 이용해 보세요</string>
+
+    <string name="withdrawal_content"><b>유의사항</b><font color="red">(필독사항)</font>\n<br/>사용하고 계신 계정은 탈퇴가 완료 될 경우 복구가 불가하니 유의 부탁드립니다.\n<br/>탈퇴가 완료될 경우 앱 이용내역이(문서 내역, NFC등록 내역 등) 삭제되며 복구가 불가능합니다.\n\n<br/><b>회원탈퇴 진행방법</b>\n<br/>회원 탈퇴 선택 시 불법도용 및 불이익에 대한 피해를 방지하고자 회원가입 시 진행된 휴대폰인증 절차가 진행됩니다.\n\n<br/>휴대폰인증 완료 후 회원탈퇴 신청이 진행 됩니다.\n\n<br/><b>회원 탈퇴 대기기간 안내</b>\n<br/>인증 완료 후 14일간의 탈퇴 대기기간이 있으며, 탈퇴 대기기간 동안 탈퇴 대기 취소를 할 수 있습니다.</string>
+    <string name="withdrawal2">회원탈퇴 신청이\n완료되었습니다</string>
+    <string name="withdrawal3">탈퇴 신청 날짜 :</string>
+    <string name="withdrawal4">14일 이내 재로그인 시 <font color="#1c329b"><u>탈퇴회원복구</u></font> 절차를 진행 하실 수 있습니다. </string>
+    <string name="invite">초대하기</string>
+    <string name="invite1">Traystorage가\n필요한 친구들에게\n초대메시지를 보내보세요</string>
+    <string name="invite_btn">친구 초대하기</string>
+    <string name="profile_management">프로필 관리</string>
+    <string name="main_info">기본정보</string>
+    <string name="birthday">생년월일</string>
+    <string name="email">이메일</string>
+    <string name="gender">성별</string>
+    <string name="doc_not_exist">등록된 문서가 존재하지 않습니다</string>
+    <string name="doc_not_exist1">"지금 쉽고 편리하게 문서를 등록하고\nNFC태그를 통해 관리 및 공유해 보세요</string>
+    <string name="add_new_doc">+문서등록</string>
+    <string name="search_hint">검색어를 입력해 주세요.</string>
+    <string name="document">문서</string>
+    <string name="document1">총 문서</string>
+    <string name="app_finish_message">"'뒤로' 버튼을 한번 더 누르면 종료됩니다.</string>
+    <string name="document_detail">문서상세</string>
+    <string name="nfc_register">NFC 등록</string>
+    <string name="document_image">문서 이미지<font color="red">*</font></string>
+    <string name="title_content">제목 및 내용<font color="red">*</font></string>
+    <string name="title">제목</string>
+    <string name="enter_detail">내용을 입력해주세요</string>
+    <string name="label_p">라벨<font color="red">*</font></string>
+    <string name="tag">태그 입력</string>
+    <string name="tag_p">태그<font color="red">*</font></string>
+    <string name="register">등록</string>
+    <string name="photo_select">사진선택</string>
+    <string name="complete">완료</string>
+    <string name="doc_reg_back">이전화면으로 이동 시\n수정내역이 저장되지 않습니다.\n\n이전화면으로\n이동 하시겠습니까?</string>
+    <string name="tag_limit">태그는 최대 5개 까지만 등록 가능합니다.</string>
+    <string name="input_tag">태그를 입력해 주세요.</string>
+    <string name="tag_exist">이미 등록된 태그입니다.</string>
+    <string name="register_confirm">문서를 등록하시겠습니까?</string>
+    <string name="register_ok">문서 등록되었습니다.</string>
+    <string name="doc_delete">문서를 삭제하시면 NFC태그 시\n해당 문서가 노출되지 않습니다.\n<font color="blue">해당 문서를 삭제 하시겠습니까?</font></string>
+    <string name="doc_delete_ok">문서 삭제되었습니다.</string>
+    <string name="nfc_content1">NFC스티커에 휴대폰을 태그하여\n문서를 등록해 주세요.</string>
+    <string name="nfc_content2">지금 쉽고 편리하게 문서를 등록하고\nNFC태그를 통해 관리 및 공유해 보세요</string>
+    <string name="reply_wait">답변대기</string>
+    <string name="answer_done">답변완료</string>
+    <string name="inquiry">문의</string>
+    <string name="inquiry_save">"작성하신 내용으로\n문의하시겠습니까?</string>
+    <string name="inquiry_save_confirm">문의가 발송되였습니다</string>
+    <string name="inquiry_title_input">문의제목을 입력해 주십시오.</string>
+    <string name="inquiry_content_input">문의내용을 입력해 주세요</string>
+    <string name="inquiry_content10_input">문의내용을 10자이상 입력해 주십시오</string>
+    <string name="all">ALL</string>
+    <string name="id_available">사용 가능한 아이디 입니다</string>
+    <string name="id_duplicated">이미 사용중인 id입니다</string>
+
+    <string name="document_reg_title">문서등록</string>
+    <string name="withdraw_confirm">정말 회원 탈퇴하시겠습니까?\n(유의사항 확인 필요)</string>
+    <string name="change_password_confirm">비밀번호 변경은\n휴대폰인증 후 가능합니다.\n휴대폰 인증 화면으로 이동하시겠습니까?</string>
+    <string name="logout_confirm">로그아웃 하시겠습니까?</string>
+    <string name="profile_save_ok">프로필이 수정되였습니다</string>
+    <string name="profile_save_qa">"이전화면으로 이동 시\n수정내역이 저장되지 않습니다.\n이전화면으로 이동 하시겠습니까?</string>
+    <string name="image_30">사진은 30개만 선택 가능합니다</string>
+    <string name="document_edit">문서 수정</string>
+    <string name="nfc_register_success">NFC태그에 문서가 등록 되었습니다.</string>
+    <string name="nfc_register_success_title">문서 등록완료</string>
+    <string name="nfc_reg_error1">NFC는 지원되지 않습니다</string>
+    <string name="nfc_reg_error2">NFC가 활성화되어 있지 않습니다.\n사용자가 설정에서 활성화해야 합니다.</string>
+    <string name="naver_login_failed">네이버 계정로그인이 실패되었습니다.</string>
+    <string name="kakao_login_failed">카카오 계정로그인이 실패되었습니다.</string>
+    <string name="google_login_failed">구글 계정로그인이 실패되었습니다.</string>
+    <string name="facebook_login_failed">페이스북 계정로그인이 실패되었습니다.</string>
+    <string name="facebook_app_id">4631666656931525</string>
+    <string name="fb_login_protocol_scheme">fb4631666656931525</string>
+    <string name="signup_close">화면을 닫으시는 경우\n회원가입이 중단됩니다.\n회원가입을 중단하시겠습니까?</string>
+    <string name="login_agree">Traystorage 약관이 변경되었습니다.\n약관에 동의해 주세요.</string>
+    <string name="required">(필수)</string>
+    <string name="search_not_result">에 대한\n검색결과가 없습니다.</string>
+    <string name="delete_tag">tag가 삭제되였습니다</string>
+    <string name="done">Done</string>
+    <string name="kakao_install_error">카카오톡을 설치해주세요.</string>
+    <string name="dimlink_make_error">"링크 생성 실패되었습니다."</string>
+    <string name="search_input">검색어를 입력하여야 합니다.</string>
+    <string name="search_result">검색 결과</string>
+    <string name="date_select">날짜 선택</string>
+    <string name="year">년</string>
+    <string name="month">월</string>
+    <string name="day">일</string>
+    <string name="profile_save_confirm">변경된 내용을 저장하겠습니까?</string>
+    <string name="login_token_error">인증기간이 만료되었습니다. 재로그인 해주세요.</string>
+    <string name="empty_nfc_tag">본 NFC태그는\n빈 태그입니다.</string>
+    <string name="go_main_page">메인 화면으로</string>
+    <string name="setting_bottom">© 2024 thinkstep\n
+        <br/>All rights reserved.
+    </string>
+
+
+</resources>

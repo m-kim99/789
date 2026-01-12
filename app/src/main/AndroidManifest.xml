@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kyad.traystorage">
+    <!-- required permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true">
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <activity
+            android:name=".app.splash.SplashActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".app.splash.IntroActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.splash.LoadingActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.splash.PermissionActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" />
+
+<!--        <activity-->
+<!--            android:name=".app.auth.AgreeActivity"-->
+<!--            android:screenOrientation="portrait"-->
+<!--            android:exported="true"-->
+<!--            tools:ignore="Instantiatable" />-->
+        <activity
+            android:name=".app.auth.FindIdResultActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.auth.LoginHomeActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.auth.FindAuthActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.auth.SigninActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.auth.SignupActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.auth.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.auth.SignupProfileActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".app.setting.ContactusActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.FaqActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.InquiryActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.InviteActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.LicenseActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.NoticeActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.NoticeDetailActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.ProfileManageActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.SettingActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.TermsActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.VersionActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.WithdrawActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.setting.WithdrawResultActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+
+        <activity
+            android:name=".app.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.main.DocumentDetailActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.main.DocumentEditActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.main.DocumentImageViewActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.common.PhotoSelectActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".app.main.NFCRegisterActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+
+        <!-- facebook 설정 -->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="ac77a04827be0d7a4cbe0ac3b6514c6f" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:exported="true"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider836486066548932"
+            android:exported="true" />
+
+        <activity
+            android:name="com.nhn.android.naverlogin.ui.OAuthCustomTabActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Intent URL 에서 로그인 액티비티를 실행하기 위해 설정 -->
+                <data
+                    android:host="authorize"
+                    android:path="/"
+                    android:scheme="traystorage" />
+            </intent-filter>
+        </activity>
+
+        <!-- kakao -->
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakao98498c102944c0477c37fcaa25a98fa7" />
+            </intent-filter>
+        </activity>
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="98498c102944c0477c37fcaa25a98fa7"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,4 @@
+rootProject.name = "TrayStorage"
+include ':app'
+include ':common'
+include ':cropper'

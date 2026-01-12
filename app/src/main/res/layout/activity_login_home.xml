@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".app.auth.LoginHomeActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="activity"
+            type="com.kyad.traystorage.app.auth.LoginHomeActivity" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_landing_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="166dp"
+                android:layout_height="118dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="80dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/group_32" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="24dp"
+                android:includeFontPadding="false"
+                android:text="@string/login_home1"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/login_home2"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <com.kyad.traystorage.app.common.font.FontButton
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="84dp"
+                android:background="@drawable/bg_btn_confirm_bottom"
+                android:onClick="@{() -> activity.goLogin()}"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <com.kyad.traystorage.app.common.font.FontButton
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_btn_confirm_bottom_white"
+                android:onClick="@{() -> activity.goSignUp()}"
+                android:text="@string/signup"
+                android:textColor="@color/focus_color"
+                android:textSize="15dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="33dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> activity.goSnsSignup(0)}"
+                        android:src="@drawable/icon_sns_kakao_60" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:onClick="@{() -> activity.goSnsSignup(1)}"
+                        android:src="@drawable/icon_sns_google_60" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:visibility="gone"
+                        android:onClick="@{() -> activity.goSnsSignup(2)}"
+                        android:src="@drawable/icon_sns_facebook_60" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:onClick="@{() -> activity.goSnsSignup(3)}"
+                        android:src="@drawable/icon_sns_naver_60" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:onClick="@{()->activity.onBackPressed()}"
+            android:padding="10dp"
+            android:src="@drawable/icon_gnb_close" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="80dp"
+            android:orientation="vertical">
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:includeFontPadding="false"
+                android:text="@string/findid_result1"
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/bg_gray_round">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:includeFontPadding="false"
+                        android:text="@string/id"
+                        android:textColor="@color/gray"
+                        android:textSize="14dp" />
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        android:id="@+id/text_result"
+                        style="@style/font_spoqahansansneo_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="123"
+                        android:textColor="@color/focus_color"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <com.kyad.traystorage.app.common.font.FontButton
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_btn_approve"
+                android:enabled="true"
+                android:gravity="center"
+                android:onClick="@{()->activity.onLogin()}"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+
+            <com.kyad.traystorage.app.common.font.FontButton
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/bg_btn_cancel10"
+                android:enabled="true"
+                android:gravity="center"
+                android:onClick="@{()->activity.onPassword()}"
+                android:text="@string/find_password"
+                android:textColor="@color/focus_color"
+                android:textSize="15dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="activity"
+            type="com.kyad.traystorage.app.auth.FindIdResultActivity" />
+    </data>
+</layout>

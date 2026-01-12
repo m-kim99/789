@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="activity"
+            type="com.kyad.traystorage.app.setting.NoticeActivity" />
+
+    </data>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{()->activity.onBackPressed()}"
+                android:padding="15dp"
+                android:src="@drawable/ic_back" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/noticeTitle"
+                android:textColor="@color/C151515"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:paddingTop="10dp"
+                android:id="@+id/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layoutManager="LinearLayoutManager"
+                tools:itemCount="50"
+                tools:listitem="@layout/item_notice" />
+
+    </LinearLayout>
+
+</layout>

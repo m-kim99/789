@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="presenter"
+            type="com.kyad.traystorage.app.common.dialog.DatePickerDialog.Presenter" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.6"
+            android:background="@color/black" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/shape_dialog_top_round">
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    android:id="@+id/title"
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/date_select" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/divider" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingHorizontal="35dp"
+                android:paddingVertical="60dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.aigestudio.wheelpicker.widgets.WheelYearPicker
+                        android:id="@+id/wheel_date_picker_year"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:wheel_atmospheric="true"
+                        app:wheel_curved="false"
+                        app:wheel_cyclic="true"
+                        app:wheel_indicator="true"
+                        app:wheel_indicator_color="#808080"
+                        app:wheel_item_align="center"
+                        app:wheel_item_space="30dp"
+                        app:wheel_item_text_color="#808080"
+                        app:wheel_item_text_size="18dp"
+                        app:wheel_selected_item_text_color="@color/black"
+                        app:wheel_visible_item_count="3" />
+
+                    <TextView
+                        android:id="@+id/wheel_date_picker_year_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/WheelMargins"
+                        android:layout_marginEnd="@dimen/WheelMargins"
+                        android:text="@string/year"
+                        android:textColor="#536D8A" />
+
+                    <com.aigestudio.wheelpicker.widgets.WheelMonthPicker
+                        android:id="@+id/wheel_date_picker_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:wheel_atmospheric="true"
+                        app:wheel_curved="false"
+                        app:wheel_cyclic="true"
+                        app:wheel_indicator="true"
+                        app:wheel_indicator_color="#808080"
+                        app:wheel_item_align="center"
+                        app:wheel_item_space="30dp"
+                        app:wheel_item_text_color="#808080"
+                        app:wheel_item_text_size="18dp"
+                        app:wheel_selected_item_text_color="@color/black"
+                        app:wheel_visible_item_count="3" />
+
+                    <TextView
+                        android:id="@+id/wheel_date_picker_month_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/WheelMargins"
+                        android:layout_marginEnd="@dimen/WheelMargins"
+                        android:text="@string/month"
+                        android:textColor="#536D8A" />
+
+                    <com.aigestudio.wheelpicker.widgets.WheelDayPicker
+                        android:id="@+id/wheel_date_picker_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:wheel_atmospheric="true"
+                        app:wheel_curved="false"
+                        app:wheel_cyclic="true"
+                        app:wheel_indicator="true"
+                        app:wheel_indicator_color="#808080"
+                        app:wheel_item_align="center"
+                        app:wheel_item_space="30dp"
+                        app:wheel_item_text_color="#808080"
+                        app:wheel_item_text_size="18dp"
+                        app:wheel_selected_item_text_color="@color/black"
+                        app:wheel_visible_item_count="3" />
+
+                    <TextView
+                        android:id="@+id/wheel_date_picker_day_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/WheelMargins"
+                        android:text="@string/day"
+                        android:textColor="#536D8A" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:scrollbarStyle="insideInset" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="@{()->presenter.onCancel()}"
+                    android:text="@string/cancel"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="10dp"
+                    android:background="#808080" />
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="@{()->presenter.onClickConfirm()}"
+                    android:text="@string/confirm"
+                    android:textColor="@color/tab_active"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="activity"
+            type="com.kyad.traystorage.app.setting.ContactusActivity" />
+        <variable
+            name="model"
+            type="com.kyad.traystorage.app.setting.ContactusActivity.ViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/bg"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/contactus"
+                android:textColor="@color/C151515"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:onClick="@{()->activity.onBackPressed()}"
+                android:id="@+id/ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:foreground="?attr/selectableItemBackground"
+                android:padding="15dp"
+                android:src="@drawable/ic_back" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_marginHorizontal="22dp"
+            android:layout_marginTop="36dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    style="@style/font_spoqahansansneo_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="@string/contactus_label1"
+                    android:textColor="@color/C333333"
+                    android:textSize="15dp" />
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/inquiry_subject"
+                    android:textColor="@color/C151515"
+                    android:textSize="15dp" />
+
+                <com.kyad.traystorage.app.common.font.FontEditText
+                    android:id="@+id/text_subject"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15dp"
+                    android:includeFontPadding="false"
+                    android:text="@={model.title}"
+                    android:textColor="@color/black"
+                    android:paddingHorizontal="14dp"
+                    android:hint="@string/inquiry_subject_hint"
+                    style="@style/font_spoqahansansneo_regular"
+                    android:background="@drawable/bg_edittext_round" />
+
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/inquiry_content"
+                    android:textColor="@color/C151515"
+                    android:textSize="15dp" />
+
+                <com.kyad.traystorage.app.common.font.FontEditText
+                    android:id="@+id/text_content"
+                    android:text="@={model.content}"
+                    style="@style/font_spoqahansansneo_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_edittext_round"
+                    android:gravity="top"
+                    android:includeFontPadding="false"
+                    android:hint="@string/inquiry_content_hint"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="24dp"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <com.kyad.traystorage.app.common.font.FontButton
+                    android:onClick="@{()->activity.onConfirm()}"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_btn_round"
+                    app:isSelect="@{model.isValid}"
+                    android:text="@string/send"
+                    android:textColor="@{model.isValid?@color/white:@color/gray}"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</layout>

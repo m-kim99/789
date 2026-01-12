@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"></import>
+
+        <variable
+            name="data"
+            type="com.kyad.traystorage.data.model.ModelAgreement" />
+
+        <variable
+            name="holder"
+            type="com.kyad.traystorage.app.auth.SignupActivity.ListAdapter.ListItemViewHolder" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->holder.onTermClick()}"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="25dp">
+
+            <ImageView
+                android:id="@+id/term_check1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_checkbox2"
+                app:isSelect="@{data.isChecked}" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/term_text1"
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/term_check1"
+                android:includeFontPadding="false"
+                android:onClick="@{()->holder.onTermClick()}"
+                android:text="@{data.title}"
+                android:textColor="@color/C555555"
+                android:textSize="14dp" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/term_text2"
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:onClick="@{()->holder.onTermClick()}"
+                android:text="@string/required"
+                android:textColor="@color/C555555"
+                android:textSize="14dp"
+                android:visibility="@{data.status==0?View.VISIBLE:View.GONE}" />
+        </LinearLayout>
+
+        <com.kyad.traystorage.app.common.font.FontTextView
+            style="@style/font_spoqahansansneo_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="@{()->holder.onTermViewClick()}"
+            android:paddingTop="25dp"
+            android:text="@string/view"
+            android:textColor="@color/C555555"
+            android:textSize="14dp" />
+    </RelativeLayout>
+</layout>

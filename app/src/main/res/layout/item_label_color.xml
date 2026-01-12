@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="holder"
+            type="com.kyad.traystorage.app.main.DocumentEditActivity.LabelColorListAdapter.ListItemViewHolder" />
+        <variable
+            name="data"
+            type="com.kyad.traystorage.app.main.DocumentEditActivity.LabelColorModel" />
+
+    </data>
+    <RelativeLayout
+        android:onClick="@{()->holder.onClick()}"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:padding="6dp"
+        android:layout_marginRight="6dp"
+        app:isSelect="@{data.isSelected}"
+        android:background="@drawable/bg_border_circle">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/label_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/white"
+            android:padding="1dp"
+            android:background="@{data.isWhite?@drawable/bg_label_round_border:null}"
+            app:riv_corner_radius="26dp"/>
+
+    </RelativeLayout>
+</layout>

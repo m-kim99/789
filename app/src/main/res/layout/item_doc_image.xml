@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="holder"
+            type="com.kyad.traystorage.app.main.DocumentImageListAdapter.ListItemViewHolder" />
+
+    </data>
+
+    <RelativeLayout
+        android:onClick="@{()->holder.onClick()}"
+        android:padding="5dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/image_view"
+            android:padding="1dp"
+            android:background="@drawable/bg_doc_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_symbol_60"
+            app:riv_corner_radius="10dp" />
+
+        <ImageView
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:onClick="@{()->holder.onCloseClick()}"
+            android:src="@drawable/icon_c_smallclose_24" />
+    </RelativeLayout>
+</layout>

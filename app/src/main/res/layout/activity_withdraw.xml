@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="activity"
+            type="com.kyad.traystorage.app.setting.WithdrawActivity" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/withdrawal"
+                android:textColor="@color/C151515"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{()->activity.onBackPressed()}"
+                android:padding="15dp"
+                android:src="@drawable/ic_back" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="18dp"
+            android:paddingTop="45dp">
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:lineHeight="34dp"
+                android:text="@string/withdrawal1"
+                android:textColor="@color/black"
+                android:textSize="22dp" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineHeight="34dp"
+                android:text="@string/version_information2"
+                android:textColor="@color/black"
+                android:textSize="22dp"
+                android:visibility="gone" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:includeFontPadding="false"
+                android:lineHeight="20dp"
+                android:text="@string/withdrawal_content"
+                android:textColor="@color/black"
+                android:textSize="14dp" />
+
+            <com.kyad.traystorage.app.common.font.FontButton
+                android:id="@+id/next_btn"
+                style="@style/font_spoqahansansneo_bold"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_btn_approve_both"
+                android:enabled="true"
+                android:gravity="center"
+                android:onClick="@{()->activity.onConfirm()}"
+                android:text="@string/withdrawal_btn"
+                android:textColor="@color/white"
+                android:textSize="15dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

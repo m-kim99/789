@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="activity"
+            type="com.kyad.traystorage.app.auth.SignupProfileActivity" />
+
+        <variable
+            name="viewModel"
+            type="com.kyad.traystorage.app.auth.SignupProfileActivity.ViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:onClick="@{()->activity.onBackPressed()}"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_back" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/img_joinmembership_150" />
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    android:id="@+id/text_intro"
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:lineHeight="34dp"
+                    android:text="@string/signup_complete1"
+                    android:textColor="@color/black"
+                    android:textSize="22dp" />
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    android:id="@+id/text_intro2"
+                    style="@style/font_spoqahansansneo_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="34dp"
+                    android:layout_marginBottom="10dp"
+                    android:lineHeight="24dp"
+                    android:text="@string/signup_complete2"
+                    android:textColor="@color/gray"
+                    android:textSize="15dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="7dp"
+                    android:layout_marginBottom="28dp"
+                    android:background="@color/Ceeeeee" />
+
+                <LinearLayout
+                    android:id="@+id/layout_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginBottom="35dp"
+                    android:orientation="vertical">
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/namep"
+                        android:textColor="@color/gray"
+                        android:textSize="14dp" />
+
+                    <com.kyad.traystorage.app.common.font.FontEditText
+                        android:id="@+id/edit_name"
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/enter_name"
+                        android:includeFontPadding="false"
+                        android:maxLength="20"
+                        android:paddingVertical="10dp"
+                        android:singleLine="true"
+                        android:text="@={viewModel.name}"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <View
+                        android:id="@+id/line_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_gray" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginBottom="35dp"
+                    android:orientation="vertical">
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/birthdayp"
+                        android:textColor="@color/gray"
+                        android:textSize="14dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:onClick="@{()->activity.onClickBirthDay()}">
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            android:id="@+id/edit_birthday"
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="@string/select_birthday"
+                            android:paddingVertical="10dp"
+                            android:singleLine="true"
+                            android:text="@={viewModel.birthday}"
+                            android:textColor="@color/black"
+                            android:textSize="18dp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@{activity.isDatePickerShown ? @drawable/ic_arrow_up : @drawable/ic_arrow_down}" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/line_birthday"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_gray" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:orientation="vertical">
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/sexp"
+                        android:textColor="@color/gray"
+                        android:textSize="14dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="35dp">
+
+                        <com.kyad.traystorage.app.common.font.FontButton
+                            android:id="@+id/button_sex1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/bg_btn_sex"
+                            android:onClick="@{()->activity.onSex1()}"
+                            android:paddingHorizontal="10dp"
+                            android:text="@string/male"
+                            android:textColor="@color/focus_color"
+                            android:textSize="14dp"
+                            app:isSelect="@{true}" />
+
+                        <com.kyad.traystorage.app.common.font.FontButton
+                            android:id="@+id/button_sex2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/bg_btn_sex"
+                            android:onClick="@{()->activity.onSex2()}"
+                            android:paddingHorizontal="10dp"
+                            android:text="@string/female"
+                            android:textColor="@color/focus_color"
+                            android:textSize="14dp"
+                            app:isSelect="@{false}" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="vertical">
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email"
+                        android:textColor="@color/gray"
+                        android:textSize="14dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.kyad.traystorage.app.common.font.FontEditText
+                            android:id="@+id/edit_email"
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="@string/enter_email"
+                            android:includeFontPadding="false"
+                            android:maxLength="50"
+                            android:paddingVertical="10dp"
+                            android:singleLine="true"
+                            android:text="@={viewModel.email}"
+                            android:textColor="@color/black"
+                            android:textSize="18dp" />
+
+                        <ImageView
+                            android:id="@+id/delete_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:onClick="@{()->activity.onDeleteEmail()}"
+                            android:src="@drawable/icon_common_24x24_close" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/line_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_gray" />
+                </LinearLayout>
+
+                <com.kyad.traystorage.app.common.font.FontButton
+                    android:id="@+id/next_btn"
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_btn_approve_both"
+                    android:enabled="true"
+                    android:gravity="center"
+                    android:onClick="@{()->activity.onConfirm()}"
+                    android:text="@string/use_service"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

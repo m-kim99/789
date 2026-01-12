@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="activity"
+            type="com.kyad.traystorage.app.main.MainActivity" />
+
+        <variable
+            name="user"
+            type="com.kyad.traystorage.data.model.ModelUser" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:openDrawer="end">
+
+        <RelativeLayout
+            android:id="@+id/main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/back_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/search"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/C151515"
+                        android:textSize="18dp" />
+
+                    <ImageView
+                        android:id="@+id/ib_close"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:onClick="@{()->activity.onBackPressed()}"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_back" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/title_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/logo_texttype" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:onClick="@{()->activity.onMenu()}"
+                        android:padding="5dp"
+                        android:src="@drawable/icon_gnb_menu" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/group_not_exist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:orientation="vertical"
+                    android:visibility="@{activity.showType == 1 ? View.VISIBLE : View.GONE}">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/img_nodocuments_150" />
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        android:id="@+id/text_intro"
+                        style="@style/font_spoqahansansneo_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:text="@string/doc_not_exist"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        android:id="@+id/text_intro2"
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="34dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:lineHeight="24dp"
+                        android:text="@string/doc_not_exist1"
+                        android:textColor="@color/gray"
+                        android:textSize="15dp" />
+
+                    <com.kyad.traystorage.app.common.font.FontButton
+                        android:id="@+id/add_btn"
+                        style="@style/font_spoqahansansneo_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/bg_btn_approve_both"
+                        android:gravity="center"
+                        android:onClick="@{()->activity.onRegisterClick()}"
+                        android:text="@string/add_new_doc"
+                        android:textColor="@color/white"
+                        android:textSize="15dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/group_exist"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical"
+                    android:visibility="@{activity.showType == 2 ? View.VISIBLE : View.GONE}">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_gray_round2">
+
+                        <ImageView
+                            android:id="@+id/delete_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="20dp"
+                            android:layout_toLeftOf="@id/search_button"
+                            android:onClick="@{()->activity.onClearSearchClick()}"
+                            android:src="@drawable/icon_common_24x24_close"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/search_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:onClick="@{()->activity.onSearchClick()}"
+                            android:src="@drawable/ic_search" />
+
+                        <com.kyad.traystorage.app.common.font.FontEditText
+                            android:id="@+id/text_search"
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toLeftOf="@id/delete_text"
+                            android:background="@null"
+                            android:includeFontPadding="false"
+                            android:hint="@string/search_hint"
+                            android:imeOptions="actionSearch"
+                            android:inputType="text"
+                            android:onTextChanged="@{()->activity.onSearchTextChanged()}"
+                            android:paddingLeft="20dp"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal">
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            android:id="@+id/doc_tittle"
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/document1"
+                            android:textColor="@color/C151515"
+                            android:textSize="15dp" />
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            android:id="@+id/doc_count"
+                            style="@style/font_spoqahansansneo_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="123"
+                            android:textColor="@color/black"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@color/transparent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/doc_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layoutManager="LinearLayoutManager"
+                        tools:itemCount="50"
+                        tools:listitem="@layout/item_document" />
+
+                    <RelativeLayout
+                        android:id="@+id/layout_not_result"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone">
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            android:id="@+id/text_no_result"
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:text="@string/search_not_result"
+                            android:textColor="@color/black"
+                            android:textSize="16dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="@{()->activity.onRegisterClick()}"
+                android:src="@drawable/icon_c_writing_56"
+                android:visibility="@{activity.showType == 1 ? View.GONE : View.VISIBLE}" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/nav_menu"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/focus_color"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="50dp"
+                    android:paddingBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/img_avatar"
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="16dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/icon_c_user_60"
+                            app:riv_corner_radius="32dp" />
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            android:id="@+id/text_name"
+                            style="@style/font_spoqahansansneo_bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="@{user.name}"
+                            android:textColor="@color/white"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="30dp"
+                    android:paddingTop="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:onClick="@{()->activity.onProfile()}"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:src="@drawable/icon_c_profile_black_24" />
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="@string/profile_management"
+                            android:textColor="@color/C151515"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_vertical"
+                        android:onClick="@{()->activity.onInvite()}"
+                        android:paddingVertical="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:src="@drawable/icon_c_setting_black_24" />
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/invite"
+                            android:includeFontPadding="false"
+                            android:textColor="@color/C151515"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_vertical"
+                        android:onClick="@{()->activity.onContactus()}"
+                        android:paddingVertical="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:src="@drawable/icon_c_comments_black_24" />
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/contactus"
+                            android:includeFontPadding="false"
+                            android:textColor="@color/C151515"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_vertical"
+                        android:onClick="@{()->activity.onNotice()}"
+                        android:paddingVertical="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:src="@drawable/icon_c_megaphone_black_24" />
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/noticeTitle"
+                            android:includeFontPadding="false"
+                            android:textColor="@color/C151515"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:onClick="@{()->activity.onSetting()}"
+                        android:paddingVertical="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:src="@drawable/icon_c_setting_black_24_copy" />
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/setting"
+                            android:includeFontPadding="false"
+                            android:textColor="@color/C151515"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp"
+                android:paddingHorizontal="30dp">
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    style="@style/font_spoqahansansneo_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="@string/setting_bottom"
+                    android:textColor="@color/C151515"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
