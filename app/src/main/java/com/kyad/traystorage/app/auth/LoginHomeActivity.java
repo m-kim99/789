@@ -75,6 +75,28 @@ public class LoginHomeActivity extends BaseBindingActivity<ActivityLoginHomeBind
         finish();
     }
 
+    // 테스트 모드: 로그인 없이 메인으로 이동
+    public void goTestMode() {
+        // 더미 유저 데이터 생성
+        ModelUser testUser = new ModelUser();
+        testUser.id = 999;
+        testUser.login_id = "test_user";
+        testUser.name = "테스트유저";
+        testUser.access_token = "test_access_token_12345";
+        testUser.phone_number = "01012345678";
+        testUser.email = "test@test.com";
+        testUser.isAutoLogin = false;
+        testUser.is_agree = 1;
+        
+        // 더미 유저 저장
+        DataManager.get().setModel(testUser);
+        
+        // 메인으로 이동
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     public void goSnsSignup(Integer type) {
         if (type == 0) {
             //kakao
