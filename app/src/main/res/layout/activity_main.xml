@@ -257,17 +257,50 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/btn_add"
+            <LinearLayout
+                android:id="@+id/fab_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="20dp"
-                android:onClick="@{()->activity.onRegisterClick()}"
-                android:src="@drawable/icon_c_writing_56"
-                android:visibility="@{activity.showType == 1 ? View.GONE : View.VISIBLE}" />
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:visibility="@{activity.showType == 1 ? View.GONE : View.VISIBLE}">
+
+                <FrameLayout
+                    android:id="@+id/btn_chatbot"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/bg_fab_chatbot"
+                    android:elevation="6dp"
+                    android:onClick="@{()->activity.onChatbotClick()}">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_chatbot" />
+                </FrameLayout>
+
+                <ImageView
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->activity.onRegisterClick()}"
+                    android:src="@drawable/icon_c_writing_56" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/chatbot_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone"
+                android:elevation="24dp" />
+
         </RelativeLayout>
 
         <RelativeLayout

@@ -47,6 +47,7 @@ import base.BaseEvent;
 import helper.RecyclerViewHelper;
 import helper.Validation;
 import android.os.Build;
+import com.kyad.traystorage.data.model.ModelUser;
 
 public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEditBinding> {
     public MainViewModel viewModel;
@@ -245,6 +246,13 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
     public void onRegisterClick() {
         AlertDialog.show(DocumentEditActivity.this).setText(getString(R.string.register_confirm), "", getString(R.string.yes), getString(R.string.no))
                 .setListener(() -> {
+                    // 테스트 모드: 바로 성공 처리
+                    if (isTestMode()) {
+                        Utils.showCustomToast(DocumentEditActivity.this, R.string.register_ok);
+                        finish();
+                        return;
+                    }
+                    
                     docImageFileList.clear();
                     List<String> localUrlList = new ArrayList<>();
                     if (editDocument != null) {
@@ -270,6 +278,12 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
                 });
     }
 
+    // 테스트 모드 체크 헬퍼
+    private boolean isTestMode() {
+        ModelUser user = DataManager.get().getModel(ModelUser.class);
+        return (user != null && user.id == 999);
+    }
+
     private void registerDocument(List<String> uploadFiles) {
         int label = 0;
         for (int i = 0; i < colorModels.size(); i++) {
@@ -279,6 +293,14 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
             }
         }
         int finalLabel = label;
+        
+        // 테스트 모드: API 호출 없이 성공 처리
+        if (isTestMode()) {
+            Utils.showCustomToast(DocumentEditActivity.this, R.string.register_ok);
+            finish();
+            return;
+        }
+        
         if (editDocument == null) {
             viewModel.registerDocument(viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles);
         } else {

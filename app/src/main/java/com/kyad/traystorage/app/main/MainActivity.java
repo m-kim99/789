@@ -1,5 +1,7 @@
 package com.kyad.traystorage.app.main;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +44,8 @@ import com.kyad.traystorage.databinding.ActivityMainBinding;
 import com.kyad.traystorage.databinding.DialogPopupBinding;
 import com.kyad.traystorage.databinding.ItemDocumentBinding;
 
+import com.kyad.traystorage.app.chatbot.ChatbotFragment;
+
 import base.BaseBindingActivity;
 import helper.RecyclerViewHelper;
 
@@ -51,6 +56,8 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     private AlertDialog popupDialog;
     public ObservableInt showType = new ObservableInt(0);
     private String lastSearchKey = "";
+    private ChatbotFragment chatbotFragment;
+    private boolean isChatbotVisible = false;
 
     @Override
     public int getLayout() {
@@ -113,12 +120,27 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         currentCount += 20;
     }
 
+    // 테스트 모드 체크 헬퍼
+    private boolean isTestMode() {
+        ModelUser user = DataManager.get().getModel(ModelUser.class);
+        return (user != null && user.id == 999);
+    }
+
     @Override
     public void init() {
         initViewModel();
         initView();
-        viewModel.getPopupInfos();
         setupKeyboard(binding.drawerLayout);
+
+        // 테스트 모드: API 호출 건너뛰기
+        if (isTestMode()) {
+            showType.set(2); // 문서 목록 UI 표시
+            binding.setUser(DataManager.get().getModel(ModelUser.class));
+            binding.docCount.setText("0건");
+            return;
+        }
+
+        viewModel.getPopupInfos();
 
         if (!Common.gDocumentID.equals("")) {
             Integer docId = Integer.parseInt(Common.gDocumentID);
@@ -133,9 +155,17 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.getDocuments(lastSearchKey);
-
+        
         binding.setUser(DataManager.get().getModel(ModelUser.class));
+        
+        // 테스트 모드: API 호출 건너뛰기
+        if (isTestMode()) {
+            showType.set(2); // 문서 목록 UI 표시
+            binding.docCount.setText("0건");
+            return;
+        }
+        
+        viewModel.getDocuments(lastSearchKey);
         Glide.with(this).load(binding.getUser().profile_image).placeholder(R.drawable.icon_c_user_60).into(binding.imgAvatar);
     }
 
@@ -223,10 +253,14 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             binding.drawerLayout.closeDrawer(binding.navMenu);
             return;
         }
+        if (isChatbotVisible) {
+            hideChatbot();
+            return;
+        }
         if (binding.backLayout.getVisibility() == View.VISIBLE) {
             binding.backLayout.setVisibility(View.GONE);
             binding.titleLayout.setVisibility(View.VISIBLE);
-            binding.btnAdd.setVisibility(View.VISIBLE);
+            binding.fabContainer.setVisibility(View.VISIBLE);
             binding.textSearch.setText("");
             lastSearchKey = "";
             viewModel.getDocuments("");
@@ -265,7 +299,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         viewModel.getDocuments(lastSearchKey);
         binding.backLayout.setVisibility(View.VISIBLE);
         binding.titleLayout.setVisibility(View.GONE);
-        binding.btnAdd.setVisibility(View.GONE);
+        binding.fabContainer.setVisibility(View.GONE);
     }
 
     void goDetail(Integer docId) {
@@ -427,5 +461,65 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             return;
         Intent intent = new Intent(this, DocumentEditActivity.class);
         startActivity(intent);
+    }
+
+    /*
+     * Chatbot
+     */
+
+    public void onChatbotClick() {
+        if (!binding.textSearch.isEnabled())
+            return;
+        if (isChatbotVisible) {
+            hideChatbot();
+        } else {
+            showChatbot();
+        }
+    }
+
+    private void showChatbot() {
+        if (chatbotFragment == null) {
+            chatbotFragment = new ChatbotFragment();
+            chatbotFragment.setOnCloseListener(() -> hideChatbot());
+        }
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.chatbot_container, chatbotFragment)
+                .commit();
+
+        binding.chatbotContainer.setVisibility(View.VISIBLE);
+        binding.chatbotContainer.setTranslationY(binding.chatbotContainer.getHeight() > 0 ? binding.chatbotContainer.getHeight() : 600);
+        binding.chatbotContainer.animate()
+                .translationY(0)
+                .setDuration(300)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        isChatbotVisible = true;
+                    }
+                })
+                .start();
+
+        binding.fabContainer.setVisibility(View.GONE);
+    }
+
+    private void hideChatbot() {
+        binding.chatbotContainer.animate()
+                .translationY(binding.chatbotContainer.getHeight())
+                .setDuration(300)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        binding.chatbotContainer.setVisibility(View.GONE);
+                        isChatbotVisible = false;
+                        if (showType.get() != 1) {
+                            binding.fabContainer.setVisibility(View.VISIBLE);
+                        }
+                    }
+                })
+                .start();
     }
 }

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="message"
+            type="com.kyad.traystorage.data.model.ModelChatMessage" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="4dp">
+
+        <LinearLayout
+            android:id="@+id/user_message_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:orientation="vertical"
+            android:visibility="@{message.role.equals(`user`) ? View.VISIBLE : View.GONE}">
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/user_message_text"
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/bg_chat_user"
+                android:maxWidth="260dp"
+                android:text="@{message.content}"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="사용자 메시지입니다" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/user_timestamp"
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/C999999"
+                android:textSize="10sp"
+                tools:text="오후 3:45" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/assistant_message_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:orientation="vertical"
+            android:visibility="@{message.role.equals(`assistant`) ? View.VISIBLE : View.GONE}">
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/assistant_message_text"
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chat_assistant"
+                android:maxWidth="260dp"
+                android:text="@{message.content}"
+                android:textColor="@color/C333333"
+                android:textSize="14sp"
+                tools:text="AI 어시스턴트 응답입니다" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/assistant_timestamp"
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/C999999"
+                android:textSize="10sp"
+                tools:text="오후 3:45" />
+
+            <LinearLayout
+                android:id="@+id/search_results_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/Cdddddd" />
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="📄 관련 문서:"
+                    android:textColor="@color/C333333"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:id="@+id/search_results_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</layout>
