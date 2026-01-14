@@ -16,11 +16,11 @@ serve(async (req) => {
   try {
     const { message, userId, access_token, history = [] } = await req.json();
     
-    const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
+    const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY');
     const supabaseUrl = Deno.env.get('SUPABASE_URL');
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     
-    if (!GEMINI_API_KEY) throw new Error('GEMINI_API_KEY not configured');
+    if (!OPENAI_API_KEY) throw new Error('OPENAI_API_KEY not configured');
     
     // 1. 사용자 문서 검색
     let documentContext = '';
@@ -112,33 +112,39 @@ ${documentContext || '검색된 문서가 없습니다.'}
 4. **중요한 내용**은 볼드 처리하세요
 5. 이모지를 적절히 사용하세요 😊`;
 
-    // 3. Gemini API 호출 (스트리밍)
-    const historyContents = history
+    // 3. OpenAI GPT-5.2 API 호출 (스트리밍)
+    const historyMessages = history
       .filter((h: any) => h.content && h.content.trim())
       .map((h: any) => ({
-        role: h.role === 'user' ? 'user' : 'model',
-        parts: [{ text: h.content }],
+        role: h.role === 'user' ? 'user' : 'assistant',
+        content: h.content,
       }));
     
-    const contents = [
-      { role: 'user', parts: [{ text: systemPrompt }] },
-      { role: 'model', parts: [{ text: '네, 알겠습니다. TrayStorage AI 어시스턴트 트로이로서 문서 검색과 관리를 도와드리겠습니다.' }] },
-      ...historyContents,
-      { role: 'user', parts: [{ text: message }] },
+    const messages = [
+      { role: 'system', content: systemPrompt },
+      ...historyMessages,
+      { role: 'user', content: message },
     ];
     
-    const streamUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse&key=${GEMINI_API_KEY}`;
+    const streamUrl = 'https://api.openai.com/v1/chat/completions';
     
-    const geminiResponse = await fetch(streamUrl, {
+    const openaiResponse = await fetch(streamUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents }),
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+      },
+      body: JSON.stringify({ 
+        model: 'gpt-5.2',
+        messages: messages,
+        stream: true,
+      }),
     });
     
-    if (!geminiResponse.ok || !geminiResponse.body) {
-      const errorText = await geminiResponse.text();
-      console.error('Gemini API error:', errorText);
-      throw new Error('Gemini API failed');
+    if (!openaiResponse.ok || !openaiResponse.body) {
+      const errorText = await openaiResponse.text();
+      console.error('OpenAI API error:', errorText);
+      throw new Error('OpenAI API failed');
     }
     
     // 4. SSE 스트리밍 응답 반환
@@ -147,7 +153,7 @@ ${documentContext || '검색된 문서가 없습니다.'}
     
     const stream = new ReadableStream({
       async start(controller) {
-        const reader = geminiResponse.body!.getReader();
+        const reader = openaiResponse.body!.getReader();
         let buffer = '';
         let fullText = '';
         
@@ -159,39 +165,44 @@ ${documentContext || '검색된 문서가 없습니다.'}
             buffer += decoder.decode(value, { stream: true });
             buffer = buffer.replace(/\r\n/g, '\n');
             
-            let boundary = buffer.indexOf('\n\n');
+            let boundary = buffer.indexOf('\n');
             while (boundary !== -1) {
-              const eventStr = buffer.slice(0, boundary);
-              buffer = buffer.slice(boundary + 2);
+              const line = buffer.slice(0, boundary).trim();
+              buffer = buffer.slice(boundary + 1);
               
-              const lines = eventStr.split('\n');
-              for (const line of lines) {
-                if (!line.trim() || line.startsWith(':') || !line.startsWith('data:')) continue;
-                
-                const dataStr = line.slice(5).trim();
-                if (!dataStr || dataStr === '[DONE]') continue;
-                
-                try {
-                  const parsed = JSON.parse(dataStr);
-                  const candidates = parsed.candidates ?? [];
-                  for (const candidate of candidates) {
-                    const parts = candidate.content?.parts ?? [];
-                    for (const part of parts) {
-                      const delta = part.text || '';
-                      if (delta) {
-                        fullText += delta;
-                        // SSE 형식으로 전송
-                        const sseData = JSON.stringify({ text: fullText });
-                        controller.enqueue(encoder.encode(`data: ${sseData}\n\n`));
-                      }
-                    }
-                  }
-                } catch (e) {
-                  console.error('Parse error:', e);
-                }
+              if (!line || line.startsWith(':')) {
+                boundary = buffer.indexOf('\n');
+                continue;
               }
               
-              boundary = buffer.indexOf('\n\n');
+              if (!line.startsWith('data:')) {
+                boundary = buffer.indexOf('\n');
+                continue;
+              }
+              
+              const dataStr = line.slice(5).trim();
+              if (!dataStr || dataStr === '[DONE]') {
+                boundary = buffer.indexOf('\n');
+                continue;
+              }
+              
+              try {
+                const parsed = JSON.parse(dataStr);
+                const choices = parsed.choices ?? [];
+                for (const choice of choices) {
+                  const delta = choice.delta?.content || '';
+                  if (delta) {
+                    fullText += delta;
+                    // SSE 형식으로 전송
+                    const sseData = JSON.stringify({ text: fullText });
+                    controller.enqueue(encoder.encode(`data: ${sseData}\n\n`));
+                  }
+                }
+              } catch (e) {
+                console.error('Parse error:', e);
+              }
+              
+              boundary = buffer.indexOf('\n');
             }
           }
           
