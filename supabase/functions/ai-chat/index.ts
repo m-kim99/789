@@ -135,7 +135,7 @@ ${documentContext || '검색된 문서가 없습니다.'}
         'Authorization': `Bearer ${OPENAI_API_KEY}`,
       },
       body: JSON.stringify({ 
-        model: 'gpt-5.2',
+        model: 'gpt-5.2-chat-latest',
         messages: messages,
         stream: true,
       }),
@@ -143,8 +143,15 @@ ${documentContext || '검색된 문서가 없습니다.'}
     
     if (!openaiResponse.ok || !openaiResponse.body) {
       const errorText = await openaiResponse.text();
-      console.error('OpenAI API error:', errorText);
-      throw new Error('OpenAI API failed');
+      console.error('OpenAI API error:', openaiResponse.status, errorText);
+      return new Response(
+        JSON.stringify({
+          error: 'OpenAI API failed',
+          status: openaiResponse.status,
+          details: errorText,
+        }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
     }
     
     // 4. SSE 스트리밍 응답 반환
@@ -232,9 +239,10 @@ ${documentContext || '검색된 문서가 없습니다.'}
     });
     
   } catch (error) {
-    console.error('Error:', error);
+    const message = error instanceof Error ? error.message : String(error);
+    console.error('Error:', message);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: message }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }

@@ -37,12 +37,14 @@ import com.kyad.traystorage.app.setting.NoticeDetailActivity;
 import com.kyad.traystorage.app.setting.ProfileManageActivity;
 import com.kyad.traystorage.app.setting.SettingActivity;
 import com.kyad.traystorage.data.DataManager;
+import com.kyad.traystorage.data.model.ModelCategory;
 import com.kyad.traystorage.data.model.ModelDocument;
 import com.kyad.traystorage.data.model.ModelPopupInfo;
 import com.kyad.traystorage.data.model.ModelUser;
 import com.kyad.traystorage.databinding.ActivityMainBinding;
 import com.kyad.traystorage.databinding.DialogPopupBinding;
-import com.kyad.traystorage.databinding.ItemDocumentBinding;
+import com.kyad.traystorage.databinding.ItemCategoryBinding;
+import android.widget.EditText;
 
 import com.kyad.traystorage.app.chatbot.ChatbotFragment;
 
@@ -51,7 +53,7 @@ import helper.RecyclerViewHelper;
 
 public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     public MainViewModel viewModel;
-    private DocumentListAdapter docListAdapter;
+    private CategoryListAdapter categoryListAdapter;
     private static DialogPopupBinding popupBinding;
     private AlertDialog popupDialog;
     public ObservableInt showType = new ObservableInt(0);
@@ -87,38 +89,17 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                 App.get().finishAllActivity();
             }
 
-            public void onGetDocuments() {
-                binding.docTittle.setText(binding.backLayout.getVisibility() == View.VISIBLE ? R.string.search_result : R.string.document1);
-                binding.docCount.setText("" + viewModel.allList.size() + "건");
-                if (lastSearchKey.isEmpty())
-                    showType.set(viewModel.allList.size() > 0 ? 2 : 1);
-                else
-                    showType.set(2);
-
-                if (viewModel.allList.size() == 0) {
-                    binding.docList.setVisibility(View.GONE);
-                    binding.layoutNotResult.setVisibility(View.VISIBLE);
-                    binding.textNoResult.setText("'" + lastSearchKey + "'" + getResources().getString(R.string.search_not_result));
-                } else {
-                    binding.docList.setVisibility(View.VISIBLE);
-                    binding.layoutNotResult.setVisibility(View.GONE);
-                }
-                updateCurrentList();
+            @Override
+            public void onGetCategories() {
+                binding.docTittle.setText(R.string.category);
+                binding.docCount.setText(viewModel.categoryList.size() + "개");
+                showType.set(viewModel.categoryList.size() > 0 ? 2 : 1);
+                categoryListAdapter.notifyDataSetChanged();
             }
         };
 
     }
 
-    int currentCount = 0;
-
-    public void updateCurrentList() {
-        viewModel.documentList.clear();
-        for (int i = 0; i < currentCount + 20; i++) {
-            if (i < viewModel.allList.size())
-                viewModel.documentList.add(viewModel.allList.get(i));
-        }
-        currentCount += 20;
-    }
 
     // 테스트 모드 체크 헬퍼
     private boolean isTestMode() {
@@ -165,7 +146,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             return;
         }
         
-        viewModel.getDocuments(lastSearchKey);
+        viewModel.getCategories();
         Glide.with(this).load(binding.getUser().profile_image).placeholder(R.drawable.icon_c_user_60).into(binding.imgAvatar);
     }
 
@@ -188,9 +169,9 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     private void initView() {
         binding.setActivity(this);
 
-        binding.docCount.setText("0");
-        docListAdapter = new DocumentListAdapter();
-        binding.docList.setAdapter(docListAdapter);
+        binding.docCount.setText("0개");
+        categoryListAdapter = new CategoryListAdapter();
+        binding.categoryList.setAdapter(categoryListAdapter);
 
         popupBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_popup, null, false);
         popupBinding.setPresenter(new PopupInfoPresenter());
@@ -228,21 +209,6 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         });
 
 
-        //scroll list (view more)
-        binding.docList.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (binding.docList.getAdapter().getItemCount() != 0) {
-                    int lastPos = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-                    if ((lastPos != RecyclerView.NO_POSITION) && (lastPos == binding.docList.getAdapter().getItemCount() - 1) && (currentCount < viewModel.allList.size())) {
-                        updateCurrentList();
-                    }
-                }
-            }
-        });
     }
 
     private boolean bFinish = false;
@@ -263,7 +229,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
             binding.fabContainer.setVisibility(View.VISIBLE);
             binding.textSearch.setText("");
             lastSearchKey = "";
-            viewModel.getDocuments("");
+            viewModel.getCategories();
             return;
         }
         if (!bFinish) {
@@ -288,54 +254,37 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     }
 
     public void onSearchClick() {
-        if (!binding.textSearch.isEnabled())
-            return;
-        currentCount = 0;
-        lastSearchKey = binding.textSearch.getPlanText();
-        if (lastSearchKey.isEmpty()) {
-            Utils.showCustomToast(this, R.string.search_input);
-            return;
-        }
-        viewModel.getDocuments(lastSearchKey);
-        binding.backLayout.setVisibility(View.VISIBLE);
-        binding.titleLayout.setVisibility(View.GONE);
-        binding.fabContainer.setVisibility(View.GONE);
+        // 검색은 카테고리 내 문서 검색에서 처리
     }
 
-    void goDetail(Integer docId) {
-        if (!binding.textSearch.isEnabled())
-            return;
-        Intent intent = new Intent(this, DocumentDetailActivity.class);
-        intent.putExtra("doc_id", docId);
+    void goCategory(int categoryId, String categoryName) {
+        Intent intent = new Intent(this, CategoryDocumentsActivity.class);
+        intent.putExtra("category_id", categoryId);
+        intent.putExtra("category_name", categoryName);
         startActivity(intent);
     }
 
-    public class DocumentListAdapter extends RecyclerView.Adapter {
-
-        public DocumentListAdapter() {
-            RecyclerViewHelper.linkAdapterAndObserable(this, viewModel.documentList);
-        }
+    public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ListItemViewHolder> {
 
         @NonNull
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_document, viewGroup, false);
-            RecyclerView.ViewHolder viewHolder = new DocumentListAdapter.ListItemViewHolder(view);
-            return viewHolder;
+        public ListItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_category, viewGroup, false);
+            return new ListItemViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-            ((ListItemViewHolder) viewHolder).bindItem(viewModel.documentList.get(i), i);
+        public void onBindViewHolder(@NonNull ListItemViewHolder holder, int position) {
+            holder.bindItem(viewModel.categoryList.get(position));
         }
 
         @Override
         public int getItemCount() {
-            return viewModel.documentList.size();
+            return viewModel.categoryList.size();
         }
 
         public class ListItemViewHolder extends RecyclerView.ViewHolder {
-            ItemDocumentBinding binding;
+            ItemCategoryBinding binding;
 
             public ListItemViewHolder(View view) {
                 super(view);
@@ -343,19 +292,63 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                 binding.setHolder(this);
             }
 
-            public void onClick(Integer docId) {
-                goDetail(docId);
+            public void onClick(int categoryId, String categoryName) {
+                goCategory(categoryId, categoryName);
             }
 
-            public void bindItem(ModelDocument document, int position) {
-                binding.setData(document);
-                binding.imgLabel.setImageResource(Constants.LabelColorArray.valueOf("color" + document.label).value);
-                if (document.image_list.size() > 0)
-                    Glide.with(MainActivity.this).load(document.image_list.get(0)).into(binding.imageView);
-                else
-                    Glide.with(MainActivity.this).load("").into(binding.imageView);
+            public boolean onLongClick(ModelCategory category) {
+                showCategoryOptionsDialog(category);
+                return true;
+            }
+
+            public void bindItem(ModelCategory category) {
+                binding.setData(category);
             }
         }
+    }
+
+    private void showCategoryOptionsDialog(ModelCategory category) {
+        String[] options = {getString(R.string.category_edit), getString(R.string.category_delete)};
+        new AlertDialog.Builder(this)
+                .setTitle(category.name)
+                .setItems(options, (dialog, which) -> {
+                    if (which == 0) {
+                        showEditCategoryDialog(category);
+                    } else {
+                        showDeleteCategoryDialog(category);
+                    }
+                })
+                .show();
+    }
+
+    private void showDeleteCategoryDialog(ModelCategory category) {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.category_delete)
+                .setMessage(R.string.category_delete_confirm)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    viewModel.deleteCategory(category.id);
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    private void showEditCategoryDialog(ModelCategory category) {
+        EditText editText = new EditText(this);
+        editText.setText(category.name);
+        editText.setHint(R.string.enter_category_name);
+        editText.setPadding(50, 30, 50, 30);
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.category_edit)
+                .setView(editText)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    String name = editText.getText().toString().trim();
+                    if (!name.isEmpty()) {
+                        viewModel.updateCategory(category.id, name, category.color);
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
     }
 
     /*
@@ -457,10 +450,31 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     }
 
     public void onRegisterClick() {
+        // 이전 버전 호환성 - 사용 안함
+    }
+
+    public void onAddCategoryClick() {
         if (!binding.textSearch.isEnabled())
             return;
-        Intent intent = new Intent(this, DocumentEditActivity.class);
-        startActivity(intent);
+        showAddCategoryDialog();
+    }
+
+    private void showAddCategoryDialog() {
+        EditText editText = new EditText(this);
+        editText.setHint(R.string.enter_category_name);
+        editText.setPadding(50, 30, 50, 30);
+
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.category_add)
+                .setView(editText)
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    String name = editText.getText().toString().trim();
+                    if (!name.isEmpty()) {
+                        viewModel.insertCategory(name, 0);
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
     }
 
     /*

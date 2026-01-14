@@ -99,7 +99,21 @@ public class ChatbotService {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (!response.isSuccessful()) {
-                        callback.onError("서버 오류: " + response.code());
+                        String errorBody = "";
+                        ResponseBody responseBody = response.body();
+                        if (responseBody != null) {
+                            try {
+                                errorBody = responseBody.string();
+                            } catch (Exception e) {
+                                Log.w(TAG, "Failed to read error response body", e);
+                            }
+                        }
+
+                        String errorMessage = "서버 오류: " + response.code();
+                        if (errorBody != null && !errorBody.isEmpty()) {
+                            errorMessage += "\n" + errorBody;
+                        }
+                        callback.onError(errorMessage);
                         return;
                     }
 

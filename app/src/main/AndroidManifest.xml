@@ -181,6 +181,11 @@
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
+            android:name=".app.main.CategoryDocumentsActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+        <activity
             android:name=".app.main.DocumentEditActivity"
             android:screenOrientation="portrait"
             android:exported="true"

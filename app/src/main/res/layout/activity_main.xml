@@ -135,11 +135,10 @@
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/bg_btn_approve_both"
                         android:gravity="center"
-                        android:onClick="@{()->activity.onRegisterClick()}"
-                        android:text="@string/add_new_doc"
+                        android:onClick="@{()->activity.onAddCategoryClick()}"
+                        android:text="@string/add_new_category"
                         android:textColor="@color/white"
                         android:textSize="15dp" />
-
 
                 </LinearLayout>
 
@@ -207,7 +206,7 @@
                             style="@style/font_spoqahansansneo_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/document1"
+                            android:text="@string/category"
                             android:textColor="@color/C151515"
                             android:textSize="15dp" />
 
@@ -217,7 +216,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:text="123"
+                            android:text="0개"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
                     </LinearLayout>
@@ -229,12 +228,12 @@
                         android:background="@color/transparent" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/doc_list"
+                        android:id="@+id/category_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:layoutManager="LinearLayoutManager"
-                        tools:itemCount="50"
-                        tools:listitem="@layout/item_document" />
+                        tools:itemCount="10"
+                        tools:listitem="@layout/item_category" />
 
                     <RelativeLayout
                         android:id="@+id/layout_not_result"
@@ -289,7 +288,7 @@
                     android:id="@+id/btn_add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{()->activity.onRegisterClick()}"
+                    android:onClick="@{()->activity.onAddCategoryClick()}"
                     android:src="@drawable/icon_c_writing_56" />
             </LinearLayout>
 

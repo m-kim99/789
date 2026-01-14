@@ -65,6 +65,8 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
 
     ModelDocument editDocument = null;
     private List<String> docImageFileList = new ArrayList<>();
+    private Integer categoryId = null;
+    private String categoryName = "";
 
     @Override
     public int getLayout() {
@@ -92,6 +94,8 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
         }
 
         Boolean isDocEdit = getIntent().getBooleanExtra("is_edit", false);
+        categoryId = getIntent().hasExtra("category_id") ? getIntent().getIntExtra("category_id", -1) : null;
+        categoryName = getIntent().getStringExtra("category_name");
         initViewModel();
         initView();
         binding.tagAdd.setTag(new Object());
@@ -302,9 +306,9 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
         }
         
         if (editDocument == null) {
-            viewModel.registerDocument(viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles);
+            viewModel.registerDocument(viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles, categoryId);
         } else {
-            viewModel.updateDocument(editDocument.id, viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles);
+            viewModel.updateDocument(editDocument.id, viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles, categoryId);
         }
     }
 

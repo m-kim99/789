@@ -7,6 +7,7 @@ import com.kyad.traystorage.App;
 import com.kyad.traystorage.R;
 import com.kyad.traystorage.data.DataManager;
 import com.kyad.traystorage.data.model.ModelBase;
+import com.kyad.traystorage.data.model.ModelCategory;
 import com.kyad.traystorage.data.model.ModelDocument;
 import com.kyad.traystorage.data.model.ModelPopupInfo;
 import com.kyad.traystorage.data.model.ModelUploadFile;
@@ -22,6 +23,7 @@ import lombok.Setter;
 public class MainViewModel extends BaseViewModel {
     public ObservableArrayList<ModelDocument> documentList = new ObservableArrayList<>();
     public List<ModelDocument> allList = new ArrayList<>();
+    public List<ModelCategory> categoryList = new ArrayList<>();
     public MutableLiveData<List<ModelPopupInfo>> popupInfoList = new MutableLiveData<>();
     public MutableLiveData<ModelDocument> documentDetail = new MutableLiveData<>();
 
@@ -138,8 +140,8 @@ public class MainViewModel extends BaseViewModel {
         }));
     }
 
-    public void registerDocument(String title, String content, Integer label, List<String> tags, List<String> uploadFileNames) {
-        addDisposable(DataManager.get().insertDocument(title, content, label, tags.toArray(new String[0]), uploadFileNames.toArray(new String[0])).subscribeWith(new ResponseSubscriber<ModelDocument.DetailModel>() {
+    public void registerDocument(String title, String content, Integer label, List<String> tags, List<String> uploadFileNames, Integer categoryId) {
+        addDisposable(DataManager.get().insertDocument(title, content, label, tags.toArray(new String[0]), uploadFileNames.toArray(new String[0]), categoryId).subscribeWith(new ResponseSubscriber<ModelDocument.DetailModel>() {
             @Override
             public void onComplete() {
                 super.onComplete();
@@ -155,8 +157,8 @@ public class MainViewModel extends BaseViewModel {
         }));
     }
 
-    public void updateDocument(Integer docId, String title, String content, Integer label, List<String> tags, List<String> uploadFileNames) {
-        addDisposable(DataManager.get().updateDocument(docId, title, content, label, tags.toArray(new String[0]), uploadFileNames.toArray(new String[0])).subscribeWith(new ResponseSubscriber<ModelBase>() {
+    public void updateDocument(Integer docId, String title, String content, Integer label, List<String> tags, List<String> uploadFileNames, Integer categoryId) {
+        addDisposable(DataManager.get().updateDocument(docId, title, content, label, tags.toArray(new String[0]), uploadFileNames.toArray(new String[0]), categoryId).subscribeWith(new ResponseSubscriber<ModelBase>() {
             @Override
             public void onComplete() {
                 super.onComplete();
@@ -214,6 +216,81 @@ public class MainViewModel extends BaseViewModel {
 
                 if (getResponse().result == 0) {
                     apiListener.onDeleteDocumentSuccess();
+                } else if (!getResponse().msg.isEmpty()) {
+                    apiListener.onError(getResponse().msg);
+                } else {
+                    apiListener.onError(App.get().getString(R.string.error_network_content));
+                }
+            }
+        }));
+    }
+
+    /************************************************************
+     *  Category APIs
+     ************************************************************/
+    public void getCategories() {
+        addDisposable(DataManager.get().getCategoryList().subscribeWith(new ResponseSubscriber<ModelCategory.ListModel>() {
+            @Override
+            public void onComplete() {
+                super.onComplete();
+
+                if (getResponse().result == 0) {
+                    categoryList.clear();
+                    categoryList.addAll(getResponse().data.category_list);
+                    apiListener.onGetCategories();
+                } else if (getResponse().result == 1) {
+                    apiListener.onLoginTokenError();
+                } else if (!getResponse().msg.isEmpty()) {
+                    apiListener.onError(getResponse().msg);
+                } else {
+                    apiListener.onError(App.get().getString(R.string.error_network_content));
+                }
+            }
+        }));
+    }
+
+    public void insertCategory(String name, Integer color) {
+        addDisposable(DataManager.get().insertCategory(name, color).subscribeWith(new ResponseSubscriber<ModelCategory.DetailModel>() {
+            @Override
+            public void onComplete() {
+                super.onComplete();
+
+                if (getResponse().result == 0) {
+                    getCategories();
+                } else if (!getResponse().msg.isEmpty()) {
+                    apiListener.onError(getResponse().msg);
+                } else {
+                    apiListener.onError(App.get().getString(R.string.error_network_content));
+                }
+            }
+        }));
+    }
+
+    public void updateCategory(Integer categoryId, String name, Integer color) {
+        addDisposable(DataManager.get().updateCategory(categoryId, name, color).subscribeWith(new ResponseSubscriber<ModelBase>() {
+            @Override
+            public void onComplete() {
+                super.onComplete();
+
+                if (getResponse().result == 0) {
+                    getCategories();
+                } else if (!getResponse().msg.isEmpty()) {
+                    apiListener.onError(getResponse().msg);
+                } else {
+                    apiListener.onError(App.get().getString(R.string.error_network_content));
+                }
+            }
+        }));
+    }
+
+    public void deleteCategory(Integer categoryId) {
+        addDisposable(DataManager.get().deleteCategory(categoryId).subscribeWith(new ResponseSubscriber<ModelBase>() {
+            @Override
+            public void onComplete() {
+                super.onComplete();
+
+                if (getResponse().result == 0) {
+                    getCategories();
                 } else if (!getResponse().msg.isEmpty()) {
                     apiListener.onError(getResponse().msg);
                 } else {

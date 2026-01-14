@@ -11,6 +11,8 @@ public class MainApiListener {
 
     public void onGetDocuments(){}
 
+    public void onGetCategories(){}
+
     public void onImageUploaded(String imageUrl, String uploadFileName) {
 
     }

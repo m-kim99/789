@@ -8,6 +8,7 @@ import com.kyad.traystorage.data.local.LocalDataSourceFactory;
 import com.kyad.traystorage.data.model.ModelAgreement;
 import com.kyad.traystorage.data.model.ModelAsk;
 import com.kyad.traystorage.data.model.ModelBase;
+import com.kyad.traystorage.data.model.ModelCategory;
 import com.kyad.traystorage.data.model.ModelCode;
 import com.kyad.traystorage.data.model.ModelDocument;
 import com.kyad.traystorage.data.model.ModelFaq;
@@ -77,7 +78,11 @@ public class DataManager {
     }
 
     public Flowable<ApiResponse<ModelDocument.ListModel>> getDocumentList(String keyword) {
-        return callApi(remote.get_document_list(getModel(ModelUser.class).access_token, keyword));
+        return callApi(remote.get_document_list(getModel(ModelUser.class).access_token, keyword, null));
+    }
+
+    public Flowable<ApiResponse<ModelDocument.ListModel>> getDocumentListByCategory(Integer categoryId, String keyword) {
+        return callApi(remote.get_document_list(getModel(ModelUser.class).access_token, keyword, categoryId));
     }
 
     public Flowable<ApiResponse<ModelBase>> uploadImage(String imageUrl) {
@@ -103,14 +108,15 @@ public class DataManager {
                 req_file));
     }
 
-    public Flowable<ApiResponse<ModelDocument.DetailModel>> insertDocument(String title, String content, Integer label, String[] tags, String[] images) {
+    public Flowable<ApiResponse<ModelDocument.DetailModel>> insertDocument(String title, String content, Integer label, String[] tags, String[] images, Integer categoryId) {
         return callApi(remote.insert_document(
                 getModel(ModelUser.class).access_token,
                 title,
                 content,
                 label,
                 Util.arrayJoin(",", tags),
-                Util.arrayJoin(",", images)));
+                Util.arrayJoin(",", images),
+                categoryId));
     }
 
     public Flowable<ApiResponse<ModelDocument.DetailModel>> getDocumentDetail(Integer docId) {
@@ -121,7 +127,7 @@ public class DataManager {
         return callApi(remote.delete_document_item(getModel(ModelUser.class).access_token, docId));
     }
 
-    public Flowable<ApiResponse<ModelBase>> updateDocument(Integer docId, String title, String content, Integer label, String[] tags, String[] images) {
+    public Flowable<ApiResponse<ModelBase>> updateDocument(Integer docId, String title, String content, Integer label, String[] tags, String[] images, Integer categoryId) {
         return callApi(remote.update_document(
                 getModel(ModelUser.class).access_token,
                 docId,
@@ -129,7 +135,8 @@ public class DataManager {
                 content,
                 label,
                 Util.arrayJoin(",", tags),
-                Util.arrayJoin(",", images)));
+                Util.arrayJoin(",", images),
+                categoryId));
     }
 
     public Flowable<ApiResponse<ModelVersion>> getVersionInfo() {
@@ -212,6 +219,26 @@ public class DataManager {
         local.removeModel(type);
     }
 
+
+    /********************************
+     *  Category APIs
+     ********************************/
+
+    public Flowable<ApiResponse<ModelCategory.ListModel>> getCategoryList() {
+        return callApi(remote.get_category_list(getModel(ModelUser.class).access_token));
+    }
+
+    public Flowable<ApiResponse<ModelCategory.DetailModel>> insertCategory(String name, Integer color) {
+        return callApi(remote.insert_category(getModel(ModelUser.class).access_token, name, color));
+    }
+
+    public Flowable<ApiResponse<ModelBase>> updateCategory(Integer categoryId, String name, Integer color) {
+        return callApi(remote.update_category(getModel(ModelUser.class).access_token, categoryId, name, color));
+    }
+
+    public Flowable<ApiResponse<ModelBase>> deleteCategory(Integer categoryId) {
+        return callApi(remote.delete_category(getModel(ModelUser.class).access_token, categoryId));
+    }
 
     /********************************
      *  global

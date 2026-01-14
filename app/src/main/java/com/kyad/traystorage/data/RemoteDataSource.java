@@ -3,6 +3,7 @@ package com.kyad.traystorage.data;
 import com.kyad.traystorage.data.model.ModelAgreement;
 import com.kyad.traystorage.data.model.ModelAsk;
 import com.kyad.traystorage.data.model.ModelBase;
+import com.kyad.traystorage.data.model.ModelCategory;
 import com.kyad.traystorage.data.model.ModelCode;
 import com.kyad.traystorage.data.model.ModelDocument;
 import com.kyad.traystorage.data.model.ModelFaq;
@@ -59,7 +60,8 @@ public interface RemoteDataSource {
     @FormUrlEncoded
     Flowable<ApiResponse<ModelDocument.ListModel>> get_document_list(
             @Field("access_token") String access_token,
-            @Field("keyword") String keyword
+            @Field("keyword") String keyword,
+            @Field("category_id") Integer category_id
     );
 
     @POST("upload/upload_file")
@@ -84,7 +86,8 @@ public interface RemoteDataSource {
             @Field("content") String content,
             @Field("label") Integer label,
             @Field("tags") String tags,
-            @Field("images") String images
+            @Field("images") String images,
+            @Field("category_id") Integer category_id
     );
 
     @POST("app/get_document_detail")
@@ -110,7 +113,8 @@ public interface RemoteDataSource {
             @Field("content") String content,
             @Field("label") Integer label,
             @Field("tags") String tags,
-            @Field("images") String images
+            @Field("images") String images,
+            @Field("category_id") Integer category_id
     );
 
     @POST("app/version_info")
@@ -250,5 +254,38 @@ public interface RemoteDataSource {
             @Field("is_code") Integer is_code
     );
 
+    // =====================================================
+    // Category APIs
+    // =====================================================
+
+    @POST("app/get_category_list")
+    @FormUrlEncoded
+    Flowable<ApiResponse<ModelCategory.ListModel>> get_category_list(
+            @Field("access_token") String access_token
+    );
+
+    @POST("app/insert_category")
+    @FormUrlEncoded
+    Flowable<ApiResponse<ModelCategory.DetailModel>> insert_category(
+            @Field("access_token") String access_token,
+            @Field("name") String name,
+            @Field("color") Integer color
+    );
+
+    @POST("app/update_category")
+    @FormUrlEncoded
+    Flowable<ApiResponse<ModelBase>> update_category(
+            @Field("access_token") String access_token,
+            @Field("id") Integer id,
+            @Field("name") String name,
+            @Field("color") Integer color
+    );
+
+    @POST("app/delete_category")
+    @FormUrlEncoded
+    Flowable<ApiResponse<ModelBase>> delete_category(
+            @Field("access_token") String access_token,
+            @Field("id") Integer id
+    );
 
 }
