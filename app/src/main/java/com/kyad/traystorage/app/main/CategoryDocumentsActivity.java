@@ -32,11 +32,16 @@ import com.kyad.traystorage.databinding.ItemDocumentBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.view.animation.AccelerateDecelerateInterpolator;
+
 import base.BaseBindingActivity;
 import helper.RecyclerViewHelper;
 import io.reactivex.disposables.CompositeDisposable;
 import org.greenrobot.eventbus.EventBus;
 import base.BaseEvent;
+import com.kyad.traystorage.app.chatbot.ChatbotFragment;
 
 public class CategoryDocumentsActivity extends BaseBindingActivity<ActivityCategoryDocumentsBinding> {
 
@@ -48,6 +53,8 @@ public class CategoryDocumentsActivity extends BaseBindingActivity<ActivityCateg
     private String lastSearchKey = "";
     private int currentCount = 0;
     private CompositeDisposable disposables = new CompositeDisposable();
+    private ChatbotFragment chatbotFragment;
+    private boolean isChatbotVisible = false;
 
     @Override
     public int getLayout() {
@@ -198,6 +205,70 @@ public class CategoryDocumentsActivity extends BaseBindingActivity<ActivityCateg
     protected void onDestroy() {
         super.onDestroy();
         disposables.clear();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isChatbotVisible) {
+            hideChatbot();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    /*
+     * Chatbot
+     */
+    public void onChatbotClick() {
+        if (isChatbotVisible) {
+            hideChatbot();
+        } else {
+            showChatbot();
+        }
+    }
+
+    private void showChatbot() {
+        if (chatbotFragment == null) {
+            chatbotFragment = new ChatbotFragment();
+            chatbotFragment.setOnCloseListener(() -> hideChatbot());
+        }
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.chatbot_container, chatbotFragment)
+                .commit();
+
+        binding.chatbotContainer.setVisibility(View.VISIBLE);
+        binding.chatbotContainer.setTranslationY(binding.chatbotContainer.getHeight() > 0 ? binding.chatbotContainer.getHeight() : 600);
+        binding.chatbotContainer.animate()
+                .translationY(0)
+                .setDuration(300)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        isChatbotVisible = true;
+                    }
+                })
+                .start();
+
+        binding.fabContainer.setVisibility(View.GONE);
+    }
+
+    private void hideChatbot() {
+        binding.chatbotContainer.animate()
+                .translationY(binding.chatbotContainer.getHeight())
+                .setDuration(300)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        binding.chatbotContainer.setVisibility(View.GONE);
+                        isChatbotVisible = false;
+                        binding.fabContainer.setVisibility(View.VISIBLE);
+                    }
+                })
+                .start();
     }
 
     public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapter.ListItemViewHolder> {

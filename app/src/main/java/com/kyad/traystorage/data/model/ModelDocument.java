@@ -7,12 +7,14 @@ import java.util.List;
 public class ModelDocument extends ModelBase {
     public int id;
     public int user_id;
+    public Integer category_id;
     public String title;
     public String content;
     public String images;
     public Integer label;
     public String tags;
     public String code;
+    public String ocr_text;
     public String create_time;
     public String reg_time;
     public List<String> tag_list;

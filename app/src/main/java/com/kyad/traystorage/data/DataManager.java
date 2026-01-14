@@ -28,6 +28,8 @@ import java.util.List;
 import helper.Util;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -82,6 +84,17 @@ public class DataManager {
     }
 
     public Flowable<ApiResponse<ModelDocument.ListModel>> getDocumentListByCategory(Integer categoryId, String keyword) {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelDocument.ListModel> response = new ApiResponse<>();
+                response.result = 0;
+                response.msg = "";
+                ModelDocument.ListModel data = new ModelDocument.ListModel();
+                data.document_list = LocalStorageManager.get().getDocumentsByCategory(categoryId, keyword);
+                response.data = data;
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.get_document_list(getModel(ModelUser.class).access_token, keyword, categoryId));
     }
 
@@ -109,6 +122,21 @@ public class DataManager {
     }
 
     public Flowable<ApiResponse<ModelDocument.DetailModel>> insertDocument(String title, String content, Integer label, String[] tags, String[] images, Integer categoryId, String ocrText) {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelDocument.DetailModel> response = new ApiResponse<>();
+                response.result = 0;
+                response.msg = "";
+                ModelDocument.DetailModel data = new ModelDocument.DetailModel();
+                data.document = LocalStorageManager.get().insertDocument(
+                        title, content, label,
+                        Util.arrayJoin(",", tags),
+                        Util.arrayJoin(",", images),
+                        categoryId, ocrText);
+                response.data = data;
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.insert_document(
                 getModel(ModelUser.class).access_token,
                 title,
@@ -121,14 +149,52 @@ public class DataManager {
     }
 
     public Flowable<ApiResponse<ModelDocument.DetailModel>> getDocumentDetail(Integer docId) {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelDocument.DetailModel> response = new ApiResponse<>();
+                ModelDocument doc = LocalStorageManager.get().getDocumentDetail(docId);
+                if (doc != null) {
+                    response.result = 0;
+                    response.msg = "";
+                    ModelDocument.DetailModel data = new ModelDocument.DetailModel();
+                    data.document = doc;
+                    response.data = data;
+                } else {
+                    response.result = 401;
+                    response.msg = "문서를 찾을 수 없습니다.";
+                }
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.get_document_detail(getModel(ModelUser.class).access_token, docId));
     }
 
     public Flowable<ApiResponse<ModelBase>> deleteDocumentItem(Integer docId) {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelBase> response = new ApiResponse<>();
+                LocalStorageManager.get().deleteDocument(docId);
+                response.result = 0;
+                response.msg = "";
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.delete_document_item(getModel(ModelUser.class).access_token, docId));
     }
 
     public Flowable<ApiResponse<ModelBase>> updateDocument(Integer docId, String title, String content, Integer label, String[] tags, String[] images, Integer categoryId, String ocrText) {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelBase> response = new ApiResponse<>();
+                LocalStorageManager.get().updateDocument(docId, title, content, label,
+                        Util.arrayJoin(",", tags),
+                        Util.arrayJoin(",", images),
+                        categoryId, ocrText);
+                response.result = 0;
+                response.msg = "";
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.update_document(
                 getModel(ModelUser.class).access_token,
                 docId,
@@ -223,22 +289,71 @@ public class DataManager {
 
 
     /********************************
+     *  Test Mode Helper
+     ********************************/
+    
+    public boolean isTestMode() {
+        ModelUser user = getModel(ModelUser.class);
+        return user != null && user.id == 999;
+    }
+
+    /********************************
      *  Category APIs
      ********************************/
 
     public Flowable<ApiResponse<ModelCategory.ListModel>> getCategoryList() {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelCategory.ListModel> response = new ApiResponse<>();
+                response.result = 0;
+                response.msg = "";
+                ModelCategory.ListModel data = new ModelCategory.ListModel();
+                data.category_list = LocalStorageManager.get().getCategories();
+                response.data = data;
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.get_category_list(getModel(ModelUser.class).access_token));
     }
 
     public Flowable<ApiResponse<ModelCategory.DetailModel>> insertCategory(String name, Integer color) {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelCategory.DetailModel> response = new ApiResponse<>();
+                response.result = 0;
+                response.msg = "";
+                ModelCategory.DetailModel data = new ModelCategory.DetailModel();
+                data.category = LocalStorageManager.get().insertCategory(name, color);
+                response.data = data;
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.insert_category(getModel(ModelUser.class).access_token, name, color));
     }
 
     public Flowable<ApiResponse<ModelBase>> updateCategory(Integer categoryId, String name, Integer color) {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelBase> response = new ApiResponse<>();
+                LocalStorageManager.get().updateCategory(categoryId, name, color);
+                response.result = 0;
+                response.msg = "";
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.update_category(getModel(ModelUser.class).access_token, categoryId, name, color));
     }
 
     public Flowable<ApiResponse<ModelBase>> deleteCategory(Integer categoryId) {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelBase> response = new ApiResponse<>();
+                LocalStorageManager.get().deleteCategory(categoryId);
+                response.result = 0;
+                response.msg = "";
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.delete_category(getModel(ModelUser.class).access_token, categoryId));
     }
 

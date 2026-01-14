@@ -13,6 +13,7 @@ import com.kyad.traystorage.app.common.dialog.LoadingDialog;
 import com.kyad.traystorage.app.common.util.Utils;
 import com.kyad.traystorage.app.main.MainActivity;
 import com.kyad.traystorage.data.DataManager;
+import com.kyad.traystorage.data.LocalStorageManager;
 import com.kyad.traystorage.data.model.ModelUser;
 import com.kyad.traystorage.data.remote.ResponseSubscriber;
 import com.kyad.traystorage.databinding.ActivityLoginHomeBinding;
@@ -90,6 +91,9 @@ public class LoginHomeActivity extends BaseBindingActivity<ActivityLoginHomeBind
         
         // 더미 유저 저장
         DataManager.get().setModel(testUser);
+        
+        // 로컬 저장소 초기화 및 기본 카테고리 생성
+        LocalStorageManager.get().initDefaultCategory();
         
         // 메인으로 이동
         Intent intent = new Intent(this, MainActivity.class);

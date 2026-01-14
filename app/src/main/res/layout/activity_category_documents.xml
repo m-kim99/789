@@ -165,16 +165,40 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/btn_add"
+        <!-- FAB 컨테이너 -->
+        <LinearLayout
+            android:id="@+id/fab_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:onClick="@{()->activity.onRegisterClick()}"
-            android:src="@drawable/icon_c_writing_56" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:id="@+id/btn_chatbot"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginBottom="12dp"
+                android:onClick="@{()->activity.onChatbotClick()}"
+                android:src="@drawable/ic_chatbot" />
+
+            <ImageView
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->activity.onRegisterClick()}"
+                android:src="@drawable/icon_c_writing_56" />
+        </LinearLayout>
+
+        <!-- 챗봇 컨테이너 -->
+        <FrameLayout
+            android:id="@+id/chatbot_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

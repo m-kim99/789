@@ -86,29 +86,7 @@ public class LoadingActivity extends BaseBindingActivity<ActivityLoadingBinding>
     }
 
     void startApp() {
-        // ⭐ 테스트 모드: 로그인 우회 (배포 테스트용)
-        boolean TEST_MODE = true; // 테스트 완료 후 false로 변경
-        
-        if (TEST_MODE) {
-            // 더미 유저 데이터 생성
-            ModelUser testUser = new ModelUser();
-            testUser.id = 999;
-            testUser.login_id = "test_user";
-            testUser.name = "테스트유저";
-            testUser.access_token = "test_access_token_12345";
-            testUser.phone_number = "01012345678";
-            testUser.email = "test@test.com";
-            testUser.isAutoLogin = true;
-            
-            // 더미 유저 저장
-            DataManager.get().setModel(testUser);
-            
-            // 메인으로 바로 이동
-            new Handler(Looper.getMainLooper()).postDelayed(this::goMain, 1000);
-            return;
-        }
-        
-        // 기존 로직
+        // 기존 로직 - 로그인 화면으로 이동
         ModelUser user = DataManager.get().getModel(ModelUser.class);
         if (user == null || !user.isAutoLogin) {
             new Handler(Looper.getMainLooper()).postDelayed(this::goLogin, 1000);
@@ -125,10 +103,8 @@ public class LoadingActivity extends BaseBindingActivity<ActivityLoadingBinding>
         return new LoadingApiListener() {
             @Override
             public void onError(String msg) {
-                isError = true;
-                AlertDialog.show(LoadingActivity.this)
-                        .setText(getString(R.string.network_error), getString(R.string.network_error_msg), getString(R.string.confirm))
-                        .setListener(() -> {finish();});
+                // 네트워크 오류 시에도 로그인 화면으로 이동 (테스트 모드 사용 가능)
+                new Handler(Looper.getMainLooper()).postDelayed(() -> goLogin(), 500);
             }
 
             @Override
