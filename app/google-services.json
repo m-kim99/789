@@ -1,59 +1,26 @@
 {
   "project_info": {
-    "project_number": "1014352638153",
-    "project_id": "traystorage-7eba0",
-    "storage_bucket": "traystorage-7eba0.appspot.com"
+    "project_number": "401700518744",
+    "project_id": "traystorage-and",
+    "storage_bucket": "traystorage-and.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1014352638153:android:6c35050e4df7a83d6bdd18",
+        "mobilesdk_app_id": "1:401700518744:android:f27d906179b6b88c93c32d",
         "android_client_info": {
           "package_name": "com.kyad.traystorage"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "1014352638153-cu0qj7mobmpl3r9iq05ftfvmf466jlll.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.kyad.traystorage",
-            "certificate_hash": "99c666b81c4d5eab4ed0c28224c4f0daf8c07634"
-          }
-        },
-        {
-          "client_id": "1014352638153-g3h5tmldg9at61ipgu4dkbcqrsml99k4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.kyad.traystorage",
-            "certificate_hash": "240555f6845221df041454f04f59afdb9936316f"
-          }
-        },
-        {
-          "client_id": "1014352638153-j0k6fqpuo7qtauq5lhqd9g3t61288j4n.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC142WWyT6MhHYfAQm7YPiDxW61O9uBh40"
+          "current_key": "AIzaSyBTloV7_RGyC4B6IFnRCemslcL4ZpbkuuY"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1014352638153-j0k6fqpuo7qtauq5lhqd9g3t61288j4n.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1014352638153-bpriac87m69h95tgjfhjc3dti2f7iefu.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.kyad.traystorage"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
