@@ -51,7 +51,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:onClick="@{()->dialog.onClickCancel()}"
-                    android:src="@drawable/ic_close"
+                    android:src="@drawable/icon_c_smallclose_blue_24"
                     android:contentDescription="닫기" />
             </RelativeLayout>
 
@@ -95,7 +95,7 @@
                     android:minHeight="200dp"
                     android:padding="12dp"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/CBFBFBF"
+                    android:textColorHint="@color/Cbbbbbb"
                     android:textSize="14sp" />
             </ScrollView>
 
