@@ -115,6 +115,23 @@
                     tools:itemCount="10"
                     tools:listitem="@layout/item_doc_image" />
 
+                <com.kyad.traystorage.app.common.font.FontButton
+                    android:id="@+id/btn_ocr"
+                    style="@style/font_spoqahansansneo_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_btn_cancel10"
+                    android:drawableStart="@drawable/ic_ocr"
+                    android:drawablePadding="6dp"
+                    android:onClick="@{()->activity.onOcrClick()}"
+                    android:paddingHorizontal="16dp"
+                    android:text="텍스트 추출 (OCR)"
+                    android:textColor="@color/focus_color"
+                    android:textSize="13sp"
+                    android:visibility="@{activity.imageListAdapter.imageUrlList.size() > 0 ? View.VISIBLE : View.GONE}" />
+
                 <RelativeLayout
                     android:id="@+id/add_first_img"
                     android:layout_width="100dp"

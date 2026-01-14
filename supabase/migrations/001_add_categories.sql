@@ -1,12 +1,12 @@
 -- =====================================================
 -- TrayStorage 카테고리 기능 추가 SQL
--- Supabase에서 실행할 마이그레이션 쿼리
+-- 주의: 000_create_users.sql을 먼저 실행하세요!
 -- =====================================================
 
 -- 1. categories 테이블 생성
 CREATE TABLE IF NOT EXISTS categories (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     name VARCHAR(100) NOT NULL,
     color INTEGER DEFAULT 0,
     icon VARCHAR(50) DEFAULT 'folder',
@@ -15,9 +15,18 @@ CREATE TABLE IF NOT EXISTS categories (
     update_time TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 2. documents 테이블에 category_id 컬럼 추가
-ALTER TABLE documents 
-ADD COLUMN IF NOT EXISTS category_id INTEGER REFERENCES categories(id) ON DELETE SET NULL;
+-- 2. documents 테이블에 category_id FK 추가 (컬럼이 이미 있는 경우)
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM information_schema.table_constraints 
+        WHERE constraint_name = 'documents_category_id_fkey'
+    ) THEN
+        ALTER TABLE documents 
+        ADD CONSTRAINT documents_category_id_fkey 
+        FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL;
+    END IF;
+END $$;
 
 -- 3. 인덱스 생성 (성능 최적화)
 CREATE INDEX IF NOT EXISTS idx_categories_user_id ON categories(user_id);

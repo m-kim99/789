@@ -87,7 +87,8 @@ public interface RemoteDataSource {
             @Field("label") Integer label,
             @Field("tags") String tags,
             @Field("images") String images,
-            @Field("category_id") Integer category_id
+            @Field("category_id") Integer category_id,
+            @Field("ocr_text") String ocr_text
     );
 
     @POST("app/get_document_detail")
@@ -114,7 +115,8 @@ public interface RemoteDataSource {
             @Field("label") Integer label,
             @Field("tags") String tags,
             @Field("images") String images,
-            @Field("category_id") Integer category_id
+            @Field("category_id") Integer category_id,
+            @Field("ocr_text") String ocr_text
     );
 
     @POST("app/version_info")

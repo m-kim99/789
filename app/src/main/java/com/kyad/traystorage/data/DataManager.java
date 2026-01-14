@@ -108,7 +108,7 @@ public class DataManager {
                 req_file));
     }
 
-    public Flowable<ApiResponse<ModelDocument.DetailModel>> insertDocument(String title, String content, Integer label, String[] tags, String[] images, Integer categoryId) {
+    public Flowable<ApiResponse<ModelDocument.DetailModel>> insertDocument(String title, String content, Integer label, String[] tags, String[] images, Integer categoryId, String ocrText) {
         return callApi(remote.insert_document(
                 getModel(ModelUser.class).access_token,
                 title,
@@ -116,7 +116,8 @@ public class DataManager {
                 label,
                 Util.arrayJoin(",", tags),
                 Util.arrayJoin(",", images),
-                categoryId));
+                categoryId,
+                ocrText));
     }
 
     public Flowable<ApiResponse<ModelDocument.DetailModel>> getDocumentDetail(Integer docId) {
@@ -127,7 +128,7 @@ public class DataManager {
         return callApi(remote.delete_document_item(getModel(ModelUser.class).access_token, docId));
     }
 
-    public Flowable<ApiResponse<ModelBase>> updateDocument(Integer docId, String title, String content, Integer label, String[] tags, String[] images, Integer categoryId) {
+    public Flowable<ApiResponse<ModelBase>> updateDocument(Integer docId, String title, String content, Integer label, String[] tags, String[] images, Integer categoryId, String ocrText) {
         return callApi(remote.update_document(
                 getModel(ModelUser.class).access_token,
                 docId,
@@ -136,7 +137,8 @@ public class DataManager {
                 label,
                 Util.arrayJoin(",", tags),
                 Util.arrayJoin(",", images),
-                categoryId));
+                categoryId,
+                ocrText));
     }
 
     public Flowable<ApiResponse<ModelVersion>> getVersionInfo() {

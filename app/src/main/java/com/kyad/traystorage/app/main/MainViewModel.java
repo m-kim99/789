@@ -140,8 +140,8 @@ public class MainViewModel extends BaseViewModel {
         }));
     }
 
-    public void registerDocument(String title, String content, Integer label, List<String> tags, List<String> uploadFileNames, Integer categoryId) {
-        addDisposable(DataManager.get().insertDocument(title, content, label, tags.toArray(new String[0]), uploadFileNames.toArray(new String[0]), categoryId).subscribeWith(new ResponseSubscriber<ModelDocument.DetailModel>() {
+    public void registerDocument(String title, String content, Integer label, List<String> tags, List<String> uploadFileNames, Integer categoryId, String ocrText) {
+        addDisposable(DataManager.get().insertDocument(title, content, label, tags.toArray(new String[0]), uploadFileNames.toArray(new String[0]), categoryId, ocrText).subscribeWith(new ResponseSubscriber<ModelDocument.DetailModel>() {
             @Override
             public void onComplete() {
                 super.onComplete();
@@ -157,8 +157,8 @@ public class MainViewModel extends BaseViewModel {
         }));
     }
 
-    public void updateDocument(Integer docId, String title, String content, Integer label, List<String> tags, List<String> uploadFileNames, Integer categoryId) {
-        addDisposable(DataManager.get().updateDocument(docId, title, content, label, tags.toArray(new String[0]), uploadFileNames.toArray(new String[0]), categoryId).subscribeWith(new ResponseSubscriber<ModelBase>() {
+    public void updateDocument(Integer docId, String title, String content, Integer label, List<String> tags, List<String> uploadFileNames, Integer categoryId, String ocrText) {
+        addDisposable(DataManager.get().updateDocument(docId, title, content, label, tags.toArray(new String[0]), uploadFileNames.toArray(new String[0]), categoryId, ocrText).subscribeWith(new ResponseSubscriber<ModelBase>() {
             @Override
             public void onComplete() {
                 super.onComplete();

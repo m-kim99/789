@@ -35,6 +35,8 @@ import java.util.List;
 import base.BaseBindingActivity;
 import helper.RecyclerViewHelper;
 import io.reactivex.disposables.CompositeDisposable;
+import org.greenrobot.eventbus.EventBus;
+import base.BaseEvent;
 
 public class CategoryDocumentsActivity extends BaseBindingActivity<ActivityCategoryDocumentsBinding> {
 
@@ -103,13 +105,13 @@ public class CategoryDocumentsActivity extends BaseBindingActivity<ActivityCateg
     }
 
     private void loadDocuments(String keyword) {
-        showLoading();
+        EventBus.getDefault().post(new BaseEvent.LoadingEvent(true));
         disposables.add(DataManager.get().getDocumentListByCategory(categoryId, keyword)
                 .subscribeWith(new ResponseSubscriber<ModelDocument.ListModel>() {
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        hideLoading();
+                        EventBus.getDefault().post(new BaseEvent.LoadingEvent(false));
 
                         if (getResponse().result == 0) {
                             allList.clear();
@@ -131,7 +133,7 @@ public class CategoryDocumentsActivity extends BaseBindingActivity<ActivityCateg
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
-                        hideLoading();
+                        EventBus.getDefault().post(new BaseEvent.LoadingEvent(false));
                         Utils.showCustomToast(CategoryDocumentsActivity.this, R.string.error_network_content);
                     }
                 }));

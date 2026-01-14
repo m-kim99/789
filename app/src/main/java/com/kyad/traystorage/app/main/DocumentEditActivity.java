@@ -48,6 +48,7 @@ import helper.RecyclerViewHelper;
 import helper.Validation;
 import android.os.Build;
 import com.kyad.traystorage.data.model.ModelUser;
+import com.kyad.traystorage.app.ocr.OcrEditDialog;
 
 public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEditBinding> {
     public MainViewModel viewModel;
@@ -67,6 +68,7 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
     private List<String> docImageFileList = new ArrayList<>();
     private Integer categoryId = null;
     private String categoryName = "";
+    private String ocrText = "";
 
     @Override
     public int getLayout() {
@@ -247,6 +249,32 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
         checkPermissions();
     }
 
+    public void onOcrClick() {
+        if (imageListAdapter.imageUrlList.isEmpty()) {
+            Utils.showCustomToast(this, "이미지를 먼저 추가해주세요.", Toast.LENGTH_SHORT);
+            return;
+        }
+
+        // 로컬 이미지 경로만 추출 (URL이 아닌 것들)
+        List<String> localImages = new ArrayList<>();
+        for (String imgUrl : imageListAdapter.imageUrlList) {
+            if (!Validation.isUrl(imgUrl)) {
+                localImages.add(imgUrl);
+            }
+        }
+
+        if (localImages.isEmpty()) {
+            Utils.showCustomToast(this, "OCR은 새로 추가한 이미지에서만 가능합니다.", Toast.LENGTH_SHORT);
+            return;
+        }
+
+        OcrEditDialog.show(this, localImages, text -> {
+            ocrText = text;
+            isChanged = true;
+            Utils.showCustomToast(this, "OCR 텍스트가 저장되었습니다.", Toast.LENGTH_SHORT);
+        });
+    }
+
     public void onRegisterClick() {
         AlertDialog.show(DocumentEditActivity.this).setText(getString(R.string.register_confirm), "", getString(R.string.yes), getString(R.string.no))
                 .setListener(() -> {
@@ -306,9 +334,9 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
         }
         
         if (editDocument == null) {
-            viewModel.registerDocument(viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles, categoryId);
+            viewModel.registerDocument(viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles, categoryId, ocrText);
         } else {
-            viewModel.updateDocument(editDocument.id, viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles, categoryId);
+            viewModel.updateDocument(editDocument.id, viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles, categoryId, ocrText);
         }
     }
 
