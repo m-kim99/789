@@ -29,10 +29,11 @@ import retrofit2.http.Part;
 public interface RemoteDataSource {
     //    String API_BASE_URL = "http://192.168.2.101:8005/api/"; //py server
 //    String API_BASE_URL = "http://192.168.0.13:8205/api/"; //local server
-    String API_BASE_URL = "http://traystorage.kr/server/api/"; //real server
-    String API_TERM_URL = API_BASE_URL + "app/term?type=term";
-    String API_PRIVACY_URL = API_BASE_URL + "app/term?type=privacy";
-    String API_MARKETING_URL = API_BASE_URL + "app/term?type=marketing";
+//    String API_BASE_URL = "http://traystorage.kr/server/api/"; //real server
+    String API_BASE_URL = "https://rtlikunlsieloeprkbiv.supabase.co/functions/v1/"; //supabase
+    String API_TERM_URL = "http://traystorage.kr/server/api/app/term?type=term";
+    String API_PRIVACY_URL = "http://traystorage.kr/server/api/app/term?type=privacy";
+    String API_MARKETING_URL = "http://traystorage.kr/server/api/app/term?type=marketing";
 
     int API_RESULT_SUCCESS = 0;
     int API_RESULT_ERROR_SYSTEM = 101;

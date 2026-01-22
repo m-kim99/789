@@ -21,7 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"/>
         <RelativeLayout
-            android:onClick="@{()->holder.onClick(data.id)}"
+            android:id="@+id/item_container"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout

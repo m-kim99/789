@@ -311,7 +311,7 @@ public class CategoryDocumentsActivity extends BaseBindingActivity<ActivityCateg
                 else
                     Glide.with(CategoryDocumentsActivity.this).load("").into(binding.imageView);
 
-                binding.getRoot().setOnClickListener(v -> goDetail(document.id));
+                binding.itemContainer.setOnClickListener(v -> goDetail(document.id));
             }
         }
     }
