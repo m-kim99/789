@@ -173,6 +173,7 @@
     <string name="invite1">Traystorage가\n필요한 친구들에게\n초대메시지를 보내보세요</string>
     <string name="invite_btn">친구 초대하기</string>
     <string name="profile_management">프로필 관리</string>
+    <string name="main_info">기본정보</string>
     <string name="birthday">생년월일</string>
     <string name="email">이메일</string>
     <string name="gender">성별</string>
