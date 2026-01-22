@@ -278,10 +278,10 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
     public void onRegisterClick() {
         AlertDialog.show(DocumentEditActivity.this).setText(getString(R.string.register_confirm), "", getString(R.string.yes), getString(R.string.no))
                 .setListener(() -> {
-                    // 테스트 모드: 바로 성공 처리
+                    // 테스트 모드: 이미지 업로드 없이 로컬 저장
                     if (isTestMode()) {
-                        Utils.showCustomToast(DocumentEditActivity.this, R.string.register_ok);
-                        finish();
+                        List<String> localImages = new ArrayList<>(imageListAdapter.imageUrlList);
+                        registerDocument(localImages);
                         return;
                     }
                     
@@ -325,13 +325,6 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
             }
         }
         int finalLabel = label;
-        
-        // 테스트 모드: API 호출 없이 성공 처리
-        if (isTestMode()) {
-            Utils.showCustomToast(DocumentEditActivity.this, R.string.register_ok);
-            finish();
-            return;
-        }
         
         if (editDocument == null) {
             viewModel.registerDocument(viewModel.title.getValue(), viewModel.content.getValue(), finalLabel, tagList, uploadFiles, categoryId, ocrText);
