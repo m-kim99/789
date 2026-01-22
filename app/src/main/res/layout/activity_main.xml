@@ -135,8 +135,8 @@
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/bg_btn_approve_both"
                         android:gravity="center"
-                        android:onClick="@{()->activity.onAddCategoryClick()}"
-                        android:text="@string/add_new_category"
+                        android:onClick="@{()->activity.onAddDocumentClick()}"
+                        android:text="@string/add_new_document"
                         android:textColor="@color/white"
                         android:textSize="15dp" />
 
@@ -206,7 +206,7 @@
                             style="@style/font_spoqahansansneo_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/category"
+                            android:text="@string/total_documents"
                             android:textColor="@color/C151515"
                             android:textSize="15dp" />
 
@@ -228,12 +228,12 @@
                         android:background="@color/transparent" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/category_list"
+                        android:id="@+id/doc_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:layoutManager="LinearLayoutManager"
                         tools:itemCount="10"
-                        tools:listitem="@layout/item_category" />
+                        tools:listitem="@layout/item_document" />
 
                     <RelativeLayout
                         android:id="@+id/layout_not_result"
@@ -288,7 +288,7 @@
                     android:id="@+id/btn_add"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{()->activity.onAddCategoryClick()}"
+                    android:onClick="@{()->activity.onAddDocumentClick()}"
                     android:src="@drawable/icon_c_writing_56" />
             </LinearLayout>
 

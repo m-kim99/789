@@ -121,6 +121,22 @@ public class LocalStorageManager {
         return documents != null ? documents : new ArrayList<>();
     }
 
+    public List<ModelDocument> getAllDocuments(String keyword) {
+        List<ModelDocument> allDocs = getDocuments();
+        if (keyword == null || keyword.isEmpty()) {
+            return allDocs;
+        }
+        List<ModelDocument> result = new ArrayList<>();
+        for (ModelDocument doc : allDocs) {
+            if (doc.title.contains(keyword) || 
+                (doc.content != null && doc.content.contains(keyword)) ||
+                (doc.tags != null && doc.tags.contains(keyword))) {
+                result.add(doc);
+            }
+        }
+        return result;
+    }
+
     public List<ModelDocument> getDocumentsByCategory(int categoryId, String keyword) {
         List<ModelDocument> allDocs = getDocuments();
         List<ModelDocument> result = new ArrayList<>();

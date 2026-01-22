@@ -80,6 +80,17 @@ public class DataManager {
     }
 
     public Flowable<ApiResponse<ModelDocument.ListModel>> getDocumentList(String keyword) {
+        if (isTestMode()) {
+            return Flowable.fromCallable(() -> {
+                ApiResponse<ModelDocument.ListModel> response = new ApiResponse<>();
+                response.result = 0;
+                response.msg = "";
+                ModelDocument.ListModel data = new ModelDocument.ListModel();
+                data.document_list = LocalStorageManager.get().getAllDocuments(keyword);
+                response.data = data;
+                return response;
+            }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        }
         return callApi(remote.get_document_list(getModel(ModelUser.class).access_token, keyword, null));
     }
 

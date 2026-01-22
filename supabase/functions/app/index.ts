@@ -1,5 +1,5 @@
 // supabase/functions/app/index.ts
-// TrayStorage App API - Categories & Documents CRUD
+// TrayStorage App API - Documents CRUD
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
@@ -51,111 +51,6 @@ serve(async (req) => {
     }
 
     // =====================================================
-    // Category APIs
-    // =====================================================
-
-    if (action === 'get_category_list') {
-      if (!userId) {
-        return jsonResponse({ result: 401, msg: 'Unauthorized' });
-      }
-      
-      const { data: categories, error } = await supabase
-        .from('categories')
-        .select('*')
-        .eq('user_id', userId)
-        .order('sort_order', { ascending: true });
-
-      if (error) throw error;
-
-      // Get document counts for each category
-      for (const cat of categories || []) {
-        const { count } = await supabase
-          .from('documents')
-          .select('*', { count: 'exact', head: true })
-          .eq('category_id', cat.id);
-        cat.document_count = count || 0;
-      }
-
-      return jsonResponse({
-        result: 0,
-        msg: '',
-        data: { category_list: categories || [] }
-      });
-    }
-
-    if (action === 'insert_category') {
-      if (!userId) {
-        return jsonResponse({ result: 401, msg: 'Unauthorized' });
-      }
-
-      const name = getParam('name');
-      const color = getIntParam('color') || 0;
-
-      const { data: category, error } = await supabase
-        .from('categories')
-        .insert({
-          user_id: userId,
-          name: name,
-          color: color,
-          icon: 'folder',
-          sort_order: 0,
-          document_count: 0
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      return jsonResponse({
-        result: 0,
-        msg: '',
-        data: { category: category }
-      });
-    }
-
-    if (action === 'update_category') {
-      if (!userId) {
-        return jsonResponse({ result: 401, msg: 'Unauthorized' });
-      }
-
-      const id = getIntParam('id');
-      const name = getParam('name');
-      const color = getIntParam('color');
-
-      const { error } = await supabase
-        .from('categories')
-        .update({
-          name: name,
-          color: color,
-          update_time: new Date().toISOString()
-        })
-        .eq('id', id)
-        .eq('user_id', userId);
-
-      if (error) throw error;
-
-      return jsonResponse({ result: 0, msg: '' });
-    }
-
-    if (action === 'delete_category') {
-      if (!userId) {
-        return jsonResponse({ result: 401, msg: 'Unauthorized' });
-      }
-
-      const id = getIntParam('id');
-
-      const { error } = await supabase
-        .from('categories')
-        .delete()
-        .eq('id', id)
-        .eq('user_id', userId);
-
-      if (error) throw error;
-
-      return jsonResponse({ result: 0, msg: '' });
-    }
-
-    // =====================================================
     // Document APIs
     // =====================================================
 
@@ -164,7 +59,6 @@ serve(async (req) => {
         return jsonResponse({ result: 401, msg: 'Unauthorized' });
       }
 
-      const categoryId = getIntParam('category_id');
       const keyword = getParam('keyword');
 
       let query = supabase
@@ -172,10 +66,6 @@ serve(async (req) => {
         .select('*')
         .eq('user_id', userId)
         .order('create_time', { ascending: false });
-
-      if (categoryId) {
-        query = query.eq('category_id', categoryId);
-      }
 
       if (keyword) {
         query = query.or(`title.ilike.%${keyword}%,content.ilike.%${keyword}%,tags.ilike.%${keyword}%`);
@@ -209,14 +99,11 @@ serve(async (req) => {
       const label = getIntParam('label') || 0;
       const tags = getParam('tags') || '';
       const images = getParam('images') || '';
-      const categoryId = getIntParam('category_id');
-      const ocrText = getParam('ocr_text') || '';
 
       const { data: document, error } = await supabase
         .from('documents')
         .insert({
           user_id: userId,
-          category_id: categoryId,
           title: title,
           content: content,
           label: label,
@@ -227,11 +114,6 @@ serve(async (req) => {
         .single();
 
       if (error) throw error;
-
-      // Update category document count
-      if (categoryId) {
-        await updateCategoryDocCount(supabase, categoryId);
-      }
 
       const doc = {
         ...document,
@@ -288,16 +170,6 @@ serve(async (req) => {
       const label = getIntParam('label') || 0;
       const tags = getParam('tags') || '';
       const images = getParam('images') || '';
-      const categoryId = getIntParam('category_id');
-
-      // Get old category_id
-      const { data: oldDoc } = await supabase
-        .from('documents')
-        .select('category_id')
-        .eq('id', id)
-        .single();
-
-      const oldCategoryId = oldDoc?.category_id;
 
       const { error } = await supabase
         .from('documents')
@@ -307,21 +179,12 @@ serve(async (req) => {
           label: label,
           tags: tags,
           images: images,
-          category_id: categoryId,
           reg_time: new Date().toISOString()
         })
         .eq('id', id)
         .eq('user_id', userId);
 
       if (error) throw error;
-
-      // Update category document counts
-      if (oldCategoryId && oldCategoryId !== categoryId) {
-        await updateCategoryDocCount(supabase, oldCategoryId);
-      }
-      if (categoryId) {
-        await updateCategoryDocCount(supabase, categoryId);
-      }
 
       return jsonResponse({ result: 0, msg: '' });
     }
@@ -333,15 +196,6 @@ serve(async (req) => {
 
       const id = getIntParam('id');
 
-      // Get category_id before delete
-      const { data: doc } = await supabase
-        .from('documents')
-        .select('category_id')
-        .eq('id', id)
-        .single();
-
-      const categoryId = doc?.category_id;
-
       const { error } = await supabase
         .from('documents')
         .delete()
@@ -349,11 +203,6 @@ serve(async (req) => {
         .eq('user_id', userId);
 
       if (error) throw error;
-
-      // Update category document count
-      if (categoryId) {
-        await updateCategoryDocCount(supabase, categoryId);
-      }
 
       return jsonResponse({ result: 0, msg: '' });
     }
@@ -469,16 +318,4 @@ function jsonResponse(data: any) {
   return new Response(JSON.stringify(data), {
     headers: { ...corsHeaders, 'Content-Type': 'application/json' }
   });
-}
-
-async function updateCategoryDocCount(supabase: any, categoryId: number) {
-  const { count } = await supabase
-    .from('documents')
-    .select('*', { count: 'exact', head: true })
-    .eq('category_id', categoryId);
-
-  await supabase
-    .from('categories')
-    .update({ document_count: count || 0 })
-    .eq('id', categoryId);
 }
