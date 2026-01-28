@@ -25,20 +25,20 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:onClick="@{()->activity.onBackPressed()}"
-            android:padding="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
         <LinearLayout
             android:id="@+id/step_layout"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="4dp"
             android:orientation="horizontal">
 
             <View
@@ -82,15 +82,16 @@
 
                     <com.kyad.traystorage.app.common.font.FontTextView
                         android:id="@+id/text_intro"
-                        style="@style/font_spoqahansansneo_regular"
+                        style="@style/font_notosans_kr_bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_toLeftOf="@+id/current_num"
-                        android:lineHeight="34dp"
+                        android:lineHeight="32sp"
                         android:text="@string/signup_title1"
-                        android:textColor="@color/black"
-                        android:textSize="22dp" />
+                        android:textColor="#111111"
+                        android:textSize="22sp"
+                        android:includeFontPadding="false" />
 
                     <com.kyad.traystorage.app.common.font.FontTextView
                         android:id="@+id/current_num"
@@ -131,12 +132,13 @@
                         android:orientation="vertical">
 
                         <com.kyad.traystorage.app.common.font.FontTextView
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/id"
-                            android:textColor="@color/gray"
-                            android:textSize="14dp" />
+                            android:textColor="#535455"
+                            android:textSize="14sp"
+                            android:includeFontPadding="false" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -144,25 +146,26 @@
 
                             <com.kyad.traystorage.app.common.font.FontEditText
                                 android:id="@+id/edit_id"
-                                style="@style/font_spoqahansansneo_regular"
+                                style="@style/font_notosans_kr_regular"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="@string/password_hint"
+                                android:textColorHint="#6B6C6E"
                                 android:includeFontPadding="false"
                                 android:paddingVertical="10dp"
                                 android:text="@={viewModel.loginID}"
-                                android:textColor="@color/black"
-                                android:textSize="18dp"
+                                android:textColor="#111111"
+                                android:textSize="18sp"
                                 android:paddingRight="4dp"
                                 android:layout_toStartOf="@+id/button_double_check"
                                 android:layout_toLeftOf="@+id/button_double_check"/>
 
                             <com.kyad.traystorage.app.common.font.FontButton
                                 android:id="@+id/button_double_check"
-                                style="@style/font_spoqahansansneo_regular"
+                                style="@style/font_notosans_kr_regular"
                                 android:layout_width="wrap_content"
-                                android:layout_height="30dp"
+                                android:layout_height="32dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
                                 android:background="@drawable/bg_btn_authreq"
@@ -171,15 +174,15 @@
                                 android:onClick="@{()->activity.onIdDoubleCheck()}"
                                 android:paddingHorizontal="10dp"
                                 android:text="@string/double_chceck"
-                                android:textColor="@color/focus_color"
-                                android:textSize="14dp" />
+                                android:textColor="#1E319D"
+                                android:textSize="14sp" />
                         </RelativeLayout>
 
                         <View
                             android:id="@+id/line_id"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/light_gray" />
+                            android:background="#D6D7DC" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -189,12 +192,13 @@
                         android:orientation="vertical">
 
                         <com.kyad.traystorage.app.common.font.FontTextView
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/password"
-                            android:textColor="@color/gray"
-                            android:textSize="14dp" />
+                            android:textColor="#535455"
+                            android:textSize="14sp"
+                            android:includeFontPadding="false" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -202,18 +206,19 @@
 
                             <com.kyad.traystorage.app.common.font.FontEditText
                                 android:id="@+id/edit_password"
-                                style="@style/font_spoqahansansneo_regular"
+                                style="@style/font_notosans_kr_regular"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="@string/password_hint"
+                                android:textColorHint="#6B6C6E"
                                 android:includeFontPadding="false"
                                 android:paddingVertical="10dp"
                                 android:password="true"
                                 android:singleLine="true"
                                 android:text="@={viewModel.password}"
-                                android:textColor="@color/black"
-                                android:textSize="18dp" />
+                                android:textColor="#111111"
+                                android:textSize="18sp" />
 
                         </RelativeLayout>
 
@@ -221,7 +226,7 @@
                             android:id="@+id/line_password"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/light_gray" />
+                            android:background="#D6D7DC" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -231,12 +236,13 @@
                         android:orientation="vertical">
 
                         <com.kyad.traystorage.app.common.font.FontTextView
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/password_confirm"
-                            android:textColor="@color/gray"
-                            android:textSize="14dp" />
+                            android:textColor="#535455"
+                            android:textSize="14sp"
+                            android:includeFontPadding="false" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -244,18 +250,19 @@
 
                             <com.kyad.traystorage.app.common.font.FontEditText
                                 android:id="@+id/edit_password2"
-                                style="@style/font_spoqahansansneo_regular"
+                                style="@style/font_notosans_kr_regular"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="@string/reenter_password"
+                                android:textColorHint="#6B6C6E"
                                 android:includeFontPadding="false"
                                 android:paddingVertical="10dp"
                                 android:password="true"
                                 android:singleLine="true"
                                 android:text="@={viewModel.password2}"
-                                android:textColor="@color/black"
-                                android:textSize="18dp" />
+                                android:textColor="#111111"
+                                android:textSize="18sp" />
 
                         </RelativeLayout>
 
@@ -263,7 +270,7 @@
                             android:id="@+id/line_password2"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/light_gray" />
+                            android:background="#D6D7DC" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -281,12 +288,13 @@
                         android:orientation="vertical">
 
                         <com.kyad.traystorage.app.common.font.FontTextView
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/phone_number"
-                            android:textColor="@color/gray"
-                            android:textSize="14dp" />
+                            android:textColor="#535455"
+                            android:textSize="14sp"
+                            android:includeFontPadding="false" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -294,18 +302,19 @@
 
                             <com.kyad.traystorage.app.common.font.FontEditText
                                 android:id="@+id/edit_phonenumber"
-                                style="@style/font_spoqahansansneo_regular"
+                                style="@style/font_notosans_kr_regular"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="@string/enter_phone_number"
+                                android:textColorHint="#6B6C6E"
                                 android:includeFontPadding="false"
                                 android:inputType="number"
                                 android:paddingVertical="10dp"
                                 android:singleLine="true"
                                 android:text="@={viewModel.phoneNumber}"
-                                android:textColor="@color/black"
-                                android:textSize="18dp" />
+                                android:textColor="#111111"
+                                android:textSize="18sp" />
 
                             <ImageView
                                 android:id="@+id/delete_text"
@@ -319,8 +328,9 @@
 
                             <com.kyad.traystorage.app.common.font.FontButton
                                 android:id="@+id/button_req"
+                                style="@style/font_notosans_kr_regular"
                                 android:layout_width="wrap_content"
-                                android:layout_height="30dp"
+                                android:layout_height="32dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
                                 android:background="@drawable/bg_btn_authreq"
@@ -328,15 +338,15 @@
                                 android:onClick="@{()->activity.onAuthReq()}"
                                 android:paddingHorizontal="10dp"
                                 android:text="@string/auth_request"
-                                android:textColor="@color/focus_color"
-                                android:textSize="14dp" />
+                                android:textColor="#1E319D"
+                                android:textSize="14sp" />
                         </RelativeLayout>
 
                         <View
                             android:id="@+id/line_phonenumber"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/light_gray" />
+                            android:background="#D6D7DC" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -346,12 +356,13 @@
                         android:orientation="vertical">
 
                         <com.kyad.traystorage.app.common.font.FontTextView
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/cert_number"
-                            android:textColor="@color/gray"
-                            android:textSize="14dp" />
+                            android:textColor="#535455"
+                            android:textSize="14sp"
+                            android:includeFontPadding="false" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -359,22 +370,24 @@
 
                             <com.kyad.traystorage.app.common.font.FontEditText
                                 android:id="@+id/edit_certnumber"
-                                style="@style/font_spoqahansansneo_regular"
+                                style="@style/font_notosans_kr_regular"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:hint="@string/enter_cert_number"
+                                android:textColorHint="#6B6C6E"
                                 android:includeFontPadding="false"
                                 android:paddingVertical="10dp"
                                 android:singleLine="true"
                                 android:text="@={viewModel.certNumber}"
-                                android:textColor="@color/black"
-                                android:textSize="18dp" />
+                                android:textColor="#111111"
+                                android:textSize="18sp" />
 
                             <com.kyad.traystorage.app.common.font.FontButton
                                 android:id="@+id/button_cert_confirm"
+                                style="@style/font_notosans_kr_regular"
                                 android:layout_width="wrap_content"
-                                android:layout_height="30dp"
+                                android:layout_height="32dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
                                 android:background="@drawable/bg_btn_authreq"
@@ -382,15 +395,15 @@
                                 android:onClick="@{()->activity.onAuthConfirm()}"
                                 android:paddingHorizontal="10dp"
                                 android:text="@string/confirm"
-                                android:textColor="@color/focus_color"
-                                android:textSize="14dp" />
+                                android:textColor="#1E319D"
+                                android:textSize="14sp" />
                         </RelativeLayout>
 
                         <View
                             android:id="@+id/line_certnumber"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/light_gray" />
+                            android:background="#D6D7DC" />
                     </LinearLayout>
 
                     <RelativeLayout
@@ -452,7 +465,7 @@
                             app:isSelect="@{activity.isAllChecked}" />
 
                         <com.kyad.traystorage.app.common.font.FontTextView
-                            style="@style/font_spoqahansansneo_bold"
+                            style="@style/font_notosans_kr_bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -460,10 +473,9 @@
                             android:includeFontPadding="false"
                             android:onClick="@{()->activity.onTermAllClick()}"
                             android:text="@string/all_agree"
-                            android:textColor="@color/C333333"
-                            android:textSize="18dp" />
+                            android:textColor="#111111"
+                            android:textSize="18sp" />
                     </LinearLayout>
-
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/agree_list"
@@ -477,18 +489,19 @@
 
                 <com.kyad.traystorage.app.common.font.FontButton
                     android:id="@+id/next_btn"
-                    style="@style/font_spoqahansansneo_bold"
+                    style="@style/font_notosans_kr_bold"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/bg_btn_approve_both"
                     android:enabled="@{activity.isEnabled}"
                     android:gravity="center"
+                    android:includeFontPadding="false"
                     android:onClick="@{()->activity.onNext()}"
                     android:text="@string/next"
                     android:textColor="@{activity.isEnabled?@color/white:@color/gray}"
-                    android:textSize="15dp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
         </ScrollView>

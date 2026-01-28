@@ -215,8 +215,8 @@
     <string name="register_ok">문서 등록되었습니다.</string>
     <string name="doc_delete">문서를 삭제하시면 NFC태그 시\n해당 문서가 노출되지 않습니다.\n<font color="blue">해당 문서를 삭제 하시겠습니까?</font></string>
     <string name="doc_delete_ok">문서 삭제되었습니다.</string>
-    <string name="nfc_content1">NFC스티커에 휴대폰을 태그하여\n문서를 등록해 주세요.</string>
-    <string name="nfc_content2">지금 쉽고 편리하게 문서를 등록하고\nNFC태그를 통해 관리 및 공유해 보세요</string>
+    <string name="nfc_content1">NFC 스티커에 휴대폰을 태그해\n문서를 등록해 주세요.</string>
+    <string name="nfc_content2">지금 쉽고 편리하게 문서를 등록하고\nNFC태그를 통해 관리 및 공유해 보세요!</string>
     <string name="reply_wait">답변대기</string>
     <string name="answer_done">답변완료</string>
     <string name="inquiry">문의</string>
@@ -237,8 +237,8 @@
     <string name="profile_save_qa">"이전화면으로 이동 시\n수정내역이 저장되지 않습니다.\n이전화면으로 이동 하시겠습니까?</string>
     <string name="image_30">사진은 30개만 선택 가능합니다</string>
     <string name="document_edit">문서 수정</string>
-    <string name="nfc_register_success">NFC태그에 문서가 등록 되었습니다.</string>
-    <string name="nfc_register_success_title">문서 등록완료</string>
+    <string name="nfc_register_success">문서에 NFC가 등록되었어요.\nNFC태그를 통해 관리 및 공유해 보세요!</string>
+    <string name="nfc_register_success_title">NFC 등록 완료!</string>
     <string name="nfc_reg_error1">NFC는 지원되지 않습니다</string>
     <string name="nfc_reg_error2">NFC가 활성화되어 있지 않습니다.\n사용자가 설정에서 활성화해야 합니다.</string>
     <string name="naver_login_failed">네이버 계정로그인이 실패되었습니다.</string>
