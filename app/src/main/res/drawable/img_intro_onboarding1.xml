@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Placeholder for onboarding illustration 1 - 서류더미 일러스트 -->
-<!-- Replace this file with actual PNG: img_intro_onboarding1.png -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="#F5F5F5" />
-    <corners android:radius="16dp" />
-    <size android:width="300dp" android:height="300dp" />
-</shape>

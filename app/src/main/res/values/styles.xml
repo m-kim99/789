@@ -41,4 +41,16 @@
         <item name="customFont">notosanscjkkr_medium.otf</item>
     </style>
 
+    <style name="font_notosans_kr_bold">
+        <item name="customFont">notosanscjkkr_bold.otf</item>
+    </style>
+
+    <style name="font_notosans_kr_regular">
+        <item name="customFont">notosanscjkkr_regular.otf</item>
+    </style>
+
+    <style name="font_notosans_kr_medium">
+        <item name="customFont">notosanscjkkr_medium.otf</item>
+    </style>
+
 </resources>
