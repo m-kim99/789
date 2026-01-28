@@ -2,9 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="dialog"
             type="com.kyad.traystorage.app.common.dialog.AlertDialog" />
@@ -14,85 +12,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <!-- 배경 Dim -->
+        <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.6"
-            android:background="@color/black" />
+            android:background="#99111111" />
 
+        <!-- 다이얼로그 -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="312dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginHorizontal="40dp"
-            android:background="@drawable/shape_dialog_round"
-            android:orientation="vertical">
+            android:background="@drawable/bg_dialog_alert"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp">
 
-            <com.kyad.traystorage.app.common.font.FontTextView
-                android:id="@+id/title"
-                style="@style/font_spoqahansansneo_bold"
+            <!-- 내용 영역 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:layout_marginHorizontal="30dp"
-                android:gravity="left"
-                android:includeFontPadding="false"
-                android:text="title"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:orientation="vertical"
+                android:paddingVertical="16dp">
 
-            <com.kyad.traystorage.app.common.font.FontTextView
-                android:id="@+id/message"
-                style="@style/font_spoqahansansneo_regular"
+                <!-- 제목 (조건부 표시) -->
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    android:id="@+id/title"
+                    style="@style/font_notosans_kr_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="다이얼로그 제목입니다."
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:lineHeight="24sp"
+                    android:includeFontPadding="false" />
+
+                <!-- 내용 (조건부 표시) -->
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    android:id="@+id/message"
+                    style="@style/font_notosans_kr_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="다이얼로그 내용입니다."
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:lineHeight="24sp"
+                    android:includeFontPadding="false" />
+            </LinearLayout>
+
+            <!-- 버튼 영역 -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="30dp"
-                android:gravity="left"
-                android:includeFontPadding="false"
-                android:text="message"
-                android:textColor="@color/C777777"
-                android:textSize="15dp" />
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:paddingStart="24dp">
 
-
-            <RelativeLayout
-                android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginBottom="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
+                <!-- 취소 버튼 (조건부 표시) -->
                 <com.kyad.traystorage.app.common.font.FontTextView
                     android:id="@+id/btn_cancel"
-                    style="@style/font_spoqahansansneo_bold"
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_toLeftOf="@id/btn_confirm"
-                    android:background="@drawable/bg_btn_cancel"
+                    style="@style/font_notosans_kr_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:includeFontPadding="false"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:text="취소"
+                    android:textColor="#6B6C6E"
+                    android:textSize="16sp"
+                    android:lineHeight="24sp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:onClick="@{()->dialog.onClickCancel()}"
-                    android:paddingHorizontal="15dp"
-                    android:text="@string/cancel"
-                    android:textColor="@color/focus_color"
-                    android:textSize="12dp" />
+                    android:includeFontPadding="false" />
 
+                <!-- 확인 버튼 -->
                 <com.kyad.traystorage.app.common.font.FontTextView
                     android:id="@+id/btn_confirm"
-                    style="@style/font_spoqahansansneo_bold"
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/bg_btn_confirm_bottom"
+                    style="@style/font_notosans_kr_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:includeFontPadding="false"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:text="확인"
+                    android:textColor="#1E319D"
+                    android:textSize="16sp"
+                    android:lineHeight="24sp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:onClick="@{()->dialog.onClickConfirm()}"
-                    android:paddingHorizontal="15dp"
-                    android:text="@string/confirm"
-                    android:textColor="@color/white"
-                    android:textSize="12dp" />
-            </RelativeLayout>
+                    android:includeFontPadding="false" />
+            </LinearLayout>
 
         </LinearLayout>
     </RelativeLayout>

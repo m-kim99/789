@@ -83,16 +83,11 @@
     <ImageView
         android:id="@+id/img_illustration"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/text_title"
-        android:layout_above="@+id/bottom_space"
-        android:layout_marginTop="40dp"
-        android:scaleType="fitCenter"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:src="@drawable/img_intro_onboarding1" />
-
-    <View
-        android:id="@+id/bottom_space"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true" />
 </RelativeLayout>

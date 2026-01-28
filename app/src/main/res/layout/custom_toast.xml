@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <com.kyad.traystorage.app.common.font.FontTextView
+        android:id="@+id/txt_message"
+        style="@style/font_notosans_kr_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txt_message"
-        style="@style/font_spoqahansansneo_regular"
-        android:textSize="14dp"
-        android:textColor="@color/white"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="5dp"
-        android:background="@drawable/bg_toast"
-        android:text="Toast"/>
-</RelativeLayout>
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp"
+        android:background="@drawable/bg_toast_new"
+        android:text="휴대폰 인증이 완료되었습니다."
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:lineHeight="20sp"
+        android:gravity="center"
+        android:includeFontPadding="false" />
+
+</LinearLayout>

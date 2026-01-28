@@ -51,8 +51,16 @@ public class SplashActivity extends BaseBindingActivity<ActivitySplashBinding> {
 
     @Override
     public void init() {
-        //startApp();
-        handleDeepLink();
+        binding.setActivity(this);
+        
+        // 로고 아이콘 1초 표시
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            // 로고+BETA로 변경
+            binding.imgLogo.setImageResource(R.drawable.img_intro_logo_text);
+            
+            // 1초 더 표시 후 다음 화면
+            new Handler(Looper.getMainLooper()).postDelayed(this::handleDeepLink, 1000);
+        }, 1000);
     }
 
     void startApp() {
