@@ -549,11 +549,10 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                     RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) binding.chatbotContainer.getLayoutParams();
                     
                     if (isKeyboardVisible) {
-                        // 키보드가 열리면 bottom margin을 키보드 높이로 설정
-                        params.bottomMargin = keypadHeight;
-                        // 로고 아래부터 시작하도록 top margin 설정
+                        // 키보드가 열리면 로고 아래부터 화면 끝까지 (adjustResize가 키보드 위치 처리)
+                        params.bottomMargin = 0;
                         params.topMargin = (int) (70 * getResources().getDisplayMetrics().density);
-                        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+                        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
                         params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
                         params.height = RelativeLayout.LayoutParams.MATCH_PARENT;
                     } else {

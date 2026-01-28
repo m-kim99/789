@@ -285,11 +285,13 @@ public class CategoryDocumentsActivity extends BaseBindingActivity<ActivityCateg
                     RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) binding.chatbotContainer.getLayoutParams();
                     
                     if (isKeyboardVisible) {
-                        params.bottomMargin = keypadHeight;
+                        params.bottomMargin = 0;
                         params.topMargin = (int) (70 * getResources().getDisplayMetrics().density);
+                        params.height = RelativeLayout.LayoutParams.MATCH_PARENT;
                     } else {
                         params.bottomMargin = 0;
                         params.topMargin = 0;
+                        params.height = RelativeLayout.LayoutParams.MATCH_PARENT;
                     }
                     binding.chatbotContainer.setLayoutParams(params);
                 }
