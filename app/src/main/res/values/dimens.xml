@@ -2,4 +2,5 @@
 <resources>
     <dimen name="chat_height_default">192dp</dimen>
     <dimen name="chat_height_expanded">384dp</dimen>
+    <dimen name="chat_height_keyboard">80dp</dimen>
 </resources>

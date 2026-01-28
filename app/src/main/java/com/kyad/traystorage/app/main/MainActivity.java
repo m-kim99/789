@@ -4,13 +4,16 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -63,6 +66,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
     private String lastSearchKey = "";
     private ChatbotFragment chatbotFragment;
     private boolean isChatbotVisible = false;
+    private ViewTreeObserver.OnGlobalLayoutListener chatbotKeyboardListener;
     private List<ModelDocument> documentList = new ArrayList<>();
     private List<ModelDocument> allList = new ArrayList<>();
     private int currentCount = 0;
@@ -512,6 +516,7 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         isChatbotVisible = true;
+                        setupChatbotKeyboardListener();
                     }
                 })
                 .start();
@@ -519,7 +524,69 @@ public class MainActivity extends BaseBindingActivity<ActivityMainBinding> {
         binding.fabContainer.setVisibility(View.GONE);
     }
 
+    private void setupChatbotKeyboardListener() {
+        if (chatbotKeyboardListener != null) {
+            binding.mainLayout.getViewTreeObserver().removeOnGlobalLayoutListener(chatbotKeyboardListener);
+        }
+        
+        chatbotKeyboardListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+            private boolean isKeyboardVisible = false;
+            
+            @Override
+            public void onGlobalLayout() {
+                if (binding == null || !isChatbotVisible) return;
+                
+                Rect r = new Rect();
+                binding.mainLayout.getWindowVisibleDisplayFrame(r);
+                int screenHeight = binding.mainLayout.getRootView().getHeight();
+                int keypadHeight = screenHeight - r.bottom;
+                
+                boolean keyboardNowVisible = keypadHeight > screenHeight * 0.15;
+                
+                if (keyboardNowVisible != isKeyboardVisible) {
+                    isKeyboardVisible = keyboardNowVisible;
+                    
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) binding.chatbotContainer.getLayoutParams();
+                    
+                    if (isKeyboardVisible) {
+                        // 키보드가 열리면 bottom margin을 키보드 높이로 설정
+                        params.bottomMargin = keypadHeight;
+                        // 로고 아래부터 시작하도록 top margin 설정
+                        params.topMargin = (int) (70 * getResources().getDisplayMetrics().density);
+                        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+                        params.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+                        params.height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                    } else {
+                        // 키보드가 닫히면 원래대로
+                        params.bottomMargin = 0;
+                        params.topMargin = 0;
+                        params.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+                        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                        params.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+                    }
+                    binding.chatbotContainer.setLayoutParams(params);
+                }
+            }
+        };
+        binding.mainLayout.getViewTreeObserver().addOnGlobalLayoutListener(chatbotKeyboardListener);
+    }
+
     private void hideChatbot() {
+        // 키보드 리스너 제거
+        if (chatbotKeyboardListener != null) {
+            binding.mainLayout.getViewTreeObserver().removeOnGlobalLayoutListener(chatbotKeyboardListener);
+            chatbotKeyboardListener = null;
+        }
+        
+        // 레이아웃 원래대로 복원
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) binding.chatbotContainer.getLayoutParams();
+        params.bottomMargin = 0;
+        params.topMargin = 0;
+        params.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        params.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+        binding.chatbotContainer.setLayoutParams(params);
+        
         binding.chatbotContainer.animate()
                 .translationY(binding.chatbotContainer.getHeight())
                 .setDuration(300)

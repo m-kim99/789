@@ -76,27 +76,7 @@ public class ChatbotFragment extends Fragment {
     }
 
     private void setupKeyboardListener() {
-        keyboardListener = new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (binding == null || getView() == null) return;
-                
-                Rect r = new Rect();
-                binding.getRoot().getWindowVisibleDisplayFrame(r);
-                int screenHeight = binding.getRoot().getRootView().getHeight();
-                int keypadHeight = screenHeight - r.bottom;
-                
-                // 키보드가 화면의 15% 이상을 차지하면 열린 것으로 판단
-                if (keypadHeight > screenHeight * 0.15) {
-                    // 키보드가 열림 - 챗봇을 키보드 위로 이동
-                    binding.getRoot().setTranslationY(-keypadHeight);
-                } else {
-                    // 키보드가 닫힘 - 원래 위치로
-                    binding.getRoot().setTranslationY(0);
-                }
-            }
-        };
-        binding.getRoot().getViewTreeObserver().addOnGlobalLayoutListener(keyboardListener);
+        // 키보드 처리는 Activity에서 chatbot_container를 직접 제어
     }
 
     private void initChatbot() {
