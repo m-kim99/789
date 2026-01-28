@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- 뒤로가기 & 닫기 버튼 -->
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="24dp"
+            android:src="@drawable/ic_back" />
+
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_close" />
+    </RelativeLayout>
+
+    <!-- 진행 표시 점 (4번째 활성) -->
+    <LinearLayout
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/bg_indicator_inactive" />
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/bg_indicator_inactive" />
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/bg_indicator_inactive" />
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/bg_indicator_active" />
+    </LinearLayout>
+
+    <!-- 제목 (TrayStorage 파란색) -->
+    <com.kyad.traystorage.app.common.font.FontTextView
+        android:id="@+id/text_title"
+        style="@style/font_notosans_kr_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/indicator"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="TrayStorage로\n스마트한 문서 관리의 첫걸음을\n내딛어 보세요."
+        android:textColor="#111111"
+        android:textSize="24sp"
+        android:lineSpacingExtra="8dp"
+        android:gravity="center"
+        android:includeFontPadding="false" />
+
+    <!-- 스마트폰 이미지 -->
+    <ImageView
+        android:id="@+id/img_illustration"
+        android:layout_width="220dp"
+        android:layout_height="467dp"
+        android:layout_below="@id/text_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/img_intro_onboarding4" />
+
+    <!-- 시작하기 버튼 -->
+    <com.kyad.traystorage.app.common.font.FontButton
+        android:id="@+id/btn_start"
+        style="@style/font_notosans_kr_bold"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="60dp"
+        android:text="시작하기"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:background="@drawable/bg_btn_confirm_bottom"
+        android:gravity="center" />
+</RelativeLayout>

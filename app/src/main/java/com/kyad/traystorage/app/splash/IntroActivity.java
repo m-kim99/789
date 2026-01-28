@@ -6,9 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
 
 import com.kyad.traystorage.R;
 import com.kyad.traystorage.app.common.dialog.LoadingDialog;
@@ -36,38 +34,51 @@ public class IntroActivity extends BaseBindingActivity<ActivityIntroBinding> {
     }
 
     BasePagerAdapter adapter;
+    
     @Override
     public void init() {
-
         binding.setActivity(this);
 
         adapter = new BasePagerAdapter(getSupportFragmentManager());
         binding.viewPager.setAdapter(adapter);
+        
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new IntroFragment(R.layout.intro_page1));
-        fragments.add(new IntroFragment(R.layout.intro_page2));
+        fragments.add(new IntroFragment(R.layout.fragment_intro1));
+        fragments.add(new IntroFragment(R.layout.fragment_intro2));
+        fragments.add(new IntroFragment(R.layout.fragment_intro3));
+        fragments.add(new IntroFragment(R.layout.fragment_intro4));
+        fragments.add(new IntroFragment(R.layout.fragment_intro5));
         adapter.setFragments(fragments);
-
-        new Handler(Looper.getMainLooper()).postDelayed(this::nextPage, 2000);
+        
+        // 자동 넘김 제거
+        // new Handler(Looper.getMainLooper()).postDelayed(this::nextPage, 2000);
     }
 
-    public void nextPage(){
-        if(binding.viewPager.getCurrentItem() < 1){
-            binding.viewPager.setCurrentItem(binding.viewPager.getCurrentItem()+1);
-        }else{
+    public void nextPage() {
+        int currentItem = binding.viewPager.getCurrentItem();
+        if(currentItem < 4) { // 0~4 (5개 페이지)
+            binding.viewPager.setCurrentItem(currentItem + 1);
+        } else {
+            // 마지막 페이지에서 "확인" 버튼 클릭 시
             goLoading();
-            return;
         }
-        new Handler(Looper.getMainLooper()).postDelayed(this::nextPage, 2000);
+    }
+
+    public void prevPage() {
+        int currentItem = binding.viewPager.getCurrentItem();
+        if(currentItem > 0) {
+            binding.viewPager.setCurrentItem(currentItem - 1);
+        }
     }
 
     public void goNext() {
+        // 건너뛰기 (닫기 버튼)
         PrefMgr prefMgr = new PrefMgr(getSharedPreferences(PrefMgr.traystorage_PREFS, MODE_PRIVATE));
         prefMgr.put(PrefMgr.FIRST_START, false);
         goLoading();
     }
 
-    void goLoading() {
+    public void goLoading() {
         if (LoadingActivity.getInstance() != null){
             return;
         }

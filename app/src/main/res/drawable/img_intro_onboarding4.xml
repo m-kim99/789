@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Placeholder for onboarding illustration 4 - 환영 스마트폰 -->
+<!-- Replace this file with actual PNG: img_intro_onboarding4.png -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#F5F5F5" />
+    <corners android:radius="16dp" />
+    <size android:width="220dp" android:height="467dp" />
+</shape>
