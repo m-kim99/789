@@ -132,6 +132,79 @@
                     android:textSize="13sp"
                     android:visibility="@{activity.imageListAdapter.imageUrlList.size() > 0 ? View.VISIBLE : View.GONE}" />
 
+                <!-- OCR 결과 카드 (접고 펼칠 수 있음) -->
+                <LinearLayout
+                    android:id="@+id/ocr_card_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_ocr_card"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <!-- 헤더 (접기/펼치기 버튼) -->
+                    <LinearLayout
+                        android:id="@+id/ocr_card_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:onClick="@{()->activity.onOcrCardToggle()}"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <com.kyad.traystorage.app.common.font.FontTextView
+                            style="@style/font_spoqahansansneo_bold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="OCR 추출 텍스트"
+                            android:textColor="@color/C151515"
+                            android:textSize="14sp" />
+
+                        <ImageView
+                            android:id="@+id/ocr_card_arrow"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:rotation="180"
+                            android:src="@drawable/ic_back"
+                            android:scaleType="centerInside" />
+                    </LinearLayout>
+
+                    <!-- 내용 (접고 펼쳐지는 부분) -->
+                    <LinearLayout
+                        android:id="@+id/ocr_card_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="12dp"
+                        android:paddingBottom="12dp"
+                        android:visibility="visible">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@color/Ceeeeee" />
+
+                        <com.kyad.traystorage.app.common.font.FontEditText
+                            android:id="@+id/ocr_text_edit"
+                            style="@style/font_spoqahansansneo_regular"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_ocr_card"
+                            android:gravity="top|start"
+                            android:hint="OCR 결과가 여기에 표시됩니다"
+                            android:inputType="textMultiLine"
+                            android:minHeight="100dp"
+                            android:padding="10dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/Cbbbbbb"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
                 <RelativeLayout
                     android:id="@+id/add_first_img"
                     android:layout_width="100dp"

@@ -1,5 +1,6 @@
 package com.kyad.traystorage.app.chatbot;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
@@ -44,6 +46,7 @@ public class ChatbotFragment extends Fragment {
     private ObservableBoolean isExpanded = new ObservableBoolean(false);
     private ChatbotService chatbotService;
     private OnChatbotCloseListener closeListener;
+    private ViewTreeObserver.OnGlobalLayoutListener keyboardListener;
 
     public interface OnChatbotCloseListener {
         void onChatbotClose();
@@ -68,7 +71,32 @@ public class ChatbotFragment extends Fragment {
         initChatbot();
         setupRecyclerView();
         setupInputListener();
+        setupKeyboardListener();
         addWelcomeMessage();
+    }
+
+    private void setupKeyboardListener() {
+        keyboardListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (binding == null || getView() == null) return;
+                
+                Rect r = new Rect();
+                binding.getRoot().getWindowVisibleDisplayFrame(r);
+                int screenHeight = binding.getRoot().getRootView().getHeight();
+                int keypadHeight = screenHeight - r.bottom;
+                
+                // 키보드가 화면의 15% 이상을 차지하면 열린 것으로 판단
+                if (keypadHeight > screenHeight * 0.15) {
+                    // 키보드가 열림 - 챗봇을 키보드 위로 이동
+                    binding.getRoot().setTranslationY(-keypadHeight);
+                } else {
+                    // 키보드가 닫힘 - 원래 위치로
+                    binding.getRoot().setTranslationY(0);
+                }
+            }
+        };
+        binding.getRoot().getViewTreeObserver().addOnGlobalLayoutListener(keyboardListener);
     }
 
     private void initChatbot() {
@@ -307,6 +335,10 @@ public class ChatbotFragment extends Fragment {
         super.onDestroyView();
         if (chatbotService != null) {
             chatbotService.cancel();
+        }
+        // 키보드 리스너 제거
+        if (keyboardListener != null && binding != null) {
+            binding.getRoot().getViewTreeObserver().removeOnGlobalLayoutListener(keyboardListener);
         }
         binding = null;
     }

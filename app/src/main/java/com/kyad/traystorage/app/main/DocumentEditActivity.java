@@ -69,6 +69,7 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
     private Integer categoryId = null;
     private String categoryName = "";
     private String ocrText = "";
+    private boolean isOcrCardExpanded = true;
 
     @Override
     public int getLayout() {
@@ -120,6 +121,12 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
             }
             tagList.clear();
             tagList.addAll(editDocument.tag_list);
+            
+            // 기존 OCR 텍스트 로드
+            if (editDocument.ocr_text != null && !editDocument.ocr_text.isEmpty()) {
+                ocrText = editDocument.ocr_text;
+                showOcrCard(ocrText);
+            }
         }
     }
 
@@ -271,11 +278,17 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
         OcrEditDialog.show(this, localImages, text -> {
             ocrText = text;
             isChanged = true;
+            showOcrCard(text);
             Utils.showCustomToast(this, "OCR 텍스트가 저장되었습니다.", Toast.LENGTH_SHORT);
         });
     }
 
     public void onRegisterClick() {
+        // OCR 카드에서 편집한 텍스트 동기화
+        if (binding.ocrCardContainer.getVisibility() == View.VISIBLE) {
+            ocrText = binding.ocrTextEdit.getText().toString().trim();
+        }
+        
         AlertDialog.show(DocumentEditActivity.this).setText(getString(R.string.register_confirm), "", getString(R.string.yes), getString(R.string.no))
                 .setListener(() -> {
                     // 테스트 모드: 이미지 업로드 없이 로컬 저장
@@ -367,6 +380,33 @@ public class DocumentEditActivity extends BaseBindingActivity<ActivityDocumentEd
     public void scrollToEnd() {
         binding.scrollView.scrollTo(0, 100000);
         binding.tagList.scrollToPosition(0);
+    }
+
+    // OCR 카드 표시
+    private void showOcrCard(String text) {
+        if (text != null && !text.isEmpty()) {
+            binding.ocrCardContainer.setVisibility(View.VISIBLE);
+            binding.ocrTextEdit.setText(text);
+            isOcrCardExpanded = true;
+            binding.ocrCardContent.setVisibility(View.VISIBLE);
+            binding.ocrCardArrow.setRotation(180);
+        } else {
+            binding.ocrCardContainer.setVisibility(View.GONE);
+        }
+    }
+
+    // OCR 카드 접기/펼치기
+    public void onOcrCardToggle() {
+        isOcrCardExpanded = !isOcrCardExpanded;
+        if (isOcrCardExpanded) {
+            binding.ocrCardContent.setVisibility(View.VISIBLE);
+            binding.ocrCardArrow.animate().rotation(180).setDuration(200).start();
+        } else {
+            binding.ocrCardContent.setVisibility(View.GONE);
+            binding.ocrCardArrow.animate().rotation(0).setDuration(200).start();
+        }
+        // 카드에서 편집한 텍스트 저장
+        ocrText = binding.ocrTextEdit.getText().toString().trim();
     }
 
     public class LabelColorModel {
