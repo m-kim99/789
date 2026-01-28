@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
         <import type="android.view.View" />
         <variable
@@ -9,260 +10,302 @@
             name="viewModel"
             type="com.kyad.traystorage.app.auth.FindAuthActivity.ViewModel" />
     </data>
+
     <LinearLayout
         android:id="@+id/bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="#FDFDFE"
         android:orientation="vertical">
 
+        <!-- Status Bar -->
+        <include
+            layout="@layout/include_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <!-- Header -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="@{activity.showPhoneTitle ? View.VISIBLE : View.GONE}">
+            android:layout_height="56dp">
 
-                <com.kyad.traystorage.app.common.font.FontTextView
-                    style="@style/font_spoqahansansneo_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/phone_cert"
-                    android:textColor="@color/C151515"
-                    android:textSize="18dp" />
-
-                    <ImageView
-                        android:id="@+id/ib_close"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:background="@color/transparent"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:onClick="@{()->activity.onBackPressed()}"
-                        android:padding="15dp"
-                        android:src="@drawable/icon_gnb_close" />
-            </RelativeLayout>
-
+            <!-- 뒤로가기 (일반 모드) -->
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="20dp"
-                android:onClick="@{()->activity.onBackPressed()}"
-                android:padding="10dp"
-                android:scaleType="fitXY"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
                 android:src="@drawable/ic_back"
+                android:onClick="@{()->activity.onBackPressed()}"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:visibility="@{activity.showPhoneTitle ? View.GONE : View.VISIBLE}" />
+
+            <!-- 휴대폰 인증 타이틀 (회원가입 모드) -->
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_notosans_kr_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/phone_cert"
+                android:textColor="#111111"
+                android:textSize="18sp"
+                android:visibility="@{activity.showPhoneTitle ? View.VISIBLE : View.GONE}" />
+
+            <!-- 닫기 버튼 (회원가입 모드) -->
+            <ImageView
+                android:id="@+id/ib_close"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/icon_gnb_close"
+                android:onClick="@{()->activity.onBackPressed()}"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:visibility="@{activity.showPhoneTitle ? View.VISIBLE : View.GONE}" />
         </RelativeLayout>
 
+        <!-- Content -->
         <ScrollView
-            android:layout_marginHorizontal="18dp"
-            android:layout_marginTop="45dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp">
 
+                <!-- 타이틀 -->
                 <com.kyad.traystorage.app.common.font.FontTextView
                     android:id="@+id/text_intro"
-                    style="@style/font_spoqahansansneo_regular"
+                    style="@style/font_notosans_kr_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lineHeight="34dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="32dp"
                     android:text="@{activity.hasUserId? @string/findauth_home2: @string/findauth_home1}"
-                    android:textColor="@color/black"
-                    android:layout_marginBottom="45dp"
-                    android:textSize="22dp" />
+                    android:textColor="#111111"
+                    android:textSize="22sp"
+                    android:lineHeight="32sp"
+                    android:includeFontPadding="false" />
 
+                <!-- 아이디 입력 (비밀번호 찾기 모드) -->
                 <LinearLayout
-                    android:visibility="@{activity.hasUserId?View.GONE:View.VISIBLE}"
                     android:id="@+id/layout_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="35dp"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical"
+                    android:visibility="@{activity.hasUserId?View.GONE:View.VISIBLE}">
+
                     <com.kyad.traystorage.app.common.font.FontTextView
-                        style="@style/font_spoqahansansneo_regular"
+                        style="@style/font_notosans_kr_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/id"
-                        android:textColor="@color/gray"
-                        android:textSize="14dp" />
+                        android:textColor="#535455"
+                        android:textSize="14sp"
+                        android:includeFontPadding="false" />
+
                     <com.kyad.traystorage.app.common.font.FontEditText
-                        style="@style/font_spoqahansansneo_regular"
                         android:id="@+id/edit_id"
-                        android:text="@={viewModel.loginID}"
+                        style="@style/font_notosans_kr_regular"
                         android:layout_width="match_parent"
-                        android:includeFontPadding="false"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:paddingVertical="10dp"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:hint="@string/enter_id" />
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_underline_input"
+                        android:hint="@string/enter_id"
+                        android:textColorHint="#6B6C6E"
+                        android:textColor="#111111"
+                        android:textSize="18sp"
+                        android:text="@={viewModel.loginID}"
+                        android:includeFontPadding="false" />
+
                     <View
                         android:id="@+id/line_id"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/light_gray"/>
+                        android:background="#D6D7DC" />
                 </LinearLayout>
 
+                <!-- 휴대폰 번호 입력 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="35dp"
+                    android:layout_marginBottom="16dp"
                     android:orientation="vertical">
+
                     <com.kyad.traystorage.app.common.font.FontTextView
-                        style="@style/font_spoqahansansneo_regular"
+                        style="@style/font_notosans_kr_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/phone_number"
-                        android:textColor="@color/gray"
-                        android:textSize="14dp" />
+                        android:textColor="#535455"
+                        android:textSize="14sp"
+                        android:includeFontPadding="false" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="48dp">
 
                         <com.kyad.traystorage.app.common.font.FontEditText
                             android:id="@+id/edit_phonenumber"
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_toStartOf="@id/button_req"
+                            android:layout_marginEnd="8dp"
                             android:background="@null"
                             android:hint="@string/enter_phone_number"
-                            android:includeFontPadding="false"
-                            android:maxLength="11"
+                            android:textColorHint="#6B6C6E"
+                            android:textColor="#111111"
+                            android:textSize="18sp"
                             android:inputType="number"
-                            android:paddingVertical="10dp"
+                            android:maxLength="11"
                             android:text="@={viewModel.phoneNumber}"
-                            android:textColor="@color/black"
-                            android:textSize="18dp" />
+                            android:includeFontPadding="false" />
 
                         <ImageView
                             android:id="@+id/delete_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:layout_toLeftOf="@id/button_req"
+                            android:layout_toStartOf="@id/button_req"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/icon_common_24x24_close"
                             android:onClick="@{()->activity.onDeletetext()}"
-                            android:src="@drawable/icon_common_24x24_close" />
+                            android:background="?attr/selectableItemBackgroundBorderless" />
 
                         <com.kyad.traystorage.app.common.font.FontButton
-                            android:onClick="@{()->activity.onAuthReq()}"
                             android:id="@+id/button_req"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
-                            android:layout_height="30dp"
-                            android:layout_alignParentRight="true"
+                            android:layout_height="32dp"
+                            android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:includeFontPadding="false"
+                            android:paddingHorizontal="12dp"
                             android:background="@drawable/bg_btn_authreq"
-                            android:paddingHorizontal="10dp"
                             android:text="@string/auth_request"
-                            android:textColor="@color/focus_color"
-                            android:textSize="14dp" />
+                            android:textColor="#1E319D"
+                            android:textSize="14sp"
+                            android:onClick="@{()->activity.onAuthReq()}"
+                            android:includeFontPadding="false" />
                     </RelativeLayout>
+
                     <View
                         android:id="@+id/line_phonenumber"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/light_gray"/>
+                        android:background="#D6D7DC" />
                 </LinearLayout>
 
+                <!-- 인증번호 입력 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="16dp"
                     android:orientation="vertical">
+
                     <com.kyad.traystorage.app.common.font.FontTextView
-                        style="@style/font_spoqahansansneo_regular"
+                        style="@style/font_notosans_kr_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cert_number"
-                        android:textColor="@color/gray"
-                        android:textSize="14dp" />
+                        android:textColor="#535455"
+                        android:textSize="14sp"
+                        android:includeFontPadding="false" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="48dp">
 
                         <com.kyad.traystorage.app.common.font.FontEditText
                             android:id="@+id/edit_certnumber"
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:background="@null"
                             android:hint="@string/enter_cert_number"
+                            android:textColorHint="#6B6C6E"
+                            android:textColor="#111111"
+                            android:textSize="18sp"
                             android:inputType="number"
-                            android:paddingVertical="10dp"
-                            android:includeFontPadding="false"
                             android:text="@={viewModel.certNumber}"
-                            android:textColor="@color/black"
-                            android:textSize="18dp" />
+                            android:includeFontPadding="false" />
 
                         <com.kyad.traystorage.app.common.font.FontTextView
                             android:id="@+id/text_time"
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:text=""
-                            android:textColor="@color/red"
-                            android:textSize="14dp" />
+                            android:textColor="#FF0000"
+                            android:textSize="14sp"
+                            android:includeFontPadding="false" />
                     </RelativeLayout>
+
                     <View
                         android:id="@+id/line_certnumber"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/light_gray"/>
+                        android:background="#D6D7DC" />
                 </LinearLayout>
 
+                <!-- 인증번호 재전송 -->
                 <RelativeLayout
                     android:id="@+id/resend_button"
-                    android:layout_gravity="right"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end">
+
                     <com.kyad.traystorage.app.common.font.FontTextView
-                        android:onClick="@{()->activity.onResendCode()}"
+                        android:id="@+id/resend_button2"
+                        style="@style/font_notosans_kr_regular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/resent_code"
-                        android:textColor="@color/gray"
-                        android:textSize="16dp"
-                        android:id="@+id/resend_button2"
-                        />
+                        android:textColor="#6B6C6E"
+                        android:textSize="14sp"
+                        android:onClick="@{()->activity.onResendCode()}"
+                        android:includeFontPadding="false" />
+
                     <View
-                        android:layout_toLeftOf="@id/resend_button2"
-                        android:layout_toRightOf="@id/resend_button2"
-                        android:layout_alignParentBottom="true"
                         android:layout_width="wrap_content"
                         android:layout_height="1dp"
-                        android:background="@color/light_gray"
-                        />
+                        android:layout_below="@id/resend_button2"
+                        android:layout_alignStart="@id/resend_button2"
+                        android:layout_alignEnd="@id/resend_button2"
+                        android:background="#D6D7DC" />
                 </RelativeLayout>
 
+                <!-- 확인 버튼 -->
                 <com.kyad.traystorage.app.common.font.FontButton
                     android:id="@+id/next_btn"
-                    android:layout_marginTop="50dp"
-                    style="@style/font_spoqahansansneo_bold"
+                    style="@style/font_notosans_kr_bold"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:enabled="@{activity.isEnabled}"
-                    android:background="@drawable/bg_btn_approve_both"
-                    android:gravity="center"
-                    android:onClick="@{()->activity.onConfirm()}"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_btn_login_primary"
                     android:text="@string/confirm"
-                    android:textColor="@{activity.isEnabled?@color/white:@color/gray}"
-                    android:layout_marginBottom="20dp"
-                    android:textSize="15dp" />
+                    android:textColor="#FDFDFE"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:enabled="@{activity.isEnabled}"
+                    android:onClick="@{()->activity.onConfirm()}"
+                    android:includeFontPadding="false" />
             </LinearLayout>
-
         </ScrollView>
-    </LinearLayout>
 
+        <!-- Navigation Bar -->
+        <include
+            layout="@layout/include_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+    </LinearLayout>
 </layout>

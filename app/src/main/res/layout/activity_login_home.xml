@@ -4,132 +4,156 @@
     tools:context=".app.auth.LoginHomeActivity">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="activity"
             type="com.kyad.traystorage.app.auth.LoginHomeActivity" />
-
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/img_landing_bg">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <!-- 배경 그라데이션 -->
+        <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:background="@drawable/bg_login_home_gradient" />
 
+        <!-- Android Status Bar -->
+        <include
+            android:id="@+id/status_bar"
+            layout="@layout/include_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_alignParentTop="true" />
+
+        <!-- 상단: 로고 + 문구 -->
+        <LinearLayout
+            android:id="@+id/layout_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/status_bar"
+            android:layout_marginTop="60dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingHorizontal="24dp">
+
+            <!-- 로고 -->
             <ImageView
-                android:layout_width="166dp"
-                android:layout_height="118dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="80dp"
-                android:scaleType="fitCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 android:src="@drawable/group_32" />
 
+            <!-- 문구 -->
             <com.kyad.traystorage.app.common.font.FontTextView
-                style="@style/font_spoqahansansneo_bold"
+                style="@style/font_notosans_kr_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:includeFontPadding="false"
-                android:text="@string/login_home1"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-
-            <com.kyad.traystorage.app.common.font.FontTextView
-                style="@style/font_spoqahansansneo_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:includeFontPadding="false"
-                android:text="@string/login_home2"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-
-            <com.kyad.traystorage.app.common.font.FontButton
-                style="@style/font_spoqahansansneo_bold"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="60dp"
-                android:background="@drawable/bg_btn_confirm_bottom_white"
-                android:onClick="@{() -> activity.goTestMode()}"
-                android:text="테스트 모드 (로그인 없이 진입)"
-                android:textColor="#FF5722"
-                android:textSize="13dp" />
-
-            <com.kyad.traystorage.app.common.font.FontButton
-                style="@style/font_spoqahansansneo_bold"
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/bg_btn_confirm_bottom"
-                android:onClick="@{() -> activity.goLogin()}"
-                android:text="@string/login"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
-
-            <com.kyad.traystorage.app.common.font.FontButton
-                style="@style/font_spoqahansansneo_bold"
-                android:layout_width="match_parent"
-                android:layout_height="54dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/bg_btn_confirm_bottom_white"
-                android:onClick="@{() -> activity.goSignUp()}"
-                android:text="@string/signup"
-                android:textColor="@color/focus_color"
-                android:textSize="15dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="33dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{() -> activity.goSnsSignup(0)}"
-                        android:src="@drawable/icon_sns_kakao_60" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:onClick="@{() -> activity.goSnsSignup(1)}"
-                        android:src="@drawable/icon_sns_google_60" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:visibility="gone"
-                        android:onClick="@{() -> activity.goSnsSignup(2)}"
-                        android:src="@drawable/icon_sns_facebook_60" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:onClick="@{() -> activity.goSnsSignup(3)}"
-                        android:src="@drawable/icon_sns_naver_60" />
-                </LinearLayout>
-            </RelativeLayout>
+                android:layout_marginTop="32dp"
+                android:text="복잡한 문서의 정리와\n관리를 더 스마트하게"
+                android:textColor="#111111"
+                android:textSize="24sp"
+                android:lineHeight="32sp"
+                android:gravity="center"
+                android:includeFontPadding="false" />
         </LinearLayout>
 
+        <!-- 하단: 버튼 영역 -->
+        <LinearLayout
+            android:id="@+id/layout_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="48dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="32dp">
+
+            <!-- 로그인 버튼 -->
+            <com.kyad.traystorage.app.common.font.FontButton
+                android:id="@+id/btn_login"
+                style="@style/font_notosans_kr_bold"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="로그인"
+                android:textColor="#FDFDFE"
+                android:textSize="18sp"
+                android:background="@drawable/bg_btn_login_primary"
+                android:gravity="center"
+                android:onClick="@{()->activity.goLogin()}"
+                android:includeFontPadding="false" />
+
+            <!-- 회원가입 버튼 -->
+            <com.kyad.traystorage.app.common.font.FontButton
+                android:id="@+id/btn_signup"
+                style="@style/font_notosans_kr_bold"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="회원가입"
+                android:textColor="#1E319D"
+                android:textSize="18sp"
+                android:background="@drawable/bg_btn_login_secondary"
+                android:gravity="center"
+                android:onClick="@{()->activity.goSignUp()}"
+                android:includeFontPadding="false" />
+
+            <!-- 또는 -->
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_notosans_kr_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:text="또는"
+                android:textColor="#111111"
+                android:textSize="14sp"
+                android:lineHeight="20sp"
+                android:gravity="center"
+                android:includeFontPadding="false" />
+
+            <!-- SNS 로그인 아이콘 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingVertical="12dp">
+
+                <!-- 카카오 -->
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/icon_sns_kakao_60"
+                    android:onClick="@{()->activity.goSnsSignup(0)}"
+                    android:scaleType="fitCenter" />
+
+                <!-- 구글 -->
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/icon_sns_google_60"
+                    android:onClick="@{()->activity.goSnsSignup(1)}"
+                    android:scaleType="fitCenter" />
+
+                <!-- 네이버 -->
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="28dp"
+                    android:src="@drawable/icon_sns_naver_60"
+                    android:onClick="@{()->activity.goSnsSignup(3)}"
+                    android:scaleType="fitCenter" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Android Navigation Bar -->
+        <include
+            android:id="@+id/nav_bar"
+            layout="@layout/include_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 </layout>

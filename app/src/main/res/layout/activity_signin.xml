@@ -2,9 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="activity"
             type="com.kyad.traystorage.app.auth.SigninActivity" />
@@ -14,188 +12,216 @@
         android:id="@+id/bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="#FFFFFF"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="20dp"
-            android:onClick="@{()->activity.onBackPressed()}"
-            android:padding="10dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_back" />
-
-        <ScrollView
-            android:id="@+id/scroll"
+        <!-- Status Bar -->
+        <include
+            layout="@layout/include_status_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp">
+            android:layout_height="24dp" />
+
+        <!-- Header with Back Button -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_back"
+                android:onClick="@{()->activity.onBackPressed()}"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </RelativeLayout>
+
+        <!-- ScrollView Content -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="28dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp">
 
+                <!-- 로고 + 문구 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:paddingVertical="24dp"
+                    android:background="#FDFDFE">
 
+                    <!-- 로고 -->
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_bell" />
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/group_32" />
 
-                    <ImageView
+                    <!-- 문구 -->
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_notosans_kr_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:src="@drawable/logo_texttype" />
+                        android:layout_marginTop="24dp"
+                        android:text="복잡한 문서의 정리와\n관리를 더 스마트하게"
+                        android:textColor="#111111"
+                        android:textSize="24sp"
+                        android:lineHeight="32sp"
+                        android:includeFontPadding="false" />
                 </LinearLayout>
 
-                <com.kyad.traystorage.app.common.font.FontTextView
-                    style="@style/font_spoqahansansneo_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:includeFontPadding="false"
-                    android:text="@string/signin_home1"
-                    android:textColor="@color/black"
-                    android:textSize="24dp" />
-
-                <com.kyad.traystorage.app.common.font.FontTextView
-                    style="@style/font_spoqahansansneo_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:text="@string/signin_home2"
-                    android:textColor="@color/black"
-                    android:textSize="24dp" />
-
+                <!-- 아이디 입력 -->
                 <com.kyad.traystorage.app.common.font.FontEditText
                     android:id="@+id/text_id"
-                    style="@style/font_spoqahansansneo_regular"
+                    style="@style/font_notosans_kr_regular"
                     android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="35dp"
-                    android:background="@drawable/bg_edittext"
-                    android:hint="@string/id"
-                    android:includeFontPadding="false"
-                    android:maxLength="25"
-                    android:onTextChanged="@{() -> activity.onChangedId()}"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
                     android:paddingHorizontal="24dp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="15dp" />
+                    android:paddingVertical="16dp"
+                    android:hint="아이디"
+                    android:textColorHint="#6B6C6E"
+                    android:textColor="#111111"
+                    android:textSize="14sp"
+                    android:background="@drawable/bg_input_border"
+                    android:inputType="text"
+                    android:includeFontPadding="false" />
 
-                <com.kyad.traystorage.app.common.font.FontEditText
-                    android:id="@+id/text_password"
-                    style="@style/font_spoqahansansneo_regular"
-                    android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="18dp"
-                    android:background="@drawable/bg_edittext"
-                    android:hint="@string/password"
-                    android:includeFontPadding="false"
-                    android:maxLength="12"
-                    android:paddingHorizontal="24dp"
-                    android:password="true"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="15dp" />
-
+                <!-- 비밀번호 입력 -->
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp">
+                    android:layout_height="50dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/bg_input_border">
 
+                    <com.kyad.traystorage.app.common.font.FontEditText
+                        android:id="@+id/text_password"
+                        style="@style/font_notosans_kr_regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="16dp"
+                        android:hint="비밀번호"
+                        android:textColorHint="#6B6C6E"
+                        android:textColor="#111111"
+                        android:textSize="14sp"
+                        android:background="@null"
+                        android:inputType="textPassword"
+                        android:includeFontPadding="false" />
+
+                    <!-- 비밀번호 표시/숨김 아이콘 -->
+                    <ImageView
+                        android:id="@+id/btn_show_pwd"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_eye_hide"
+                        android:background="?attr/selectableItemBackgroundBorderless" />
+                </RelativeLayout>
+
+                <!-- 자동로그인 / 아이디찾기 / 비밀번호찾기 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <!-- 자동로그인 -->
                     <LinearLayout
-                        android:id="@+id/lly_auto_login"
-                        android:layout_width="wrap_content"
-                        android:layout_height="32dp"
-                        android:layout_centerHorizontal="true"
-                        android:orientation="horizontal">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:gravity="start|center_vertical"
+                        android:onClick="@{()->activity.checkAutoLogin()}">
 
                         <ImageView
                             android:id="@+id/auto_check"
-                            android:layout_width="32dp"
-                            android:layout_height="match_parent"
-                            android:onClick="@{() -> activity.checkAutoLogin()}"
-                            android:padding="1dp"
-                            android:src="@drawable/bg_checkbox" />
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_check_off" />
 
                         <com.kyad.traystorage.app.common.font.FontTextView
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:onClick="@{() -> activity.checkAutoLogin()}"
-                            android:text="@string/auto_login"
-                            android:textColor="@color/gray"
-                            android:textSize="14dp" />
-
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="자동 로그인"
+                            android:textColor="#6B6C6E"
+                            android:textSize="14sp"
+                            android:lineHeight="20sp"
+                            android:includeFontPadding="false" />
                     </LinearLayout>
 
+                    <!-- 아이디찾기 / 비밀번호찾기 -->
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="32dp"
-                        android:layout_below="@+id/lly_auto_login"
-                        android:layout_centerHorizontal="true"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="end|center_vertical">
 
                         <com.kyad.traystorage.app.common.font.FontTextView
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="20dp"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:onClick="@{() -> activity.goFindId()}"
-                            android:text="@string/find_id"
-                            android:textColor="@color/gray"
-                            android:textSize="14dp" />
+                            android:layout_height="wrap_content"
+                            android:text="아이디 찾기"
+                            android:textColor="#6B6C6E"
+                            android:textSize="14sp"
+                            android:lineHeight="20sp"
+                            android:onClick="@{()->activity.goFindId()}"
+                            android:includeFontPadding="false" />
 
                         <View
                             android:layout_width="1dp"
-                            android:layout_height="15dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="20dp"
-                            android:background="@color/gray" />
+                            android:layout_height="14dp"
+                            android:layout_marginHorizontal="8dp"
+                            android:background="#D6D7DC" />
 
                         <com.kyad.traystorage.app.common.font.FontTextView
-                            style="@style/font_spoqahansansneo_regular"
+                            style="@style/font_notosans_kr_regular"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="20dp"
-                            android:gravity="center"
-                            android:includeFontPadding="false"
-                            android:onClick="@{() -> activity.goPasswordReset()}"
-                            android:text="@string/password_reset"
-                            android:textColor="@color/gray"
-                            android:textSize="14dp" />
+                            android:layout_height="wrap_content"
+                            android:text="비밀번호 찾기"
+                            android:textColor="#6B6C6E"
+                            android:textSize="14sp"
+                            android:lineHeight="20sp"
+                            android:onClick="@{()->activity.goPasswordReset()}"
+                            android:includeFontPadding="false" />
                     </LinearLayout>
-                </RelativeLayout>
+                </LinearLayout>
 
+                <!-- 로그인 버튼 -->
                 <com.kyad.traystorage.app.common.font.FontButton
                     android:id="@+id/btn_login"
-                    style="@style/font_spoqahansansneo_bold"
+                    style="@style/font_notosans_kr_bold"
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/bg_btn_confirm_bottom"
-                    android:onClick="@{() -> activity.doLogin()}"
-                    android:text="@string/login"
-                    android:textColor="@color/white"
-                    android:textSize="15dp" />
-
+                    android:layout_height="56dp"
+                    android:layout_marginTop="32dp"
+                    android:text="로그인"
+                    android:textColor="#6B6C6E"
+                    android:textSize="20sp"
+                    android:background="@drawable/bg_btn_login_disabled"
+                    android:gravity="center"
+                    android:onClick="@{()->activity.doLogin()}"
+                    android:enabled="false"
+                    android:includeFontPadding="false" />
             </LinearLayout>
         </ScrollView>
+
+        <!-- Navigation Bar -->
+        <include
+            layout="@layout/include_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
     </LinearLayout>
 </layout>
