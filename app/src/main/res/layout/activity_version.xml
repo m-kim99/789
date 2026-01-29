@@ -22,26 +22,29 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="56dp"
+            android:paddingHorizontal="4dp">
+
+            <ImageView
+                android:id="@+id/ib_close"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:background="@color/transparent"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{()->activity.onBackPressed()}"
+                android:padding="12dp"
+                android:src="@drawable/ic_back" />
 
             <com.kyad.traystorage.app.common.font.FontTextView
                 style="@style/font_spoqahansansneo_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:includeFontPadding="false"
                 android:text="@string/version_information"
                 android:textColor="@color/C151515"
-                android:textSize="18dp" />
-
-            <ImageView
-                android:id="@+id/ib_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:foreground="?attr/selectableItemBackground"
-                android:onClick="@{()->activity.onBackPressed()}"
-                android:padding="15dp"
-                android:src="@drawable/ic_back" />
+                android:textSize="18sp" />
 
         </RelativeLayout>
 
@@ -56,41 +59,50 @@
                 style="@style/font_spoqahansansneo_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
                 android:includeFontPadding="false"
                 android:lineHeight="34dp"
                 android:text="@string/version_information1"
-                android:textColor="@color/black"
-                android:textSize="22dp"
+                android:textColor="#111111"
+                android:textSize="22sp"
                 android:visibility="@{model.isUpdate?View.VISIBLE:View.GONE}" />
 
             <com.kyad.traystorage.app.common.font.FontTextView
                 style="@style/font_spoqahansansneo_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
                 android:includeFontPadding="false"
                 android:lineHeight="34dp"
                 android:text="@string/version_information2"
-                android:textColor="@color/black"
-                android:textSize="22dp"
+                android:textColor="#111111"
+                android:textSize="22sp"
                 android:visibility="@{model.isUpdate?View.GONE:View.VISIBLE}" />
+
+            <com.kyad.traystorage.app.common.font.FontTextView
+                android:id="@+id/text_version"
+                style="@style/font_spoqahansansneo_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:includeFontPadding="false"
+                android:text="@{model.oldVersion}"
+                android:textColor="#6B6C6E"
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="32dp"
-                android:src="@drawable/appicon_login_100" />
+                android:src="@drawable/appicon_login_100"
+                android:visibility="@{model.isUpdate?View.VISIBLE:View.GONE}" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="38dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="@{model.isUpdate?View.VISIBLE:View.GONE}">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -104,7 +116,7 @@
                         android:includeFontPadding="false"
                         android:text="@string/current_version"
                         android:textColor="@color/C151515"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                     <com.kyad.traystorage.app.common.font.FontTextView
                         style="@style/font_spoqahansansneo_regular"
@@ -114,7 +126,7 @@
                         android:includeFontPadding="false"
                         android:text="@string/newest_version"
                         android:textColor="@color/C151515"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:visibility="@{model.isUpdate?View.VISIBLE:View.GONE}" />
                 </LinearLayout>
 
@@ -132,7 +144,7 @@
                         android:includeFontPadding="false"
                         android:text="@{model.oldVersion}"
                         android:textColor="@color/C151515"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                     <com.kyad.traystorage.app.common.font.FontTextView
                         android:id="@+id/label_newestversion"
@@ -143,16 +155,16 @@
                         android:includeFontPadding="false"
                         android:text="@{model.newVersion}"
                         android:textColor="@color/focus_color"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:visibility="@{model.isUpdate?View.VISIBLE:View.GONE}" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1" />
 
             <com.kyad.traystorage.app.common.font.FontButton
@@ -164,10 +176,11 @@
                 android:background="@drawable/bg_btn_approve_both"
                 android:enabled="true"
                 android:gravity="center"
+                android:includeFontPadding="false"
                 android:onClick="@{()->activity.onConfirm()}"
                 android:text="@string/update_version_button"
                 android:textColor="@color/white"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:visibility="@{model.isUpdate?View.VISIBLE:View.GONE}" />
         </LinearLayout>
     </LinearLayout>

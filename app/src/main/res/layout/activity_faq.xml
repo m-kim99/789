@@ -20,16 +20,18 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="56dp"
+            android:paddingHorizontal="4dp">
 
             <ImageView
                 android:id="@+id/ib_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
                 android:background="@color/transparent"
                 android:foreground="?attr/selectableItemBackground"
                 android:onClick="@{()->activity.onBackPressed()}"
-                android:padding="15dp"
+                android:padding="12dp"
                 android:src="@drawable/ic_back" />
 
             <com.kyad.traystorage.app.common.font.FontTextView
@@ -37,9 +39,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:includeFontPadding="false"
                 android:text="@string/FAQ"
                 android:textColor="@color/C151515"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
         </RelativeLayout>
 

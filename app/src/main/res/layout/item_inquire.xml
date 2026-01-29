@@ -25,28 +25,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingVertical="20dp">
+            android:paddingVertical="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="26dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <com.kyad.traystorage.app.common.font.FontTextView
                     style="@style/font_spoqahansansneo_regular"
                     android:layout_width="wrap_content"
-                    android:layout_height="26dp"
+                    android:layout_height="wrap_content"
                     android:includeFontPadding="false"
-                    android:gravity="center_vertical"
-                    android:layout_gravity="center_vertical"
                     android:background="@drawable/bg_label_reply"
-                    android:paddingHorizontal="6dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
                     app:isSelect="@{data.status==0?false:true}"
                     android:text="@{data.status==0? @string/reply_wait : @string/answer_done}"
                     android:textColor="@drawable/bg_label_reply_text"
-                    android:textSize="12dp" />
+                    android:textSize="14sp" />
 
                 <com.kyad.traystorage.app.common.font.FontTextView
                     style="@style/font_spoqahansansneo_regular"
@@ -54,10 +52,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:includeFontPadding="false"
-                    android:layout_gravity="center_vertical"
                     android:text="@{data.reg_time}"
-                    android:textColor="@color/C777777"
-                    android:textSize="13dp" />
+                    android:textColor="#6B6C6E"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -65,57 +62,95 @@
                 android:onClick="@{()->holder.onExpand()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <com.kyad.traystorage.app.common.font.FontTextView
                     style="@style/font_spoqahansansneo_bold"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
                     android:layout_weight="1"
+                    android:includeFontPadding="false"
                     android:text="@{data.title}"
                     android:textColor="@{!data.isExpanded ? @color/C151515 : @color/focus_color}"
-                    android:textSize="15dp" />
+                    android:textSize="14sp" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
                     android:src="@{data.isExpanded ? @drawable/ic_arrow_up : @drawable/ic_arrow_down}" />
 
             </LinearLayout>
 
             <com.kyad.traystorage.app.common.font.FontTextView
-                android:layout_marginTop="20dp"
                 style="@style/font_spoqahansansneo_regular"
-                android:includeFontPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:includeFontPadding="false"
                 android:text="@{data.content}"
-                android:textColor="@color/C151515"
-                android:textSize="15dp"
-                android:visibility="@{data.isExpanded ? View.VISIBLE : View.GONE}"/>
-            <com.kyad.traystorage.app.common.font.FontTextView
-                android:layout_marginTop="10dp"
-                style="@style/font_spoqahansansneo_regular"
+                android:textColor="#111111"
+                android:textSize="14sp"
+                android:visibility="@{data.isExpanded ? View.VISIBLE : View.GONE}" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{data.reply}"
-                android:background="@color/Ceeeeee"
-                android:padding="10dp"
-                android:textColor="@color/C151515"
-                android:includeFontPadding="false"
-                android:textSize="15dp"
-                android:visibility="@{data.replyVisible ? View.VISIBLE : View.GONE}"/>
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_reply_box"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="@{data.replyVisible ? View.VISIBLE : View.GONE}">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_label_reply_done"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/answer_done"
+                        android:textColor="#535455"
+                        android:textSize="14sp" />
+
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        style="@style/font_spoqahansansneo_regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:includeFontPadding="false"
+                        android:text="@{data.reg_time}"
+                        android:textColor="#6B6C6E"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <com.kyad.traystorage.app.common.font.FontTextView
+                    style="@style/font_spoqahansansneo_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:includeFontPadding="false"
+                    android:text="@{data.reply}"
+                    android:textColor="#111111"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/Ceeeeee" />
+            android:background="#EBEDF0" />
 
     </LinearLayout>
 

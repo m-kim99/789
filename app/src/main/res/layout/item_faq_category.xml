@@ -13,17 +13,17 @@
 
     </data>
     <com.kyad.traystorage.app.common.font.FontTextView
-        android:onClick="@{()->holder.onClick()}"
         style="@style/font_spoqahansansneo_regular"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:includeFontPadding="false"
-        android:paddingHorizontal="20dp"
-        android:layout_marginEnd="6dp"
-        app:isSelect="@{data.isSelected}"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/bg_btn_circle_dark"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:onClick="@{()->holder.onClick()}"
+        android:paddingHorizontal="20dp"
+        android:text="@{data.name}"
         android:textColor="@drawable/color_btn_circle_dark"
-        android:textSize="14dp"
-        android:text="@{data.name}" />
+        android:textSize="14sp"
+        app:isSelect="@{data.isSelected}" />
 </layout>

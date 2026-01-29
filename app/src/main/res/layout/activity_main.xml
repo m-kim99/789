@@ -306,7 +306,8 @@
             android:id="@+id/nav_menu"
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:layout_gravity="end">
+            android:layout_gravity="end"
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -314,60 +315,59 @@
                 android:background="@color/white"
                 android:orientation="vertical">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/focus_color"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="50dp"
-                    android:paddingBottom="24dp">
+                    android:layout_height="213dp"
+                    android:background="@drawable/bg_drawer_header"
+                    android:orientation="vertical"
+                    android:padding="24dp"
+                    android:gravity="bottom">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    <FrameLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginBottom="16dp">
 
                         <com.makeramen.roundedimageview.RoundedImageView
                             android:id="@+id/img_avatar"
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginBottom="16dp"
-                            android:scaleType="fitXY"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:scaleType="centerCrop"
                             android:src="@drawable/icon_c_user_60"
-                            app:riv_corner_radius="32dp" />
+                            app:riv_corner_radius="30dp"
+                            app:riv_border_width="2dp"
+                            app:riv_border_color="@color/white" />
+                    </FrameLayout>
 
-                        <com.kyad.traystorage.app.common.font.FontTextView
-                            android:id="@+id/text_name"
-                            style="@style/font_spoqahansansneo_bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:text="@{user.name}"
-                            android:textColor="@color/white"
-                            android:textSize="18dp" />
-                    </LinearLayout>
-                </RelativeLayout>
+                    <com.kyad.traystorage.app.common.font.FontTextView
+                        android:id="@+id/text_name"
+                        style="@style/font_spoqahansansneo_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{user.name}"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:includeFontPadding="false" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingHorizontal="30dp"
-                    android:paddingTop="14dp">
+                    android:paddingHorizontal="24dp"
+                    android:paddingTop="12dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="72dp"
                         android:onClick="@{()->activity.onProfile()}"
                         android:gravity="center_vertical"
-                        android:paddingVertical="10dp">
+                        android:paddingVertical="24dp">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="12dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="17dp"
                             android:src="@drawable/icon_c_profile_black_24" />
 
                         <com.kyad.traystorage.app.common.font.FontTextView
@@ -376,22 +376,21 @@
                             android:layout_height="wrap_content"
                             android:includeFontPadding="false"
                             android:text="@string/profile_management"
-                            android:textColor="@color/C151515"
-                            android:textSize="16dp" />
+                            android:textColor="#111111"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="72dp"
                         android:gravity="center_vertical"
                         android:onClick="@{()->activity.onInvite()}"
-                        android:paddingVertical="10dp">
+                        android:paddingVertical="24dp">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="12dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="17dp"
                             android:src="@drawable/icon_c_setting_black_24" />
 
                         <com.kyad.traystorage.app.common.font.FontTextView
@@ -400,22 +399,21 @@
                             android:layout_height="wrap_content"
                             android:text="@string/invite"
                             android:includeFontPadding="false"
-                            android:textColor="@color/C151515"
-                            android:textSize="16dp" />
+                            android:textColor="#111111"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="72dp"
                         android:gravity="center_vertical"
                         android:onClick="@{()->activity.onContactus()}"
-                        android:paddingVertical="10dp">
+                        android:paddingVertical="24dp">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="12dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="17dp"
                             android:src="@drawable/icon_c_comments_black_24" />
 
                         <com.kyad.traystorage.app.common.font.FontTextView
@@ -424,22 +422,21 @@
                             android:layout_height="wrap_content"
                             android:text="@string/contactus"
                             android:includeFontPadding="false"
-                            android:textColor="@color/C151515"
-                            android:textSize="16dp" />
+                            android:textColor="#111111"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="72dp"
                         android:gravity="center_vertical"
                         android:onClick="@{()->activity.onNotice()}"
-                        android:paddingVertical="10dp">
+                        android:paddingVertical="24dp">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="12dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="17dp"
                             android:src="@drawable/icon_c_megaphone_black_24" />
 
                         <com.kyad.traystorage.app.common.font.FontTextView
@@ -448,21 +445,21 @@
                             android:layout_height="wrap_content"
                             android:text="@string/noticeTitle"
                             android:includeFontPadding="false"
-                            android:textColor="@color/C151515"
-                            android:textSize="16dp" />
+                            android:textColor="#111111"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="20dp"
+                        android:layout_height="72dp"
                         android:onClick="@{()->activity.onSetting()}"
-                        android:paddingVertical="10dp">
+                        android:gravity="center_vertical"
+                        android:paddingVertical="24dp">
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="12dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="17dp"
                             android:src="@drawable/icon_c_setting_black_24_copy" />
 
                         <com.kyad.traystorage.app.common.font.FontTextView
@@ -471,29 +468,24 @@
                             android:layout_height="wrap_content"
                             android:text="@string/setting"
                             android:includeFontPadding="false"
-                            android:textColor="@color/C151515"
-                            android:textSize="16dp" />
+                            android:textColor="#111111"
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <com.kyad.traystorage.app.common.font.FontTextView
+                style="@style/font_spoqahansansneo_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="20dp"
-                android:paddingHorizontal="30dp">
-
-                <com.kyad.traystorage.app.common.font.FontTextView
-                    style="@style/font_spoqahansansneo_regular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:text="@string/setting_bottom"
-                    android:textColor="@color/C151515"
-                    android:textSize="12dp" />
-            </LinearLayout>
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="ⓒ 2025 TrayStorage.\nAll right reserved."
+                android:textColor="#8D8E90"
+                android:textSize="14sp" />
 
         </RelativeLayout>
     </androidx.drawerlayout.widget.DrawerLayout>
