@@ -1,11 +1,17 @@
 package com.kyad.traystorage.app.splash;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.kyad.traystorage.R;
@@ -22,6 +28,8 @@ import widgets.viewpager.BasePagerAdapter;
 import static android.content.Context.MODE_PRIVATE;
 
 public class IntroActivity extends BaseBindingActivity<ActivityIntroBinding> {
+
+    private static final int RC_PERMISSIONS = 3001;
 
     @Override
     public int getLayout() {
@@ -84,9 +92,61 @@ public class IntroActivity extends BaseBindingActivity<ActivityIntroBinding> {
         }
         PrefMgr prefMgr = new PrefMgr(getSharedPreferences(PrefMgr.traystorage_PREFS, MODE_PRIVATE));
         prefMgr.put(PrefMgr.FIRST_START, false);
+        prefMgr.put(PrefMgr.HAS_PERMISSION, true);
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
         finish();
     }
 
+    // 권한 요청 시작 (intro5 확인 버튼에서 호출)
+    public void requestAppPermissions() {
+        String[] permissions;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            // Android 14+
+            permissions = new String[]{
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
+            };
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Android 13
+            permissions = new String[]{
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_MEDIA_IMAGES
+            };
+        } else {
+            // Android 12 이하
+            permissions = new String[]{
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            };
+        }
+
+        // 이미 모든 권한이 있는지 체크
+        boolean allGranted = true;
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                allGranted = false;
+                break;
+            }
+        }
+
+        if (allGranted) {
+            goLoading();
+        } else {
+            ActivityCompat.requestPermissions(this, permissions, RC_PERMISSIONS);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == RC_PERMISSIONS) {
+            // 권한 결과와 상관없이 다음 화면으로 진행 (권한 거부해도 앱 사용 가능하게)
+            goLoading();
+        }
+    }
 }

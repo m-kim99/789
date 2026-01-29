@@ -41,10 +41,10 @@ public class IntroFragment extends BaseFragment {
             btnStart.setOnClickListener(v -> ((IntroActivity)getActivity()).nextPage());
         }
         
-        // 확인 버튼 (5번째 권한 화면)
+        // 확인 버튼 (5번째 권한 화면) - OS 권한 요청 후 다음 화면으로
         View btnConfirm = view.findViewById(R.id.btn_confirm);
         if (btnConfirm != null) {
-            btnConfirm.setOnClickListener(v -> ((IntroActivity)getActivity()).goLoading());
+            btnConfirm.setOnClickListener(v -> ((IntroActivity)getActivity()).requestAppPermissions());
         }
         
         return view;

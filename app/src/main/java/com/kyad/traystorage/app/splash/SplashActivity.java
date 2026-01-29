@@ -70,16 +70,11 @@ public class SplashActivity extends BaseBindingActivity<ActivitySplashBinding> {
         prefMgr.put(PrefMgr.FIRST_START, true);
         
         prefMgr = new PrefMgr(getSharedPreferences(PrefMgr.traystorage_PREFS, MODE_PRIVATE));
-        boolean haspermission = prefMgr.getBoolean(PrefMgr.HAS_PERMISSION, false);
-        if(haspermission) {
-            boolean isfirst = prefMgr.getBoolean(PrefMgr.FIRST_START, true);
-            if(isfirst)
-                new Handler(Looper.getMainLooper()).postDelayed(this::goIntro, 2000);
-            else
-                new Handler(Looper.getMainLooper()).postDelayed(this::goLoading, 2000);
-        }
+        boolean isfirst = prefMgr.getBoolean(PrefMgr.FIRST_START, true);
+        if(isfirst)
+            new Handler(Looper.getMainLooper()).postDelayed(this::goIntro, 2000);
         else
-            new Handler(Looper.getMainLooper()).postDelayed(this::goPermission, 2000);
+            new Handler(Looper.getMainLooper()).postDelayed(this::goLoading, 2000);
     }
 
     void goLoading() {
