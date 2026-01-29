@@ -24,16 +24,27 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:onClick="@{()->activity.onBackPressed()}"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_back"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+        <!-- Status Bar -->
+        <include
+            layout="@layout/include_status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
+        <!-- Header -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="@{()->activity.onBackPressed()}"
+                android:src="@drawable/ic_back" />
+        </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/step_layout"
@@ -65,15 +76,16 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="18dp">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
-                android:orientation="vertical">
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="18dp"
+                android:paddingTop="30dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -82,16 +94,16 @@
 
                     <com.kyad.traystorage.app.common.font.FontTextView
                         android:id="@+id/text_intro"
-                        style="@style/font_notosans_kr_bold"
+                        style="@style/font_notosans_kr_regular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_toLeftOf="@+id/current_num"
+                        android:includeFontPadding="false"
                         android:lineHeight="32sp"
                         android:text="@string/signup_title1"
                         android:textColor="#111111"
-                        android:textSize="22sp"
-                        android:includeFontPadding="false" />
+                        android:textSize="22sp" />
 
                     <com.kyad.traystorage.app.common.font.FontTextView
                         android:id="@+id/current_num"
@@ -487,24 +499,44 @@
                         tools:listitem="@layout/item_agreement" />
                 </LinearLayout>
 
-                <com.kyad.traystorage.app.common.font.FontButton
-                    android:id="@+id/next_btn"
-                    style="@style/font_notosans_kr_bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/bg_btn_approve_both"
-                    android:enabled="@{activity.isEnabled}"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:onClick="@{()->activity.onNext()}"
-                    android:text="@string/next"
-                    android:textColor="@{activity.isEnabled?@color/white:@color/gray}"
-                    android:textSize="16sp" />
             </LinearLayout>
 
         </ScrollView>
+
+        <!-- 하단 Dock -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="12dp"
+                android:background="#EBEDF0" />
+
+            <com.kyad.traystorage.app.common.font.FontButton
+                android:id="@+id/next_btn"
+                style="@style/font_notosans_kr_bold"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/bg_btn_login_primary"
+                android:enabled="@{activity.isEnabled}"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:onClick="@{()->activity.onNext()}"
+                android:text="@string/confirm"
+                android:textColor="@{activity.isEnabled ? @color/white : @color/gray}"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <!-- Navigation Bar -->
+        <include
+            layout="@layout/include_nav_bar"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
     </LinearLayout>
 
 </layout>

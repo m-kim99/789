@@ -161,6 +161,7 @@
     <string name="privacy_req">개인정보 취급방침 (필수)</string>
     <string name="signup_title1">회원가입을 위해\n계정정보를 입력해주세요</string>
     <string name="findid_result1">아이디를 확인해 주세요</string>
+    <string name="findid_result_title">아이디 확인</string>
     <string name="find_password">비밀번호 찾기</string>
     <string name="signup_complete1">Traystorage\n회원가입이 완료되었습니다</string>
     <string name="signup_complete2">프로필정보를 입력 후 서비스를 이용해 보세요</string>
@@ -250,6 +251,7 @@
     <string name="signup_close">화면을 닫으시는 경우\n회원가입이 중단됩니다.\n회원가입을 중단하시겠습니까?</string>
     <string name="login_agree">Traystorage 약관이 변경되었습니다.\n약관에 동의해 주세요.</string>
     <string name="required">(필수)</string>
+    <string name="optional">(선택)</string>
     <string name="search_not_result">에 대한\n검색결과가 없습니다.</string>
     <string name="delete_tag">tag가 삭제되였습니다</string>
     <string name="done">Done</string>
